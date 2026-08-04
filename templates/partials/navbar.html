@@ -1,0 +1,240 @@
+{% load static %}
+
+<!-- =========================================================
+     TOP CONTACT BAR
+========================================================= -->
+
+<div class="top-bar">
+  <div class="container-fluid px-lg-4">
+    <div class="top-bar-inner">
+      <!-- Contact information -->
+      <div class="top-contact">
+        <a href="tel:+254712001141">
+          <i class="bi bi-telephone-fill"></i>
+          <span>+254 712 001 141</span>
+        </a>
+
+        <a href="mailto:info@waingofarm.co.ke">
+          <i class="bi bi-envelope-fill"></i>
+          <span>info@waingofarm.co.ke</span>
+        </a>
+      </div>
+
+      <!-- Social / quick links -->
+      <div class="top-right">
+        <a href="#" class="social-link" aria-label="Facebook">
+          <i class="bi bi-facebook"></i>
+        </a>
+
+        <a href="#" class="social-link" aria-label="Instagram">
+          <i class="bi bi-instagram"></i>
+        </a>
+
+        <a href="#" class="top-link"> CONTACT US </a>
+
+        <a href="#" class="top-link"> FAQS </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================
+     MAIN HEADER
+========================================================= -->
+
+<header class="main-header">
+  <div class="container-fluid px-lg-4">
+    <div class="main-header-inner">
+      <!-- MOBILE MENU BUTTON -->
+
+      <button
+        class="mobile-menu-button"
+        type="button"
+        id="mobileMenuButton"
+        aria-label="Open navigation"
+        aria-expanded="false"
+      >
+        <i class="bi bi-list"></i>
+      </button>
+
+      <!-- =================================================
+                 LOGO
+            ================================================== -->
+
+      <div class="site-logo">
+        <a href="{% url 'home' %}">
+          <img src="{% static 'images/logo.jpg' %}" alt="Waingo Farm Logo" />
+        </a>
+      </div>
+
+      <!-- =================================================
+                 SEARCH BAR
+            ================================================== -->
+
+      <div class="search-container">
+        <form action="#" method="GET" class="product-search">
+          <div class="search-input">
+            <input
+              type="search"
+              name="q"
+              placeholder="Search for products"
+              aria-label="Search for products"
+            />
+          </div>
+
+          <div class="category-select">
+            <select name="category" aria-label="Select category">
+              <option value="">SELECT CATEGORY</option>
+
+              <option value="animal-health">Animal Health</option>
+
+              <option value="animal-feeds">Animal Feeds</option>
+
+              <option value="seeds">Seeds</option>
+
+              <option value="fertilizers">Fertilizers</option>
+
+              <option value="farm-tools">Farm Tools</option>
+
+              <option value="crop-protection">Crop Protection</option>
+            </select>
+          </div>
+
+          <button type="submit" class="search-button" aria-label="Search">
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
+      </div>
+
+      <!-- =================================================
+                 HEADER ACTIONS
+            ================================================== -->
+
+      <div class="header-actions">
+        <!-- Account -->
+
+        <a
+          href="#"
+          class="header-action account-action"
+          aria-label="My account"
+        >
+          <i class="bi bi-person"></i>
+        </a>
+
+        <!-- Wishlist -->
+
+        <a
+          href="#"
+          class="header-action action-with-counter"
+          aria-label="Wishlist"
+        >
+          <i class="bi bi-heart"></i>
+
+          <span class="action-counter"> 0 </span>
+        </a>
+
+        <!-- Compare -->
+
+        <a
+          href="#"
+          class="header-action action-with-counter compare-action"
+          aria-label="Compare products"
+        >
+          <i class="bi bi-arrow-left-right"></i>
+
+          <span class="action-counter"> 0 </span>
+        </a>
+
+        <!-- Cart -->
+
+        <a href="#" class="cart-button" aria-label="Shopping cart">
+          <span class="cart-icon">
+            <i class="bi bi-bag"></i>
+          </span>
+
+          <span class="cart-total"> KSH 0 </span>
+
+          <span class="cart-counter"> 0 </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+<nav class="main-navigation">
+  <div class="container-fluid px-lg-4">
+    <div class="navigation-inner">
+      <!-- PRODUCT CATEGORIES -->
+
+      <button class="categories-button" type="button" id="categoriesButton">
+        <span class="categories-left">
+          <i class="bi bi-list"></i>
+
+          <span> PRODUCT CATEGORIES </span>
+        </span>
+
+        <i class="bi bi-chevron-down categories-arrow"></i>
+      </button>
+
+      <!-- NAVIGATION MENU -->
+
+      <div class="nav-menu" id="navMenu">
+        <a href="{% url 'home' %}" class="nav-link active"> HOME </a>
+
+        <a href="#" class="nav-link"> SHOP </a>
+
+        <a href="#" class="nav-link"> OUR SERVICES </a>
+
+        <a href="#" class="nav-link"> ABOUT US </a>
+
+        <a href="#" class="nav-link"> GALLERY </a>
+
+        <a href="#" class="nav-link"> CONTACT US </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- =========================================================
+     CATEGORY MOBILE DROPDOWN
+========================================================= -->
+
+<div class="category-dropdown" id="categoryDropdown">
+  <div class="container">
+    <div class="category-grid">
+      <a href="#">
+        <i class="bi bi-heart-pulse"></i>
+        Animal Health
+      </a>
+
+      <a href="#">
+        <i class="bi bi-basket"></i>
+        Animal Feeds
+      </a>
+
+      <a href="#">
+        <i class="bi bi-flower1"></i>
+        Seeds
+      </a>
+
+      <a href="#">
+        <i class="bi bi-droplet"></i>
+        Fertilizers
+      </a>
+
+      <a href="#">
+        <i class="bi bi-shield-check"></i>
+        Crop Protection
+      </a>
+
+      <a href="#">
+        <i class="bi bi-tools"></i>
+        Farm Tools
+      </a>
+    </div>
+  </div>
+</div>
