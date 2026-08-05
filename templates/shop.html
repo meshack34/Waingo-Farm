@@ -1,0 +1,167 @@
+{% extends "base.html" %} {% load static %} {% block title %} Shop | Waingo Farm
+{% endblock %} {% block content %}
+
+<!-- =====================================================
+     SHOP HEADER
+===================================================== -->
+
+<section class="shop-header">
+  <div class="container">
+    <div class="shop-header-content">
+      <span> WAINGO FARM </span>
+
+      <h1>Shop Our Products</h1>
+
+      <p>Quality agricultural products for healthy farms and better yields.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     SHOP CONTENT
+===================================================== -->
+
+<section class="shop-section">
+  <div class="container">
+    <div class="row g-4">
+      <!-- =========================================
+                 SIDEBAR
+            ========================================== -->
+
+      <div class="col-lg-3">
+        <div class="shop-sidebar">
+          <h3>Product Categories</h3>
+
+          <div class="category-list">
+            <a href="{% url 'shop' %}" class="category-item active">
+              <span> All Products </span>
+
+              <i class="bi bi-chevron-right"></i>
+            </a>
+
+            {% for category in categories %}
+
+            <a href="#" class="category-item">
+              <span> {{ category.name }} </span>
+
+              <i class="bi bi-chevron-right"></i>
+            </a>
+
+            {% empty %}
+
+            <p class="empty-text">No categories available.</p>
+
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================================
+                 PRODUCTS
+            ========================================== -->
+
+      <div class="col-lg-9">
+        <div class="shop-toolbar">
+          <div>
+            <strong> {{ products|length }} </strong>
+
+            Products Available
+          </div>
+
+          <select class="shop-sort">
+            <option>Sort by Latest</option>
+
+            <option>Price: Low to High</option>
+
+            <option>Price: High to Low</option>
+
+            <option>Name A-Z</option>
+          </select>
+        </div>
+
+        <div class="row g-4">
+          {% for product in products %}
+
+          <div class="col-6 col-md-4">
+            <div class="product-card">
+              <!-- PRODUCT IMAGE -->
+
+              <div class="product-image">
+                {% if product.image %}
+
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+
+                {% else %}
+
+                <div class="product-placeholder">
+                  <i class="bi bi-image"></i>
+                </div>
+
+                {% endif %} {% if product.is_featured %}
+
+                <span class="product-badge"> Featured </span>
+
+                {% endif %}
+
+                <div class="product-actions">
+                  <button type="button" aria-label="Add to wishlist">
+                    <i class="bi bi-heart"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- PRODUCT DETAILS -->
+
+              <div class="product-info">
+                <span class="product-category">
+                  {{ product.category.name }}
+                </span>
+
+                <h3>
+                  <a href="{{ product.get_absolute_url }}">
+                    {{ product.name }}
+                  </a>
+                </h3>
+
+                <p class="product-description">
+                  {{ product.description|truncatechars:70 }}
+                </p>
+
+                <div class="product-bottom">
+                  <strong class="product-price">
+                    KSH {{ product.price|floatformat:2 }}
+                  </strong>
+
+                  <a href="{{ product.get_absolute_url }}" class="view-product">
+                    <i class="bi bi-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {% empty %}
+
+          <div class="col-12">
+            <div class="empty-products">
+              <i class="bi bi-box-seam"></i>
+
+              <h3>No Products Yet</h3>
+
+              <p>
+                Products will appear here once they are added from the admin
+                panel.
+              </p>
+
+              <a href="/admin/" class="btn-empty"> Go To Admin </a>
+            </div>
+          </div>
+
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

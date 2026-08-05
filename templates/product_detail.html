@@ -1,0 +1,202 @@
+{% extends "base.html" %} {% load static %} {% block title %} {{ product.name }}
+| Waingo Farm {% endblock %} {% block content %}
+
+<section class="product-detail-section">
+  <div class="container">
+    <!-- Breadcrumb -->
+
+    <div class="product-breadcrumb">
+      <a href="{% url 'home' %}"> Home </a>
+
+      <i class="bi bi-chevron-right"></i>
+
+      <a href="{% url 'shop' %}"> Shop </a>
+
+      <i class="bi bi-chevron-right"></i>
+
+      <span> {{ product.name }} </span>
+    </div>
+
+    <div class="row g-5 align-items-start">
+      <!-- PRODUCT IMAGE -->
+
+      <div class="col-lg-6">
+        <div class="product-detail-image">
+          {% if product.image %}
+
+          <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+
+          {% else %}
+
+          <div class="product-detail-placeholder">
+            <i class="bi bi-image"></i>
+
+            <span> No image available </span>
+          </div>
+
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- PRODUCT INFORMATION -->
+
+      <div class="col-lg-6">
+        <div class="product-detail-info">
+          <span class="product-detail-category">
+            {{ product.category.name }}
+          </span>
+
+          <h1>{{ product.name }}</h1>
+
+          <div class="product-rating">
+            <span>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star"></i>
+            </span>
+
+            <small> Product Rating </small>
+          </div>
+
+          <div class="product-detail-price">
+            KSH {{ product.price|floatformat:2 }}
+          </div>
+
+          <div class="product-detail-stock">
+            {% if product.stock > 0 %}
+
+            <i class="bi bi-check-circle-fill"></i>
+
+            In Stock ({{ product.stock }} available) {% else %}
+
+            <i class="bi bi-x-circle-fill"></i>
+
+            Out of Stock {% endif %}
+          </div>
+
+          <div class="product-detail-description">
+            <h3>Product Description</h3>
+
+            {% if product.description %}
+
+            <p>{{ product.description }}</p>
+
+            {% else %}
+
+            <p>Quality agricultural product from Waingo Farm.</p>
+
+            {% endif %}
+          </div>
+
+          {% if product.stock > 0 %}
+
+          <div class="purchase-area">
+            <div class="quantity-box">
+              <button type="button" id="quantity-minus">
+                <i class="bi bi-dash"></i>
+              </button>
+
+              <input
+                type="number"
+                id="quantity"
+                value="1"
+                min="1"
+                max="{{ product.stock }}"
+              />
+
+              <button type="button" id="quantity-plus">
+                <i class="bi bi-plus"></i>
+              </button>
+            </div>
+
+            <button type="button" class="add-cart-btn">
+              <i class="bi bi-cart-plus"></i>
+
+              ADD TO CART
+            </button>
+          </div>
+
+          {% else %}
+
+          <button type="button" class="add-cart-btn disabled" disabled>
+            OUT OF STOCK
+          </button>
+
+          {% endif %}
+
+          <!-- PRODUCT FEATURES -->
+
+          <div class="product-features">
+            <div class="product-feature">
+              <i class="bi bi-truck"></i>
+
+              <div>
+                <strong> Reliable Delivery </strong>
+
+                <span> Delivery available for your order. </span>
+              </div>
+            </div>
+
+            <div class="product-feature">
+              <i class="bi bi-shield-check"></i>
+
+              <div>
+                <strong> Quality Products </strong>
+
+                <span> Quality agricultural products. </span>
+              </div>
+            </div>
+
+            <div class="product-feature">
+              <i class="bi bi-headset"></i>
+
+              <div>
+                <strong> Customer Support </strong>
+
+                <span> We're here to help. </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %} {% block extra_js %}
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const quantityInput = document.getElementById("quantity");
+
+    const minusButton = document.getElementById("quantity-minus");
+
+    const plusButton = document.getElementById("quantity-plus");
+
+    if (!quantityInput) {
+      return;
+    }
+
+    minusButton.addEventListener("click", function () {
+      let quantity = parseInt(quantityInput.value);
+
+      if (quantity > 1) {
+        quantityInput.value = quantity - 1;
+      }
+    });
+
+    plusButton.addEventListener("click", function () {
+      let quantity = parseInt(quantityInput.value);
+
+      let maximum = parseInt(quantityInput.max);
+
+      if (quantity < maximum) {
+        quantityInput.value = quantity + 1;
+      }
+    });
+  });
+</script>
+
+{% endblock %}
