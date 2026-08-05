@@ -147,14 +147,18 @@
 
         <!-- Cart -->
 
-        <a href="#" class="cart-button" aria-label="Shopping cart">
+        <a
+          href="{% url 'cart' %}"
+          class="cart-button"
+          aria-label="Shopping cart"
+        >
           <span class="cart-icon">
             <i class="bi bi-bag"></i>
           </span>
 
-          <span class="cart-total"> KSH 0 </span>
+          <span class="cart-total"> KSH {{ cart_total|floatformat:0 }} </span>
 
-          <span class="cart-counter"> 0 </span>
+          <span class="cart-counter"> {{ cart_count }} </span>
         </a>
       </div>
     </div>
@@ -183,9 +187,19 @@
       <!-- NAVIGATION MENU -->
 
       <div class="nav-menu" id="navMenu">
-        <a href="{% url 'home' %}" class="nav-link active"> HOME </a>
+        <a
+          href="{% url 'home' %}"
+          class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}"
+        >
+          HOME
+        </a>
 
-        <a href="{% url 'shop' %}" class="nav-link"> SHOP </a>
+        <a
+          href="{% url 'shop' %}"
+          class="nav-link {% if request.resolver_match.url_name == 'shop' or request.resolver_match.url_name == 'product_detail' %}active{% endif %}"
+        >
+          SHOP
+        </a>
 
         <a href="#" class="nav-link"> OUR SERVICES </a>
 

@@ -92,7 +92,13 @@
 
           {% if product.stock > 0 %}
 
-          <div class="purchase-area">
+          <form
+            action="{% url 'add_to_cart' product.id %}"
+            method="POST"
+            class="purchase-area"
+          >
+            {% csrf_token %}
+
             <div class="quantity-box">
               <button type="button" id="quantity-minus">
                 <i class="bi bi-dash"></i>
@@ -101,6 +107,7 @@
               <input
                 type="number"
                 id="quantity"
+                name="quantity"
                 value="1"
                 min="1"
                 max="{{ product.stock }}"
@@ -111,12 +118,12 @@
               </button>
             </div>
 
-            <button type="button" class="add-cart-btn">
+            <button type="submit" class="add-cart-btn">
               <i class="bi bi-cart-plus"></i>
 
               ADD TO CART
             </button>
-          </div>
+          </form>
 
           {% else %}
 

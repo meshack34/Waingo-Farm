@@ -1,0 +1,215 @@
+{% extends "base.html" %} {% block title %}Checkout | Waingo Farm{% endblock %}
+{% block content %}
+
+<section class="checkout-section">
+  <div class="container">
+    <!-- PAGE HEADER -->
+    <div class="checkout-header">
+      <span>WAINGO FARM</span>
+
+      <h1>Checkout</h1>
+
+      <p>Enter your details to complete your order.</p>
+    </div>
+
+    <form method="POST" class="checkout-form">
+      {% csrf_token %}
+
+      <div class="row g-5">
+        <!-- =========================================
+                     CUSTOMER INFORMATION
+                ========================================== -->
+
+        <div class="col-lg-7">
+          <div class="checkout-card">
+            <div class="checkout-card-header">
+              <i class="bi bi-person"></i>
+
+              <div>
+                <h2>Customer Information</h2>
+
+                <p>Tell us where to deliver your order.</p>
+              </div>
+            </div>
+
+            <!-- FULL NAME -->
+
+            <div class="checkout-field">
+              <label for="{{ form.full_name.id_for_label }}">
+                Full Name
+                <span>*</span>
+              </label>
+
+              {{ form.full_name.errors }} {{ form.full_name }}
+            </div>
+
+            <!-- PHONE -->
+
+            <div class="checkout-field">
+              <label for="{{ form.phone.id_for_label }}">
+                Phone Number
+                <span>*</span>
+              </label>
+
+              {{ form.phone.errors }} {{ form.phone }}
+            </div>
+
+            <!-- EMAIL -->
+
+            <div class="checkout-field">
+              <label for="{{ form.email.id_for_label }}"> Email Address </label>
+
+              {{ form.email.errors }} {{ form.email }}
+            </div>
+
+            <!-- COUNTY -->
+
+            <div class="checkout-field">
+              <label for="{{ form.county.id_for_label }}">
+                County
+                <span>*</span>
+              </label>
+
+              {{ form.county.errors }} {{ form.county }}
+            </div>
+
+            <!-- TOWN -->
+
+            <div class="checkout-field">
+              <label for="{{ form.town.id_for_label }}">
+                Town
+                <span>*</span>
+              </label>
+
+              {{ form.town.errors }} {{ form.town }}
+            </div>
+
+            <!-- DELIVERY ADDRESS -->
+
+            <div class="checkout-field">
+              <label for="{{ form.delivery_address.id_for_label }}">
+                Delivery Address
+                <span>*</span>
+              </label>
+
+              {{ form.delivery_address.errors }} {{ form.delivery_address }}
+            </div>
+
+            <!-- ORDER NOTES -->
+
+            <div class="checkout-field">
+              <label for="{{ form.order_notes.id_for_label }}">
+                Order Notes
+              </label>
+
+              {{ form.order_notes.errors }} {{ form.order_notes }}
+            </div>
+          </div>
+        </div>
+
+        <!-- =========================================
+                     ORDER SUMMARY
+                ========================================== -->
+
+        <div class="col-lg-5">
+          <div class="checkout-summary">
+            <h2>Your Order</h2>
+
+            <div class="checkout-products">
+              {% for item in cart_items %}
+
+              <div class="checkout-product">
+                <!-- PRODUCT IMAGE -->
+
+                <div class="checkout-product-image">
+                  {% if item.product.image %}
+
+                  <img
+                    src="{{ item.product.image.url }}"
+                    alt="{{ item.product.name }}"
+                  />
+
+                  {% else %}
+
+                  <i class="bi bi-image"></i>
+
+                  {% endif %}
+                </div>
+
+                <!-- PRODUCT DETAILS -->
+
+                <div class="checkout-product-info">
+                  <strong> {{ item.product.name }} </strong>
+
+                  <span> Qty: {{ item.quantity }} </span>
+                </div>
+
+                <!-- SUBTOTAL -->
+
+                <strong class="checkout-product-price">
+                  KSH {{ item.subtotal|floatformat:2 }}
+                </strong>
+              </div>
+
+              {% empty %}
+
+              <p class="text-muted">Your cart is empty.</p>
+
+              {% endfor %}
+            </div>
+
+            <!-- SUBTOTAL -->
+
+            <div class="checkout-summary-line">
+              <span> Subtotal </span>
+
+              <strong> KSH {{ cart_total|floatformat:2 }} </strong>
+            </div>
+
+            <!-- DELIVERY -->
+
+            <div class="checkout-summary-line">
+              <span> Delivery </span>
+
+              <span> To be confirmed </span>
+            </div>
+
+            <!-- TOTAL -->
+
+            <div class="checkout-total">
+              <span> Order Total </span>
+
+              <strong> KSH {{ cart_total|floatformat:2 }} </strong>
+            </div>
+
+            <!-- PAYMENT BUTTON -->
+
+            <button type="submit" class="place-order-btn">
+              Continue to Payment
+
+              <i class="bi bi-arrow-right"></i>
+            </button>
+
+            <!-- BACK TO CART -->
+
+            <a href="{% url 'cart' %}" class="back-cart-link">
+              <i class="bi bi-arrow-left"></i>
+
+              Back to Cart
+            </a>
+
+            <!-- SECURITY -->
+
+            <div class="checkout-security">
+              <i class="bi bi-shield-check"></i>
+
+              <span> Your information is securely handled. </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+{% endblock %}

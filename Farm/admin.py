@@ -1,6 +1,11 @@
 from django.contrib import admin
-from django.contrib import admin
-from .models import Category, Product
+
+from .models import (
+    Category,
+    Product,
+    Order,
+    OrderItem,
+)
 
 
 @admin.register(Category)
@@ -42,3 +47,43 @@ class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {
         "slug": ("name",)
     }
+
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+
+    list_display = (
+        "id",
+        "full_name",
+        "phone",
+        "total_amount",
+        "status",
+        "created_at",
+    )
+
+    list_filter = (
+        "status",
+        "created_at",
+    )
+
+    search_fields = (
+        "full_name",
+        "phone",
+        "email",
+    )
+
+    readonly_fields = (
+        "created_at",
+        "updated_at",
+    )
+
+
+@admin.register(OrderItem)
+class OrderItemAdmin(admin.ModelAdmin):
+
+    list_display = (
+        "order",
+        "product",
+        "quantity",
+        "price",
+    )

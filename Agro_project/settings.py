@@ -1,10 +1,11 @@
 import os
+from dotenv import load_dotenv
 
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -55,6 +56,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.static',
+                'Farm.context_processors.cart_context',
             ],
         },
     },
@@ -126,3 +129,17 @@ LOGOUT_REDIRECT_URL = 'login'
 PAYPAL_CLIENT_ID = "AQRk_BNJ53jb5kdVbkLQBrjFLBCPfzGszSEeME7-9Zpv0EQjvMeuhjs9p25G7-du1XYzrBkaO7wfe5c3"
 PAYPAL_CLIENT_SECRET = "EKOf5W7Uli_WV5LHkbn6jNMEwIvqVFvv8cvNnlp4wBGNaaAyFBjAFmrNOdD2u72AsFbd3UqlEi6RYRkB"
 PAYPAL_MODE = "sandbox"
+
+# =========================================================
+# MPESA DARaja CONFIGURATION
+# =========================================================
+
+DARAJA_CONSUMER_KEY = os.getenv("DARAJA_CONSUMER_KEY")
+
+DARAJA_CONSUMER_SECRET = os.getenv("DARAJA_CONSUMER_SECRET")
+
+DARAJA_SHORTCODE = os.getenv("DARAJA_SHORTCODE")
+
+DARAJA_PASSKEY = os.getenv("DARAJA_PASSKEY")
+
+DARAJA_CALLBACK_URL = os.getenv("DARAJA_CALLBACK_URL")

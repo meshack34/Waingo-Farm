@@ -1,0 +1,115 @@
+{% extends "base.html" %} {% block title %}Payment | Waingo Farm{% endblock %}
+{% block content %}
+
+<section class="payment-section">
+  <div class="container">
+    <div class="payment-wrapper">
+      <!-- HEADER -->
+
+      <div class="payment-header">
+        <div class="payment-icon">
+          <i class="bi bi-phone-fill"></i>
+        </div>
+
+        <span>WAINGO FARM</span>
+
+        <h1>Complete Your Payment</h1>
+
+        <p>
+          Your order has been created successfully. Complete your payment using
+          M-Pesa.
+        </p>
+      </div>
+
+      <!-- PAYMENT CARD -->
+
+      <div class="payment-card">
+        <!-- ORDER INFORMATION -->
+
+        <div class="payment-order-row">
+          <div>
+            <span>Order Number</span>
+
+            <strong> #{{ order.id }} </strong>
+          </div>
+
+          <div class="payment-status">
+            <span>Status</span>
+
+            <strong> {{ order.get_status_display }} </strong>
+          </div>
+        </div>
+
+        <!-- AMOUNT -->
+
+        <div class="payment-amount">
+          <span>Amount to Pay</span>
+
+          <strong> KSH {{ order.total_amount|floatformat:2 }} </strong>
+        </div>
+
+        <!-- MPESA INFORMATION -->
+
+        <div class="mpesa-box">
+          <div class="mpesa-icon">
+            <i class="bi bi-phone-fill"></i>
+          </div>
+
+          <div>
+            <h3>Pay with M-Pesa</h3>
+
+            <p>
+              Enter your M-Pesa phone number below. You will receive a payment
+              prompt on your phone.
+            </p>
+          </div>
+        </div>
+
+        <!-- PAYMENT FORM -->
+
+        <form method="POST" class="payment-form">
+          {% csrf_token %}
+
+          <label for="phone"> M-Pesa Phone Number </label>
+
+          <div class="mpesa-input">
+            <span>+254</span>
+
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="712 345 678"
+              maxlength="9"
+              required
+            />
+          </div>
+
+          <button type="submit" class="mpesa-pay-btn">
+            <i class="bi bi-lock-fill"></i>
+
+            Pay KSH {{ order.total_amount|floatformat:0 }}
+          </button>
+        </form>
+
+        <!-- SECURITY -->
+
+        <div class="payment-security">
+          <i class="bi bi-shield-check"></i>
+
+          <span> Secure M-Pesa payment </span>
+        </div>
+
+        <!-- CONTINUE SHOPPING -->
+
+        <a href="{% url 'shop' %}" class="payment-back">
+          <i class="bi bi-arrow-left"></i>
+
+          Continue Shopping
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

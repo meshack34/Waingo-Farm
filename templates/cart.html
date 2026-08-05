@@ -1,0 +1,190 @@
+{% extends "base.html" %} {% load static %} {% block title %} Shopping Cart |
+Waingo Farm {% endblock %} {% block content %}
+
+<section class="cart-section">
+  <div class="container">
+    <!-- PAGE HEADER -->
+
+    <div class="cart-header">
+      <span> WAINGO FARM </span>
+
+      <h1>Shopping Cart</h1>
+
+      <p>Review your selected products before checkout.</p>
+    </div>
+
+    {% if cart_items %}
+
+    <div class="row g-5">
+      <!-- =================================================
+                 CART ITEMS
+            ================================================== -->
+
+      <div class="col-lg-8">
+        <div class="cart-items">
+          {% for item in cart_items %}
+
+          <div class="cart-item">
+            <!-- IMAGE -->
+
+            <div class="cart-item-image">
+              {% if item.product.image %}
+
+              <img
+                src="{{ item.product.image.url }}"
+                alt="{{ item.product.name }}"
+              />
+
+              {% else %}
+
+              <i class="bi bi-image"></i>
+
+              {% endif %}
+            </div>
+
+            <!-- DETAILS -->
+
+            <div class="cart-item-details">
+              <span class="cart-item-category">
+                {{ item.product.category.name }}
+              </span>
+
+              <h3>
+                <a href="{{ item.product.get_absolute_url }}">
+                  {{ item.product.name }}
+                </a>
+              </h3>
+
+              <div class="cart-item-price">
+                KSH {{ item.product.price|floatformat:2 }}
+              </div>
+
+              <!-- QUANTITY -->
+
+              <form
+                action="{% url 'update_cart' item.product.id %}"
+                method="POST"
+                class="cart-quantity-form"
+              >
+                {% csrf_token %}
+
+                <div class="cart-quantity">
+                  <button type="button" class="cart-minus">
+                    <i class="bi bi-dash"></i>
+                  </button>
+
+                  <input
+                    type="number"
+                    name="quantity"
+                    value="{{ item.quantity }}"
+                    min="1"
+                    max="{{ item.product.stock }}"
+                  />
+
+                  <button type="button" class="cart-plus">
+                    <i class="bi bi-plus"></i>
+                  </button>
+                </div>
+
+                <button type="submit" class="update-cart-btn">Update</button>
+              </form>
+            </div>
+
+            <!-- SUBTOTAL -->
+
+            <div class="cart-item-right">
+              <strong> KSH {{ item.subtotal|floatformat:2 }} </strong>
+
+              <a
+                href="{% url 'remove_from_cart' item.product.id %}"
+                class="remove-cart"
+              >
+                <i class="bi bi-trash3"></i>
+
+                Remove
+              </a>
+            </div>
+          </div>
+
+          {% endfor %}
+        </div>
+
+        <!-- CONTINUE SHOPPING -->
+
+        <a href="{% url 'shop' %}" class="continue-shopping">
+          <i class="bi bi-arrow-left"></i>
+
+          Continue Shopping
+        </a>
+      </div>
+
+      <!-- =================================================
+                 CART SUMMARY
+            ================================================== -->
+
+      <div class="col-lg-4">
+        <div class="cart-summary">
+          <h2>Cart Summary</h2>
+
+          <div class="summary-row">
+            <span> Subtotal </span>
+
+            <strong> KSH {{ cart_total|floatformat:2 }} </strong>
+          </div>
+
+          <div class="summary-row">
+            <span> Delivery </span>
+
+            <span> Calculated at checkout </span>
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <div class="summary-total">
+            <span> Total </span>
+
+            <strong> KSH {{ cart_total|floatformat:2 }} </strong>
+          </div>
+
+          <a href="{% url 'checkout' %}" class="checkout-btn">
+            Proceed to Checkout
+
+            <i class="bi bi-arrow-right"></i>
+          </a>
+
+          <div class="secure-shopping">
+            <i class="bi bi-shield-check"></i>
+
+            <span> Secure and reliable shopping </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% else %}
+
+    <!-- =================================================
+             EMPTY CART
+        ================================================== -->
+
+    <div class="empty-cart">
+      <div class="empty-cart-icon">
+        <i class="bi bi-cart-x"></i>
+      </div>
+
+      <h2>Your Cart Is Empty</h2>
+
+      <p>You haven't added any products to your cart yet.</p>
+
+      <a href="{% url 'shop' %}" class="empty-cart-btn">
+        <i class="bi bi-shop"></i>
+
+        Continue Shopping
+      </a>
+    </div>
+
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}
