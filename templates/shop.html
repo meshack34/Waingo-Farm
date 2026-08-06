@@ -1,4 +1,9 @@
-{% extends "base.html" %} {% load static %} {% block title %} Shop | Waingo Farm
+{% extends "base.html" %} {% load static %} {% block title %} Waingo Farm | Shop
+{% endblock %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/shop.css' %}" />
+<link rel="stylesheet" href="{% static 'css/cart.css' %}" />
+<link rel="stylesheet" href="{% static 'css/payment.css' %}" />
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
 {% endblock %} {% block content %}
 
 <!-- =====================================================

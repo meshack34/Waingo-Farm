@@ -1,108 +1,261 @@
 {% load static %}
 
-<footer class="footer" id="contact">
-    <div class="footer-grid">
-        <div>
-            <h5>About Nomad</h5>
-            <p>Tour Management System to handle bookings, itineraries, and clients efficiently.</p>
+<footer class="site-footer">
+  <!-- ================= FOOTER MAIN ================= -->
+  <div class="footer-main">
+    <div class="container">
+      <div class="row g-4">
+        <!-- BRAND -->
+        <div class="col-lg-4 col-md-6">
+          <div class="footer-brand">
+            <a href="{% url 'home' %}" class="footer-logo">
+              <img
+                src="{% static 'images/logo.jpg' %}"
+                alt="Waingo Farm Logo"
+              />
+            </a>
+
+            <p class="footer-description">
+              Your trusted partner for quality agricultural products, farm
+              inputs and reliable farming solutions in Kenya.
+            </p>
+
+            <div class="footer-socials">
+              <a href="#" aria-label="Facebook">
+                <i class="bi bi-facebook"></i>
+              </a>
+
+              <a href="#" aria-label="Instagram">
+                <i class="bi bi-instagram"></i>
+              </a>
+
+              <a href="#" aria-label="WhatsApp">
+                <i class="bi bi-whatsapp"></i>
+              </a>
+
+              <a href="#" aria-label="TikTok">
+                <i class="bi bi-tiktok"></i>
+              </a>
+            </div>
+          </div>
         </div>
 
-        <div>
-            <h5>Support</h5>
+        <!-- QUICK LINKS -->
+        <div class="col-lg-2 col-md-6">
+          <div class="footer-column">
+            <h5>Quick Links</h5>
+
             <ul>
-                <li><a href="#">Help Center</a></li>
-                <li><a href="#">Contact Us</a></li>
+              <li>
+                <a href="{% url 'home' %}">
+                  <i class="bi bi-chevron-right"></i>
+                  Home
+                </a>
+              </li>
+
+              <li>
+                <a href="{% url 'shop' %}">
+                  <i class="bi bi-chevron-right"></i>
+                  Shop
+                </a>
+              </li>
+
+              <li>
+                <a href="#">
+                  <i class="bi bi-chevron-right"></i>
+                  Our Services
+                </a>
+              </li>
+
+              <li>
+                <a href="#">
+                  <i class="bi bi-chevron-right"></i>
+                  About Us
+                </a>
+              </li>
+
+              <li>
+                <a href="#">
+                  <i class="bi bi-chevron-right"></i>
+                  Contact Us
+                </a>
+              </li>
             </ul>
+          </div>
         </div>
-        <div>
-            <h5>Follow Us</h5>
-            <a href="#"><i class="bi bi-facebook"></i></a>
-            <a href="#"><i class="bi bi-twitter"></i></a>
-            <a href="#"><i class="bi bi-instagram"></i></a>
+
+        <!-- CATEGORIES -->
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-column">
+            <h5>Shop Categories</h5>
+
+            <ul>
+              <li>
+                <a href="#">
+                  <i class="bi bi-chevron-right"></i>
+                  Animal Health
+                </a>
+              </li>
+
+              <li>
+                <a href="#">
+                  <i class="bi bi-chevron-right"></i>
+                  Animal Feeds
+                </a>
+              </li>
+
+              <li>
+                <a href="#">
+                  <i class="bi bi-chevron-right"></i>
+                  Seeds
+                </a>
+              </li>
+
+              <li>
+                <a href="#">
+                  <i class="bi bi-chevron-right"></i>
+                  Fertilizers
+                </a>
+              </li>
+
+              <li>
+                <a href="#">
+                  <i class="bi bi-chevron-right"></i>
+                  Crop Protection
+                </a>
+              </li>
+
+              <li>
+                <a href="#">
+                  <i class="bi bi-chevron-right"></i>
+                  Farm Tools
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
+
+        <!-- CONTACT -->
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-column">
+            <h5>Contact Us</h5>
+
+            <div class="footer-contact">
+              <div class="contact-item">
+                <span class="contact-icon">
+                  <i class="bi bi-geo-alt-fill"></i>
+                </span>
+
+                <div>
+                  <strong>Visit Us</strong>
+                  <p>Kenya</p>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <span class="contact-icon">
+                  <i class="bi bi-telephone-fill"></i>
+                </span>
+
+                <div>
+                  <strong>Call Us</strong>
+
+                  <a href="tel:+254712001141"> 0704659267 </a>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <span class="contact-icon">
+                  <i class="bi bi-envelope-fill"></i>
+                </span>
+
+                <div>
+                  <strong>Email Us</strong>
+
+                  <a href="mailto:info@waingofarm.co.ke">
+                    info@waingofarm.co.ke
+                  </a>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <span class="contact-icon">
+                  <i class="bi bi-clock-fill"></i>
+                </span>
+
+                <div>
+                  <strong>Opening Hours</strong>
+                  <p>Mon - Sat: 8:00 AM - 6:00 PM</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <p class="text-center mt-3">&copy; 2025 Nomad Tour Management System. All rights reserved.</p>
+  </div>
+
+  <!-- ================= NEWSLETTER ================= -->
+
+  <div class="footer-newsletter">
+    <div class="container">
+      <div class="newsletter-inner">
+        <div class="newsletter-content">
+          <span class="newsletter-icon">
+            <i class="bi bi-envelope-paper"></i>
+          </span>
+
+          <div>
+            <h5>Stay Updated With Waingo Farm</h5>
+
+            <p>
+              Get farming tips, new products and special offers directly in your
+              inbox.
+            </p>
+          </div>
+        </div>
+
+        <form class="newsletter-form">
+          <input
+            type="email"
+            placeholder="Enter your email address"
+            aria-label="Email address"
+          />
+
+          <button type="submit">
+            Subscribe
+            <i class="bi bi-arrow-right"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER BOTTOM ================= -->
+
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="footer-bottom-inner">
+        <p>
+          &copy; {% now "Y" %}
+          <strong>Waingo Farm</strong>. All Rights Reserved.
+        </p>
+
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+
+          <span>|</span>
+
+          <a href="#">Terms & Conditions</a>
+        </div>
+
+        <div class="payment-methods">
+          <span>Secure Payments</span>
+
+          <i class="bi bi-phone"></i>
+          <span>M-Pesa</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </footer>
-
-<style>
-/* ======================
-   FOOTER STYLES
-   ====================== */
-.footer {
-  background-color: #f8f9fa;
-  color: #212529;
-  padding: 40px 20px 20px;
-  margin-top: 40px;
-}
-
-.footer h5 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 15px;
-  color: #0d6efd;
-}
-
-.footer p {
-  font-size: 0.9rem;
-  color: #495057;
-  margin-bottom: 10px;
-}
-
-.footer ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footer ul li {
-  margin-bottom: 8px;
-}
-
-.footer ul li a {
-  color: #495057;
-  text-decoration: none;
-  transition: color 0.2s ease-in-out;
-}
-
-.footer ul li a:hover {
-  color: #0d6efd;
-}
-
-/* Footer Grid */
-.footer-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 25px;
-  margin-bottom: 20px;
-}
-
-/* Social Icons */
-.footer .bi {
-  font-size: 1.3rem;
-  margin-right: 12px;
-  color: #495057;
-  transition: color 0.2s ease-in-out;
-}
-
-.footer .bi:hover {
-  color: #0d6efd;
-}
-
-/* Bottom note */
-.footer p.text-center {
-  font-size: 0.85rem;
-  margin-top: 15px;
-  color: #6c757d;
-  border-top: 1px solid #dee2e6;
-  padding-top: 10px;
-}
-
-/* ======================
-   RESPONSIVE
-   ====================== */
-@media (max-width: 768px) {
-  .footer-grid {
-    grid-template-columns: 1fr;
-  }
-}
-</style>

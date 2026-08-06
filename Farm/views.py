@@ -2,9 +2,13 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from decimal import Decimal
 from .models import Order
+from django.views.decorators.csrf import csrf_exempt
 from .mpesa import initiate_stk_push
 from django.contrib import messages
 from .models import Category, Product, Order, OrderItem
+import json
+from django.http import JsonResponse
+from django.utils import timezone
 
 
 
@@ -513,3 +517,190 @@ def payment(request, order_id):
             "order": order
         }
     )
+
+@csrf_exempt
+def mpesa_callback(request):
+
+    if request.method != "POST":
+        return JsonResponse(
+            {
+                "ResultCode": 1,
+                "ResultDesc": "Method not allowed",
+            },
+            status=405,
+        )
+
+    try:
+        data = json.loads(request.body)
+
+        print("\n===================================")
+        print("MPESA CALLBACK RECEIVED")
+        print(json.dumps(data, indent=4))
+        print("===================================\n")
+
+        stk_callback = (
+            data
+            .get("Body", {})
+            .get("stkCallback", {})
+        )
+
+        merchant_request_id = stk_callback.get(
+            "MerchantRequestID"
+        )
+
+        checkout_request_id = stk_callback.get(
+            "CheckoutRequestID"
+        )
+
+        result_code = stk_callback.get(
+            "ResultCode"
+        )
+
+        result_description = stk_callback.get(
+            "ResultDesc"
+        )
+
+        print("MerchantRequestID:", merchant_request_id)
+        print("CheckoutRequestID:", checkout_request_id)
+        print("ResultCode:", result_code)
+        print("ResultDesc:", result_description)
+
+        # -------------------------------------------------
+        # Validate callback
+        # -------------------------------------------------
+
+        if not checkout_request_id:
+            print("Missing CheckoutRequestID")
+
+            return JsonResponse(
+                {
+                    "ResultCode": 0,
+                    "ResultDesc": "Accepted",
+                }
+            )
+
+        # -------------------------------------------------
+        # Find order
+        # -------------------------------------------------
+
+        order = Order.objects.filter(
+            mpesa_checkout_request_id=checkout_request_id
+        ).first()
+
+        if not order:
+
+            print(
+                "Order not found for CheckoutRequestID:",
+                checkout_request_id
+            )
+
+            return JsonResponse(
+                {
+                    "ResultCode": 0,
+                    "ResultDesc": "Accepted",
+                }
+            )
+
+        # -------------------------------------------------
+        # Save basic callback information
+        # -------------------------------------------------
+
+        order.mpesa_merchant_request_id = merchant_request_id
+        order.mpesa_checkout_request_id = checkout_request_id
+        order.mpesa_result_code = result_code
+        order.mpesa_result_description = result_description
+
+        # -------------------------------------------------
+        # PAYMENT SUCCESSFUL
+        # -------------------------------------------------
+
+        if result_code == 0:
+
+            callback_metadata = stk_callback.get(
+                "CallbackMetadata",
+                {}
+            )
+
+            items = callback_metadata.get(
+                "Item",
+                []
+            )
+
+            metadata = {}
+
+            for item in items:
+
+                name = item.get("Name")
+                value = item.get("Value")
+
+                if name:
+                    metadata[name] = value
+
+            print("M-PESA METADATA:", metadata)
+
+            # Receipt number
+            order.mpesa_receipt_number = metadata.get(
+                "MpesaReceiptNumber"
+            )
+
+            # Payment date/time
+            order.paid_at = timezone.now()
+
+            # Mark order as paid
+            order.status = "paid"
+
+            order.save()
+
+            print(
+                f"✅ ORDER #{order.id} MARKED AS PAID"
+            )
+
+        # -------------------------------------------------
+        # PAYMENT FAILED / CANCELLED
+        # -------------------------------------------------
+
+        else:
+
+            order.save()
+
+            print(
+                f"❌ ORDER #{order.id} PAYMENT FAILED"
+            )
+
+        # -------------------------------------------------
+        # Tell Safaricom we received callback
+        # -------------------------------------------------
+
+        return JsonResponse(
+            {
+                "ResultCode": 0,
+                "ResultDesc": "Accepted",
+            }
+        )
+
+    except json.JSONDecodeError:
+
+        print("❌ Invalid JSON received from M-Pesa")
+
+        return JsonResponse(
+            {
+                "ResultCode": 1,
+                "ResultDesc": "Invalid JSON",
+            },
+            status=400,
+        )
+
+    except Exception as e:
+
+        print(
+            "❌ MPESA CALLBACK ERROR:",
+            repr(e)
+        )
+
+        return JsonResponse(
+            {
+                "ResultCode": 1,
+                "ResultDesc": "Callback processing failed",
+            },
+            status=500,
+        )

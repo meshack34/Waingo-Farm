@@ -1,0 +1,611 @@
+/* =========================================================
+   WAINGO FARM
+   PROFESSIONAL FOOTER
+   Brand Colors:
+   Green  - Agriculture / Growth
+   Brown  - Farm / Earth
+   White  - Clean / Professional
+========================================================= */
+
+:root {
+  --waingo-green: #65a936;
+  --waingo-green-dark: #3f7627;
+  --waingo-green-light: #eaf4e3;
+
+  --waingo-brown: #5a3030;
+  --waingo-brown-light: #8a5650;
+
+  --waingo-dark: #172019;
+  --waingo-text: #4a554c;
+  --waingo-muted: #879187;
+
+  --waingo-white: #ffffff;
+  --waingo-border: #e3e8e1;
+}
+
+
+/* =========================================================
+   MAIN FOOTER
+========================================================= */
+
+.site-footer {
+  background: var(--waingo-dark);
+  color: #dfe8df;
+  margin-top: 80px;
+}
+
+
+/* =========================================================
+   FOOTER MAIN
+========================================================= */
+
+.footer-main {
+  padding: 75px 0 65px;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.footer-brand {
+  max-width: 380px;
+}
+
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.footer-logo img {
+  width: 155px;
+  height: 75px;
+
+  object-fit: contain;
+
+  background: #fff;
+
+  padding: 6px 12px;
+
+  border-radius: 10px;
+
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+}
+
+.footer-description {
+  color: #b8c4b9;
+
+  font-size: 14px;
+
+  line-height: 1.9;
+
+  margin-bottom: 25px;
+}
+
+
+/* =========================================================
+   SOCIAL MEDIA
+========================================================= */
+
+.footer-socials {
+  display: flex;
+  gap: 10px;
+}
+
+.footer-socials a {
+  width: 41px;
+  height: 41px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+
+  border-radius: 50%;
+
+  color: #fff;
+
+  text-decoration: none;
+
+  transition: all 0.3s ease;
+}
+
+.footer-socials a:hover {
+  background: var(--waingo-green);
+
+  border-color: var(--waingo-green);
+
+  transform: translateY(-4px);
+
+  box-shadow: 0 6px 15px rgba(101, 169, 54, 0.25);
+}
+
+
+/* =========================================================
+   FOOTER COLUMNS
+========================================================= */
+
+.footer-column h5 {
+  color: #fff;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  margin-bottom: 25px;
+
+  position: relative;
+
+  padding-bottom: 13px;
+}
+
+.footer-column h5::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+
+  bottom: 0;
+
+  width: 40px;
+
+  height: 3px;
+
+  background: var(--waingo-green);
+
+  border-radius: 20px;
+}
+
+.footer-column h5::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+
+  bottom: 0;
+
+  width: 65px;
+
+  height: 1px;
+
+  background: rgba(255, 255, 255, 0.12);
+}
+
+
+/* =========================================================
+   FOOTER LINKS
+========================================================= */
+
+.footer-column ul {
+  list-style: none;
+
+  padding: 0;
+
+  margin: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 13px;
+}
+
+.footer-column ul li a {
+  color: #b8c4b9;
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  transition: all 0.3s ease;
+}
+
+.footer-column ul li a i {
+  font-size: 9px;
+
+  margin-right: 9px;
+
+  color: var(--waingo-green);
+
+  transition: transform 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+  color: #fff;
+
+  transform: translateX(5px);
+}
+
+.footer-column ul li a:hover i {
+  transform: translateX(2px);
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.footer-contact {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 19px;
+}
+
+.contact-item {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 12px;
+}
+
+.contact-icon {
+  width: 39px;
+  height: 39px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: rgba(101, 169, 54, 0.12);
+
+  color: var(--waingo-green);
+
+  border-radius: 9px;
+
+  transition: all 0.3s ease;
+}
+
+.contact-item:hover .contact-icon {
+  background: var(--waingo-green);
+
+  color: #fff;
+}
+
+.contact-item strong {
+  display: block;
+
+  color: #fff;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  margin-bottom: 4px;
+}
+
+.contact-item p,
+.contact-item a {
+  margin: 0;
+
+  color: #aebbb0;
+
+  font-size: 13px;
+
+  text-decoration: none;
+
+  line-height: 1.6;
+}
+
+.contact-item a:hover {
+  color: var(--waingo-green);
+}
+
+
+/* =========================================================
+   NEWSLETTER
+========================================================= */
+
+.footer-newsletter {
+  background: #1d2d20;
+
+  padding: 32px 0;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.newsletter-inner {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 30px;
+}
+
+.newsletter-content {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+}
+
+.newsletter-icon {
+  width: 52px;
+  height: 52px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: var(--waingo-green);
+
+  color: #fff;
+
+  border-radius: 50%;
+
+  font-size: 20px;
+
+  box-shadow: 0 6px 18px rgba(101, 169, 54, 0.22);
+}
+
+.newsletter-content h5 {
+  color: #fff;
+
+  margin: 0 0 5px;
+
+  font-size: 17px;
+
+  font-weight: 600;
+}
+
+.newsletter-content p {
+  color: #aebbb0;
+
+  margin: 0;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   NEWSLETTER FORM
+========================================================= */
+
+.newsletter-form {
+  display: flex;
+
+  width: 100%;
+
+  max-width: 470px;
+}
+
+.newsletter-form input {
+  flex: 1;
+
+  height: 48px;
+
+  border: 1px solid transparent;
+
+  outline: none;
+
+  padding: 0 18px;
+
+  border-radius: 7px 0 0 7px;
+
+  font-size: 13px;
+
+  background: #fff;
+
+  color: var(--waingo-dark);
+}
+
+.newsletter-form input:focus {
+  border-color: var(--waingo-green);
+}
+
+.newsletter-form button {
+  height: 48px;
+
+  padding: 0 22px;
+
+  border: none;
+
+  background: var(--waingo-green);
+
+  color: #fff;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  border-radius: 0 7px 7px 0;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+.newsletter-form button:hover {
+  background: var(--waingo-green-dark);
+
+  padding-right: 26px;
+}
+
+.newsletter-form button i {
+  margin-left: 6px;
+}
+
+
+/* =========================================================
+   FOOTER BOTTOM
+========================================================= */
+
+.footer-bottom {
+  background: #101811;
+
+  padding: 20px 0;
+}
+
+.footer-bottom-inner {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.footer-bottom p {
+  margin: 0;
+
+  color: #829083;
+
+  font-size: 12px;
+}
+
+.footer-bottom p strong {
+  color: #fff;
+}
+
+
+/* =========================================================
+   BOTTOM LINKS
+========================================================= */
+
+.footer-bottom-links {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+.footer-bottom-links a {
+  color: #829083;
+
+  font-size: 12px;
+
+  text-decoration: none;
+
+  transition: 0.3s ease;
+}
+
+.footer-bottom-links a:hover {
+  color: var(--waingo-green);
+}
+
+.footer-bottom-links span {
+  color: #435145;
+}
+
+
+/* =========================================================
+   PAYMENT METHODS
+========================================================= */
+
+.payment-methods {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  color: #829083;
+
+  font-size: 12px;
+}
+
+.payment-methods i {
+  color: var(--waingo-green);
+
+  font-size: 17px;
+}
+
+.payment-methods span:last-child {
+  color: #fff;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 991px) {
+
+  .footer-main {
+    padding: 60px 0 45px;
+  }
+
+  .newsletter-inner {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .newsletter-form {
+    max-width: 100%;
+  }
+
+  .footer-bottom-inner {
+    flex-direction: column;
+
+    text-align: center;
+  }
+
+}
+
+
+@media (max-width: 575px) {
+
+  .site-footer {
+    margin-top: 50px;
+  }
+
+  .footer-main {
+    padding: 50px 0 35px;
+  }
+
+  .footer-logo img {
+    width: 140px;
+
+    height: 65px;
+  }
+
+  .newsletter-content {
+    align-items: flex-start;
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+
+    gap: 10px;
+  }
+
+  .newsletter-form input,
+  .newsletter-form button {
+    width: 100%;
+
+    border-radius: 7px;
+  }
+
+  .footer-bottom-links {
+    flex-wrap: wrap;
+
+    justify-content: center;
+  }
+
+}

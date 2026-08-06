@@ -1,5 +1,10 @@
 {% extends "base.html" %} {% load static %} {% block title %} Shopping Cart |
-Waingo Farm {% endblock %} {% block content %}
+Waingo Farm{% endblock %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/shop.css' %}" />
+<link rel="stylesheet" href="{% static 'css/cart.css' %}" />
+<link rel="stylesheet" href="{% static 'css/payment.css' %}" />
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+{% endblock %} {% block content %}
 
 <section class="cart-section">
   <div class="container">

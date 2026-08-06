@@ -1,0 +1,460 @@
+
+
+
+/* =========================================================
+   PAYMENT PAGE
+========================================================= */
+
+.payment-section {
+    width: 100%;
+    min-height: 75vh;
+    padding: 70px 20px 100px;
+    background: #f7f9f5;
+}
+
+.payment-wrapper {
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+
+/* =========================
+   PAYMENT HEADER
+========================= */
+
+.payment-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.payment-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #7fbe26;
+    color: #ffffff;
+
+    font-size: 28px;
+}
+
+.payment-header > span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #7fbe26;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.payment-header h1 {
+    margin: 0 0 12px;
+
+    color: #333333;
+
+    font-size: 38px;
+    font-weight: 700;
+}
+
+.payment-header p {
+    max-width: 500px;
+
+    margin: 0 auto;
+
+    color: #777777;
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* =========================
+   PAYMENT CARD
+========================= */
+
+.payment-card {
+    width: 100%;
+
+    padding: 35px;
+
+    background: #ffffff;
+
+    border: 1px solid #e8e8e8;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 15px 45px rgba(0, 0, 0, 0.07);
+}
+
+
+/* =========================
+   ORDER INFORMATION
+========================= */
+
+.payment-order-row {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding-bottom: 22px;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+.payment-order-row > div {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.payment-order-row span {
+    color: #888888;
+
+    font-size: 11px;
+    font-weight: 500;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+}
+
+.payment-order-row strong {
+    color: #333333;
+
+    font-size: 15px;
+}
+
+.payment-status {
+    text-align: right;
+}
+
+.payment-status strong {
+    color: #e49a00;
+}
+
+
+/* =========================
+   AMOUNT
+========================= */
+
+.payment-amount {
+    padding: 28px 0;
+
+    text-align: center;
+}
+
+.payment-amount span {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #777777;
+
+    font-size: 13px;
+}
+
+.payment-amount strong {
+    color: #70ad20;
+
+    font-size: 32px;
+    font-weight: 700;
+}
+
+
+/* =========================
+   MPESA INFORMATION
+========================= */
+
+.mpesa-box {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 15px;
+
+    padding: 20px;
+
+    background: #f6faef;
+
+    border: 1px solid #e1eccf;
+
+    border-radius: 8px;
+}
+
+.mpesa-icon {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background: #7fbe26;
+
+    color: #ffffff;
+
+    font-size: 20px;
+}
+
+.mpesa-box h3 {
+    margin: 0 0 7px;
+
+    color: #333333;
+
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.mpesa-box p {
+    margin: 0;
+
+    color: #777777;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.payment-form {
+    margin-top: 28px;
+}
+
+.payment-form label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #333333;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.mpesa-input {
+    width: 100%;
+    height: 54px;
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid #dddddd;
+
+    border-radius: 6px;
+
+    transition: 0.2s ease;
+}
+
+.mpesa-input:focus-within {
+    border-color: #7fbe26;
+
+    box-shadow:
+        0 0 0 3px rgba(127, 190, 38, 0.12);
+}
+
+.mpesa-input span {
+    height: 100%;
+
+    padding: 0 16px;
+
+    display: flex;
+    align-items: center;
+
+    background: #f7f7f7;
+
+    border-right: 1px solid #dddddd;
+
+    color: #555555;
+
+    font-size: 14px;
+}
+
+.mpesa-input input {
+    width: 100%;
+    height: 100%;
+
+    padding: 0 15px;
+
+    border: none;
+    outline: none;
+
+    color: #333333;
+
+    font-size: 15px;
+}
+
+.mpesa-input input::placeholder {
+    color: #aaaaaa;
+}
+
+
+/* =========================
+   PAY BUTTON
+========================= */
+
+.mpesa-pay-btn {
+    width: 100%;
+    min-height: 55px;
+
+    margin-top: 16px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: #7fbe26;
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+}
+
+.mpesa-pay-btn:hover {
+    background: #68a51b;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(127, 190, 38, 0.25);
+}
+
+.mpesa-pay-btn i {
+    margin-right: 7px;
+}
+
+
+/* =========================
+   SECURITY
+========================= */
+
+.payment-security {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    margin-top: 22px;
+    padding-top: 20px;
+
+    border-top: 1px solid #eeeeee;
+
+    color: #888888;
+
+    font-size: 11px;
+}
+
+.payment-security i {
+    color: #7fbe26;
+
+    font-size: 16px;
+}
+
+
+/* =========================
+   BACK LINK
+========================= */
+
+.payment-back {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    margin-top: 18px;
+
+    color: #70ad20;
+
+    font-size: 13px;
+
+    text-decoration: none;
+
+    transition: 0.2s ease;
+}
+
+.payment-back:hover {
+    color: #4f8c12;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .payment-section {
+        padding: 45px 15px 70px;
+    }
+
+    .payment-card {
+        padding: 22px;
+        border-radius: 8px;
+    }
+
+    .payment-header h1 {
+        font-size: 30px;
+    }
+
+    .payment-header p {
+        font-size: 13px;
+    }
+
+    .payment-order-row {
+        align-items: flex-start;
+    }
+
+    .payment-amount strong {
+        font-size: 27px;
+    }
+
+    .mpesa-box {
+        padding: 16px;
+    }
+
+    .mpesa-box h3 {
+        font-size: 15px;
+    }
+
+    .mpesa-box p {
+        font-size: 12px;
+    }
+
+}

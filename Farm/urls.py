@@ -63,5 +63,10 @@ urlpatterns = [
     views.payment,
     name="payment"
 ),
+    path(
+        "mpesa/callback/",
+        views.mpesa_callback,
+        name="mpesa_callback",
+    ),
 
 ]
