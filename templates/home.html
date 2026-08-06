@@ -39,8 +39,9 @@ Quality Agricultural Supplies {% endblock %} {% block extra_css %}
 
               <i class="bi bi-arrow-right"></i>
             </a>
-
-            <a href="#" class="hero-btn-secondary"> OUR SERVICES </a>
+            <a href="{% url 'services' %}" class="hero-btn-secondary">
+              OUR SERVICES
+            </a>
           </div>
         </div>
       </div>
@@ -49,13 +50,13 @@ Quality Agricultural Supplies {% endblock %} {% block extra_css %}
 
       <div class="col-lg-6">
         <div class="hero-image-wrapper">
-          <div class="hero-circle"></div>
-
-          <img
-            src="{% static 'images/lading.jpeg' %}"
-            alt="Modern farming"
-            class="hero-image"
-          />
+          <div class="hero-circle">
+            <img
+              src="{% static 'images/lading.jpeg' %}"
+              alt="Modern farming"
+              class="hero-image"
+            />
+          </div>
         </div>
       </div>
     </div>
