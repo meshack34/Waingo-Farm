@@ -16,7 +16,8 @@ urlpatterns = [
         "shop/",
         views.shop,
         name="shop"
-    ),
+    ),  
+    path("services/", views.services, name="services"),
 
     # Product details
     path(

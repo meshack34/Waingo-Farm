@@ -201,7 +201,12 @@
           SHOP
         </a>
 
-        <a href="#" class="nav-link"> OUR SERVICES </a>
+        <a
+          href="{% url 'services' %}"
+          class="nav-link {% if request.resolver_match.url_name == 'services' %}active{% endif %}"
+        >
+          OUR SERVICES
+        </a>
 
         <a href="#" class="nav-link"> ABOUT US </a>
 

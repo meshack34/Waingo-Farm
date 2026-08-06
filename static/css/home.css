@@ -916,3 +916,82 @@
     }
 
 }
+
+
+/* =========================================================
+   LOCATION
+========================================================= */
+
+.location-section{
+    padding:100px 0;
+    background:#f8fbf6;
+}
+
+.location-info{
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+}
+
+.location-card{
+    display:flex;
+    gap:18px;
+    align-items:flex-start;
+    padding:24px;
+    background:white;
+    border:1px solid var(--border);
+    border-radius:12px;
+    transition:var(--transition);
+}
+
+.location-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+}
+
+.location-card i{
+    width:55px;
+    height:55px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--primary-green);
+    color:white;
+    border-radius:50%;
+    font-size:22px;
+}
+
+.location-card h4{
+    margin-bottom:6px;
+    color:var(--dark);
+}
+
+.location-card p{
+    margin:0;
+    color:var(--muted);
+    line-height:1.7;
+}
+
+.map-wrapper{
+    overflow:hidden;
+    border-radius:16px;
+    box-shadow:0 15px 40px rgba(0,0,0,.12);
+}
+
+.map-wrapper iframe{
+    width:100%;
+    height:500px;
+    border:0;
+}
+
+@media(max-width:768px){
+
+    .location-section{
+        padding:70px 0;
+    }
+
+    .map-wrapper iframe{
+        height:350px;
+    }
+
+}

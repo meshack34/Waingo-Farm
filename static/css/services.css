@@ -1,0 +1,45 @@
+/* =========================================================
+   WAINGO FARM
+   SERVICES PAGE
+========================================================= */
+
+.services-page {
+    padding: 100px 0;
+    background: var(--background);
+}
+
+.services-page-heading {
+    max-width: 750px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.services-page-heading span {
+    display: inline-block;
+    margin-bottom: 12px;
+
+    color: var(--primary-green);
+
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.services-page-heading h1 {
+    margin-bottom: 18px;
+
+    color: var(--dark);
+
+    font-size: clamp(34px, 5vw, 52px);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.services-page-heading p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 16px;
+    line-height: 1.8;
+}

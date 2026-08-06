@@ -56,6 +56,12 @@ def shop(request):
         context
     )
 
+def services(request):
+
+    return render(
+        request,
+        "services.html"
+    )
 
 def product_detail(request, slug):
 
@@ -421,25 +427,70 @@ def payment(request, order_id):
 
     if request.method == "POST":
 
-        phone_number = request.POST.get("phone", "").strip()
+        # =====================================================
+        # GET PHONE NUMBER
+        # =====================================================
+
+        phone_number = request.POST.get(
+            "phone",
+            ""
+        ).strip()
+
+        print("========================================")
+        print("PAYMENT POST RECEIVED")
+        print("PHONE FROM FORM:", phone_number)
+        print("ORDER ID:", order.id)
+        print("ORDER AMOUNT:", order.total_amount)
+        print("========================================")
 
         # Remove spaces
         phone_number = phone_number.replace(" ", "")
 
-        # Convert +254712345678 → 254712345678
-        if phone_number.startswith("+254"):
+        # Remove hyphen if someone enters one
+        phone_number = phone_number.replace("-", "")
+
+        # =====================================================
+        # NORMALIZE KENYAN PHONE NUMBER
+        # =====================================================
+
+        # 0712345678 → 254712345678
+        if phone_number.startswith("0"):
+
+            phone_number = (
+                "254"
+                + phone_number[1:]
+            )
+
+        # +254712345678 → 254712345678
+        elif phone_number.startswith("+254"):
+
             phone_number = phone_number[1:]
 
-        # Convert 0712345678 → 254712345678
-        elif phone_number.startswith("0"):
-            phone_number = "254" + phone_number[1:]
-
-        # Validate Kenyan number
-        if (
-            not phone_number.startswith("254")
-            or len(phone_number) != 12
-            or not phone_number.isdigit()
+        # 712345678 → 254712345678
+        elif (
+            len(phone_number) == 9
+            and phone_number.startswith("7")
         ):
+
+            phone_number = (
+                "254"
+                + phone_number
+            )
+
+        print("NORMALIZED PHONE:", phone_number)
+
+        # =====================================================
+        # VALIDATE PHONE NUMBER
+        # =====================================================
+
+        if (
+            len(phone_number) != 12
+            or not phone_number.isdigit()
+            or not phone_number.startswith("2547")
+        ):
+
+            print("INVALID PHONE NUMBER:", phone_number)
+
             messages.error(
                 request,
                 "Please enter a valid Kenyan M-Pesa phone number."
@@ -453,24 +504,55 @@ def payment(request, order_id):
                 }
             )
 
+        # =====================================================
+        # INITIATE STK PUSH
+        # =====================================================
+
         try:
 
+            print("========================================")
+            print("CALLING MPESA STK PUSH")
+            print("PHONE SENT TO MPESA:", phone_number)
+            print("AMOUNT SENT TO MPESA:", order.total_amount)
+            print("========================================")
+
             response = initiate_stk_push(
+
                 phone_number=phone_number,
+
                 amount=order.total_amount,
-                account_reference=f"ORDER-{order.id}",
-                transaction_description="Waingo Farm Order Payment",
+
+                account_reference=(
+                    f"ORDER-{order.id}"
+                ),
+
+                transaction_description=(
+                    "Waingo Farm Order Payment"
+                ),
+
             )
+
+            print("========================================")
+            print("MPESA FUNCTION RETURNED")
+            print("MPESA RESPONSE FROM VIEW:", response)
+            print("========================================")
+
+            # =================================================
+            # SUCCESSFUL STK REQUEST
+            # =================================================
 
             if response.get("ResponseCode") == "0":
 
-                # Save M-Pesa request information
-                order.mpesa_merchant_request_id = response.get(
-                    "MerchantRequestID"
+                order.mpesa_merchant_request_id = (
+                    response.get(
+                        "MerchantRequestID"
+                    )
                 )
 
-                order.mpesa_checkout_request_id = response.get(
-                    "CheckoutRequestID"
+                order.mpesa_checkout_request_id = (
+                    response.get(
+                        "CheckoutRequestID"
+                    )
                 )
 
                 order.save(
@@ -483,7 +565,8 @@ def payment(request, order_id):
                 messages.success(
                     request,
                     "M-Pesa payment request sent. "
-                    "Please check your phone and enter your M-Pesa PIN."
+                    "Please check your phone and "
+                    "enter your M-Pesa PIN."
                 )
 
                 return render(
@@ -495,20 +578,47 @@ def payment(request, order_id):
                     }
                 )
 
-            messages.error(
-                request,
+            # =================================================
+            # SAFARICOM RETURNED AN ERROR
+            # =================================================
+
+            error_message = response.get(
+                "errorMessage",
                 response.get(
-                    "errorMessage",
+                    "ResponseDescription",
                     "Unable to initiate M-Pesa payment."
                 )
             )
 
+            print(
+                "MPESA REQUEST FAILED:",
+                error_message
+            )
+
+            messages.error(
+                request,
+                error_message
+            )
+
+        # =====================================================
+        # PYTHON / REQUEST ERROR
+        # =====================================================
+
         except Exception as e:
+
+            print("========================================")
+            print("MPESA ERROR")
+            print(repr(e))
+            print("========================================")
 
             messages.error(
                 request,
                 f"Payment request failed: {str(e)}"
             )
+
+    # =========================================================
+    # GET REQUEST
+    # =========================================================
 
     return render(
         request,
@@ -517,7 +627,7 @@ def payment(request, order_id):
             "order": order
         }
     )
-
+    
 @csrf_exempt
 def mpesa_callback(request):
 

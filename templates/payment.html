@@ -78,17 +78,23 @@ Payment {% endblock %} {% block extra_css %}
           <label for="phone"> M-Pesa Phone Number </label>
 
           <div class="mpesa-input">
-            <span>+254</span>
+            <span class="country-code">+254</span>
 
             <input
               type="tel"
               id="phone"
               name="phone"
               placeholder="712 345 678"
-              maxlength="9"
+              maxlength="11"
+              inputmode="numeric"
+              autocomplete="tel"
               required
             />
           </div>
+
+          <small class="phone-help">
+            Enter your M-Pesa number, e.g. 712 345 678
+          </small>
 
           <button type="submit" class="mpesa-pay-btn">
             <i class="bi bi-lock-fill"></i>

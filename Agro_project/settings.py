@@ -18,7 +18,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-
+CSRF_TRUSTED_ORIGINS = [
+    "https://waingofarm.com",
+    "https://5292-41-139-140-211.ngrok-free.app",
+]
 # Application definition
 
 INSTALLED_APPS = [
