@@ -209,7 +209,7 @@ class OrderDetailView(LoginRequiredMixin, TemplateView):
 
 
 
-    class AnalyticsView(TemplateView):
+class AnalyticsView(TemplateView):
 
     template_name = "owner/analytics/analytics.html"
 
