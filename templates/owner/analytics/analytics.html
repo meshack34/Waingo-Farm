@@ -1,0 +1,274 @@
+{% extends "owner/base_owner.html" %} {% load static %} {% block title
+%}Analytics{% endblock %} {% block page_title %} Analytics {% endblock %} {%
+block extra_css %}
+<link rel="stylesheet" href="{% static 'css/owner/analytics.css' %}" />
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %} {% block content %}
+
+<div class="analytics-page">
+  <!-- ===================================================== -->
+  <!-- PAGE HEADER -->
+  <!-- ===================================================== -->
+
+  <div class="analytics-header">
+    <div>
+      <h2>Business Analytics</h2>
+
+      <p>Monitor your farm performance, sales and revenue.</p>
+    </div>
+
+    <div class="analytics-actions">
+      <button class="btn-owner-outline">
+        <i class="bi bi-download"></i>
+
+        Export Report
+      </button>
+    </div>
+  </div>
+
+  <!-- ===================================================== -->
+  <!-- KPI CARDS -->
+  <!-- ===================================================== -->
+
+  <div class="analytics-cards">
+    <div class="analytics-card revenue">
+      <div class="card-icon">
+        <i class="bi bi-cash-stack"></i>
+      </div>
+
+      <div>
+        <small>Total Revenue</small>
+
+        <h3>KSh {{ total_revenue|floatformat:2 }}</h3>
+      </div>
+    </div>
+
+    <div class="analytics-card orders">
+      <div class="card-icon">
+        <i class="bi bi-bag-check"></i>
+      </div>
+
+      <div>
+        <small>Total Orders</small>
+
+        <h3>{{ total_orders }}</h3>
+      </div>
+    </div>
+
+    <div class="analytics-card customers">
+      <div class="card-icon">
+        <i class="bi bi-people"></i>
+      </div>
+
+      <div>
+        <small>Customers</small>
+
+        <h3>{{ total_customers }}</h3>
+      </div>
+    </div>
+
+    <div class="analytics-card products">
+      <div class="card-icon">
+        <i class="bi bi-box-seam"></i>
+      </div>
+
+      <div>
+        <small>Products Sold</small>
+
+        <h3>{{ total_products_sold }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================== -->
+  <!-- CHARTS -->
+  <!-- ===================================================== -->
+
+  <div class="analytics-grid">
+    <div class="dashboard-card">
+      <div class="panel-header">
+        <div>
+          <h2>Monthly Revenue</h2>
+
+          <p>Revenue trend over the year</p>
+        </div>
+      </div>
+
+      <canvas id="revenueChart"></canvas>
+    </div>
+
+    <div class="dashboard-card">
+      <div class="panel-header">
+        <div>
+          <h2>Orders by Status</h2>
+
+          <p>Current order distribution</p>
+        </div>
+      </div>
+
+      <canvas id="statusChart"></canvas>
+    </div>
+  </div>
+
+  <!-- ===================================================== -->
+  <!-- SECOND ROW -->
+  <!-- ===================================================== -->
+
+  <div class="analytics-grid">
+    <!-- BEST SELLERS -->
+
+    <div class="dashboard-card">
+      <div class="panel-header">
+        <div>
+          <h2>Best Selling Products</h2>
+
+          <p>Top performing products</p>
+        </div>
+      </div>
+
+      <div class="ranking-list">
+        {% for product in best_products %}
+
+        <div class="ranking-item">
+          <div class="ranking-left">
+            {% if product.image %}
+
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+
+            {% else %}
+
+            <div class="ranking-placeholder">
+              <i class="bi bi-image"></i>
+            </div>
+
+            {% endif %}
+
+            <div>
+              <strong>{{ product.name }}</strong>
+
+              <small>{{ product.category.name }}</small>
+            </div>
+          </div>
+
+          <span> {{ product.total_sold }} Sold </span>
+        </div>
+
+        {% empty %}
+
+        <div class="empty-box">No sales available.</div>
+
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- LOW STOCK -->
+
+    <div class="dashboard-card">
+      <div class="panel-header">
+        <div>
+          <h2>Low Stock</h2>
+
+          <p>Products needing restocking</p>
+        </div>
+      </div>
+
+      <div class="ranking-list">
+        {% for product in low_stock_products %}
+
+        <div class="ranking-item">
+          <div>
+            <strong> {{ product.name }} </strong>
+
+            <small> {{ product.category.name }} </small>
+          </div>
+
+          <span class="stock-warning"> {{ product.stock }} Left </span>
+        </div>
+
+        {% empty %}
+
+        <div class="empty-box">All products sufficiently stocked.</div>
+
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================== -->
+  <!-- RECENT PAYMENTS -->
+  <!-- ===================================================== -->
+
+  <div class="dashboard-card">
+    <div class="panel-header">
+      <div>
+        <h2>Recent Payments</h2>
+
+        <p>Latest completed M-Pesa transactions</p>
+      </div>
+    </div>
+
+    <table class="dashboard-table">
+      <thead>
+        <tr>
+          <th>Receipt</th>
+
+          <th>Customer</th>
+
+          <th>Amount</th>
+
+          <th>Status</th>
+
+          <th>Date</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for order in recent_payments %}
+
+        <tr>
+          <td>{{ order.mpesa_receipt_number }}</td>
+
+          <td>{{ order.full_name }}</td>
+
+          <td>KSh {{ order.total_amount }}</td>
+
+          <td>
+            <span class="status paid"> Paid </span>
+          </td>
+
+          <td>{{ order.paid_at|date:"d M Y" }}</td>
+        </tr>
+
+        {% empty %}
+
+        <tr>
+          <td colspan="5">No payments yet.</td>
+        </tr>
+
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %} {% block extra_js %}
+
+<script>
+
+  window.analyticsData = {
+
+      revenueLabels: {{ revenue_labels|safe }},
+
+      revenueData: {{ revenue_values|safe }},
+
+      statusLabels: {{ status_labels|safe }},
+
+      statusData: {{ status_values|safe }}
+
+  };
+</script>
+
+<script src="{% static 'js/analytics.js' %}"></script>
+
+{% endblock %}

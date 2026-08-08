@@ -1,0 +1,69 @@
+{% extends "owner/base_owner.html" %} {% load static %} {% block title %}Delete
+Product{% endblock %} {% block page_title %} Delete Product {% endblock %} {%
+block extra_css %}
+<link rel="stylesheet" href="{% static 'css/owner/products.css' %}" />
+{% endblock %} {% block content %}
+
+<div class="product-delete-page">
+  <div class="delete-card">
+    <div class="delete-icon">
+      <i class="bi bi-trash3-fill"></i>
+    </div>
+
+    <h2>Delete Product</h2>
+
+    <p>You are about to permanently delete</p>
+
+    <h3>"{{ object.name }}"</h3>
+
+    <p>This action cannot be undone.</p>
+
+    {% if object.image %}
+
+    <div class="delete-image">
+      <img src="{{ object.image.url }}" alt="{{ object.name }}" />
+    </div>
+
+    {% endif %}
+
+    <div class="delete-info">
+      <div>
+        <span>Category</span>
+
+        <strong>{{ object.category.name }}</strong>
+      </div>
+
+      <div>
+        <span>Price</span>
+
+        <strong>KSh {{ object.price }}</strong>
+      </div>
+
+      <div>
+        <span>Stock</span>
+
+        <strong>{{ object.stock }}</strong>
+      </div>
+    </div>
+
+    <form method="POST">
+      {% csrf_token %}
+
+      <div class="delete-actions">
+        <a href="{% url 'owner:products' %}" class="btn-owner-outline">
+          <i class="bi bi-arrow-left"></i>
+
+          Cancel
+        </a>
+
+        <button type="submit" class="btn-delete">
+          <i class="bi bi-trash3"></i>
+
+          Delete Product
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

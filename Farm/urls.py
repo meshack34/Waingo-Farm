@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import include, path
 from . import views
 
 
@@ -64,10 +64,20 @@ urlpatterns = [
     views.payment,
     name="payment"
 ),
+    path( "payment/status/<int:order_id>/",
+        views.payment_status,
+        name="payment_status"
+    ),
+    path(
+    "payment/success/<int:order_id>/",
+    views.payment_success,
+    name="payment_success"
+),
     path(
         "mpesa/callback/",
         views.mpesa_callback,
         name="mpesa_callback",
     ),
 
+path("owner/", include("Farm.owner.urls")),
 ]

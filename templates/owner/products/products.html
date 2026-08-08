@@ -1,0 +1,179 @@
+{% extends "owner/base_owner.html" %} {% load static %} {% block title
+%}Products{% endblock %} {% block page_title %} Products {% endblock %} {% block
+extra_css %}
+<link rel="stylesheet" href="{% static 'css/owner/products.css' %}" />
+{% endblock %} {% block content %}
+
+<div class="products-page">
+  <!-- ================= HEADER ================= -->
+
+  <div class="products-header">
+    <div>
+      <h2>Farm Products</h2>
+
+      <p>Manage all products available in your farm shop.</p>
+    </div>
+    <a href="{% url 'owner:product_add' %}" class="btn-owner">
+      <i class="bi bi-plus-lg"></i>
+
+      Add Product
+    </a>
+  </div>
+
+  <!-- ================= FILTERS ================= -->
+
+  <div class="products-toolbar">
+    <div class="toolbar-search">
+      <i class="bi bi-search"></i>
+
+      <input type="text" placeholder="Search products..." />
+    </div>
+
+    <select>
+      <option>All Categories</option>
+
+      {% for category in categories %}
+
+      <option>{{ category.name }}</option>
+
+      {% endfor %}
+    </select>
+
+    <select>
+      <option>Availability</option>
+
+      <option>Available</option>
+
+      <option>Unavailable</option>
+    </select>
+
+    <select>
+      <option>Sort</option>
+
+      <option>Newest</option>
+
+      <option>Oldest</option>
+
+      <option>Price ↑</option>
+
+      <option>Price ↓</option>
+
+      <option>Name</option>
+    </select>
+  </div>
+
+  <!-- ================= PRODUCTS ================= -->
+
+  {% if products %}
+
+  <div class="products-grid">
+    {% for product in products %}
+
+    <div class="product-card">
+      <div class="product-image">
+        {% if product.image %}
+
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+
+        {% else %}
+
+        <div class="no-image">
+          <i class="bi bi-image"></i>
+        </div>
+
+        {% endif %} {% if product.is_featured %}
+
+        <span class="featured-badge"> Featured </span>
+
+        {% endif %}
+      </div>
+
+      <div class="product-body">
+        <span class="product-category"> {{ product.category.name }} </span>
+
+        <h3>{{ product.name }}</h3>
+
+        <p class="product-price">KSh {{ product.price }}</p>
+
+        {% if product.stock == 0 %}
+
+        <span class="stock-badge out"> Out of Stock </span>
+
+        {% elif product.is_low_stock %}
+
+        <span class="stock-badge low"> Low Stock ({{ product.stock }}) </span>
+
+        {% else %}
+
+        <span class="stock-badge in"> In Stock ({{ product.stock }}) </span>
+
+        {% endif %}
+
+        <div class="product-actions">
+          <a
+            href="{% url 'owner:product_edit' product.id %}"
+            class="action-btn edit"
+          >
+            <i class="bi bi-pencil-square"></i>
+          </a>
+
+          <a
+            href="{% url 'product_detail' product.slug %}"
+            target="_blank"
+            class="action-btn view"
+          >
+            <i class="bi bi-eye"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+
+  {% else %}
+
+  <div class="empty-products">
+    <i class="bi bi-box-seam"></i>
+
+    <h3>No Products Found</h3>
+
+    <p>Start by adding your first farm product.</p>
+
+    <a href="{% url 'admin:Farm_product_add' %}" class="btn-owner">
+      <i class="bi bi-plus-circle"></i>
+
+      Add Product
+    </a>
+  </div>
+
+  {% endif %}
+
+  <!-- ================= PAGINATION ================= -->
+
+  {% if is_paginated %}
+
+  <div class="pagination-area">
+    {% if page_obj.has_previous %}
+
+    <a href="?page={{ page_obj.previous_page_number }}"> Previous </a>
+
+    {% endif %}
+
+    <span>
+      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    </span>
+
+    {% if page_obj.has_next %}
+
+    <a href="?page={{ page_obj.next_page_number }}"> Next </a>
+
+    {% endif %}
+  </div>
+
+  {% endif %}
+</div>
+
+{% endblock %} {% block extra_js %}
+<script src="{% static 'js/products.js' %}"></script>
+{% endblock %}

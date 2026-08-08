@@ -29,6 +29,17 @@ Payment {% endblock %} {% block extra_css %}
       <!-- PAYMENT CARD -->
 
       <div class="payment-card">
+        {% if stk_sent %}
+        <div id="payment-waiting" class="payment-waiting">
+          <div class="spinner-border" role="status"></div>
+
+          <h3>Waiting for M-Pesa payment...</h3>
+
+          <p>Please check your phone and enter your M-Pesa PIN.</p>
+
+          <small> We will automatically confirm your payment. </small>
+        </div>
+        {% endif %}
         <!-- ORDER INFORMATION -->
 
         <div class="payment-order-row">
@@ -72,6 +83,43 @@ Payment {% endblock %} {% block extra_css %}
 
         <!-- PAYMENT FORM -->
 
+        {% if stk_sent %}
+        <div id="payment-waiting" class="payment-waiting">
+          <div class="payment-loading">
+            <i class="bi bi-phone-fill"></i>
+          </div>
+
+          <h3>Payment Request Sent</h3>
+
+          <p>Check your phone and enter your M-Pesa PIN.</p>
+
+          <p id="payment-checking">Waiting for M-Pesa confirmation...</p>
+        </div>
+
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+            const orderId = "{{ order.id }}";
+
+            const checkPayment = setInterval(function () {
+              fetch(`/payment/status/${orderId}/`)
+                .then((response) => response.json())
+                .then((data) => {
+                  console.log("Payment status:", data.status);
+
+                  if (data.status === "paid") {
+                    clearInterval(checkPayment);
+
+                    window.location.href = `/payment/success/${orderId}/`;
+                  }
+                })
+                .catch((error) => {
+                  console.error("Payment status check failed:", error);
+                });
+            }, 3000);
+          });
+        </script>
+        {% endif %}
+
         <form method="POST" class="payment-form">
           {% csrf_token %}
 
@@ -84,7 +132,7 @@ Payment {% endblock %} {% block extra_css %}
               type="tel"
               id="phone"
               name="phone"
-              placeholder="712 345 678"
+              placeholder="712 345 678 or 110 071 789"
               maxlength="11"
               inputmode="numeric"
               autocomplete="tel"
@@ -123,4 +171,27 @@ Payment {% endblock %} {% block extra_css %}
   </div>
 </section>
 
-{% endblock %}
+{% if stk_sent %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const orderId = "{{ order.id }}";
+
+    const checkPayment = setInterval(function () {
+      fetch(`/payment/status/${orderId}/`)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Payment status:", data.status);
+
+          if (data.status === "paid") {
+            clearInterval(checkPayment);
+
+            window.location.href = `/payment/success/${orderId}/`;
+          }
+        })
+        .catch((error) => {
+          console.error("Payment status check failed:", error);
+        });
+    }, 3000);
+  });
+</script>
+{% endif %} {% endblock %}
