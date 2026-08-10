@@ -45,7 +45,7 @@ class CheckoutForm(forms.ModelForm):
             "county": forms.TextInput(
                 attrs={
                     "class": "form-control",
-                    "placeholder": "e.g. Nairobi",
+                    "placeholder": "e.g. Kenya",
                 }
             ),
 
