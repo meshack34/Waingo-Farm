@@ -1,0 +1,594 @@
+/* =========================================================
+   CATEGORY DELETE PAGE
+   ========================================================= */
+
+.category-delete-page {
+               width: 100%;
+               max-width: 1100px;
+               margin: 0 auto;
+               padding: 30px 24px 60px;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.delete-page-header {
+               display: flex;
+               align-items: center;
+               justify-content: space-between;
+               gap: 24px;
+
+               margin-bottom: 30px;
+}
+
+.delete-page-header-content {
+               display: flex;
+               align-items: center;
+               gap: 18px;
+}
+
+.delete-page-icon {
+               width: 58px;
+               height: 58px;
+
+               display: flex;
+               align-items: center;
+               justify-content: center;
+
+               border-radius: 16px;
+
+               background: #fff1f2;
+               color: #dc2626;
+
+               font-size: 24px;
+
+               border: 1px solid #fecdd3;
+}
+
+.delete-page-eyebrow {
+               display: block;
+
+               margin-bottom: 5px;
+
+               font-size: 11px;
+               font-weight: 700;
+
+               letter-spacing: 1.2px;
+
+               color: #64748b;
+}
+
+.delete-page-header h1 {
+               margin: 0;
+
+               font-size: 28px;
+               line-height: 1.2;
+
+               color: #0f172a;
+}
+
+.delete-page-header p {
+               margin: 7px 0 0;
+
+               color: #64748b;
+
+               font-size: 14px;
+}
+
+
+/* =========================================================
+   MAIN CARD
+   ========================================================= */
+
+.category-delete-card {
+               background: #ffffff;
+
+               border: 1px solid #e2e8f0;
+
+               border-radius: 20px;
+
+               box-shadow:
+                              0 4px 6px rgba(15, 23, 42, 0.03),
+                              0 15px 35px rgba(15, 23, 42, 0.06);
+
+               overflow: hidden;
+}
+
+
+/* =========================================================
+   CARD TOP
+   ========================================================= */
+
+.delete-card-top {
+               display: flex;
+               align-items: center;
+
+               gap: 18px;
+
+               padding: 30px;
+
+               border-bottom: 1px solid #f1f5f9;
+}
+
+.delete-danger-icon {
+               width: 54px;
+               height: 54px;
+
+               flex-shrink: 0;
+
+               display: flex;
+               align-items: center;
+               justify-content: center;
+
+               border-radius: 14px;
+
+               background: #fef2f2;
+               color: #dc2626;
+
+               border: 1px solid #fecaca;
+
+               font-size: 21px;
+}
+
+.delete-card-eyebrow {
+               display: block;
+
+               margin-bottom: 5px;
+
+               color: #dc2626;
+
+               font-size: 11px;
+               font-weight: 800;
+
+               letter-spacing: 1px;
+}
+
+.delete-card-top h2 {
+               margin: 0;
+
+               font-size: 21px;
+
+               color: #0f172a;
+}
+
+.delete-card-top p {
+               margin: 6px 0 0;
+
+               color: #64748b;
+
+               font-size: 14px;
+}
+
+
+/* =========================================================
+   DETAILS
+   ========================================================= */
+
+.delete-details {
+               display: grid;
+
+               grid-template-columns: repeat(2, 1fr);
+
+               gap: 16px;
+
+               padding: 26px 30px;
+}
+
+.delete-detail {
+               display: flex;
+               align-items: center;
+
+               gap: 14px;
+
+               padding: 18px;
+
+               background: #f8fafc;
+
+               border: 1px solid #e2e8f0;
+
+               border-radius: 14px;
+}
+
+.delete-detail-icon {
+               width: 42px;
+               height: 42px;
+
+               flex-shrink: 0;
+
+               display: flex;
+               align-items: center;
+               justify-content: center;
+
+               border-radius: 11px;
+
+               background: #eff6ff;
+               color: #2563eb;
+
+               font-size: 17px;
+}
+
+.delete-detail-icon.product-icon {
+               background: #f0fdf4;
+               color: #16a34a;
+}
+
+.delete-detail-content span {
+               display: block;
+
+               margin-bottom: 4px;
+
+               color: #64748b;
+
+               font-size: 12px;
+               font-weight: 600;
+}
+
+.delete-detail-content strong {
+               display: block;
+
+               color: #0f172a;
+
+               font-size: 16px;
+}
+
+
+/* =========================================================
+   STATUS MESSAGE
+   ========================================================= */
+
+.delete-status {
+               display: flex;
+
+               align-items: flex-start;
+
+               gap: 14px;
+
+               margin: 0 30px 26px;
+
+               padding: 18px;
+
+               border-radius: 14px;
+
+               border: 1px solid;
+}
+
+
+/* =========================================================
+   SUCCESS
+   ========================================================= */
+
+.delete-status-success {
+               background: #f0fdf4;
+
+               border-color: #bbf7d0;
+
+               color: #166534;
+}
+
+.delete-status-success .delete-status-icon {
+               color: #16a34a;
+}
+
+
+/* =========================================================
+   DANGER
+   ========================================================= */
+
+.delete-status-danger {
+               background: #fff1f2;
+
+               border-color: #fecdd3;
+
+               color: #991b1b;
+}
+
+.delete-status-danger .delete-status-icon {
+               color: #dc2626;
+}
+
+.delete-status-icon {
+               flex-shrink: 0;
+
+               font-size: 20px;
+
+               padding-top: 1px;
+}
+
+.delete-status-content {
+               flex: 1;
+}
+
+.delete-status-content strong {
+               display: block;
+
+               font-size: 14px;
+               font-weight: 800;
+}
+
+.delete-status-content p {
+               margin: 5px 0 0;
+
+               font-size: 13px;
+
+               line-height: 1.6;
+
+               color: inherit;
+}
+
+.delete-status-danger .delete-status-content p strong {
+               display: inline;
+
+               font-weight: 800;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.delete-card-footer {
+               display: flex;
+
+               justify-content: flex-end;
+               align-items: center;
+
+               gap: 12px;
+
+               padding: 22px 30px;
+
+               background: #f8fafc;
+
+               border-top: 1px solid #e2e8f0;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.delete-btn {
+               display: inline-flex;
+
+               align-items: center;
+               justify-content: center;
+
+               gap: 8px;
+
+               min-height: 42px;
+
+               padding: 0 17px;
+
+               border-radius: 10px;
+
+               font-size: 13px;
+               font-weight: 700;
+
+               text-decoration: none;
+
+               cursor: pointer;
+
+               transition:
+                              background 0.2s ease,
+                              border-color 0.2s ease,
+                              color 0.2s ease,
+                              transform 0.2s ease,
+                              box-shadow 0.2s ease;
+}
+
+
+/* =========================================================
+   SECONDARY
+   ========================================================= */
+
+.delete-btn-secondary {
+               background: #ffffff;
+
+               color: #475569;
+
+               border: 1px solid #cbd5e1;
+}
+
+.delete-btn-secondary:hover {
+               background: #f8fafc;
+
+               color: #0f172a;
+
+               border-color: #94a3b8;
+
+               transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   DANGER
+   ========================================================= */
+
+.delete-btn-danger {
+               border: 1px solid #dc2626;
+
+               background: #dc2626;
+
+               color: #ffffff;
+
+               box-shadow: 0 4px 10px rgba(220, 38, 38, 0.18);
+}
+
+.delete-btn-danger:hover {
+               background: #b91c1c;
+
+               border-color: #b91c1c;
+
+               transform: translateY(-1px);
+
+               box-shadow: 0 7px 16px rgba(220, 38, 38, 0.25);
+}
+
+.delete-btn-danger:active {
+               transform: translateY(0);
+}
+
+
+/* =========================================================
+   DISABLED DELETE
+   ========================================================= */
+
+.delete-btn-disabled {
+               background: #e2e8f0;
+
+               border: 1px solid #cbd5e1;
+
+               color: #94a3b8;
+
+               cursor: not-allowed;
+
+               opacity: 0.9;
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.delete-form {
+               margin: 0;
+}
+
+
+/* =========================================================
+   BUTTON LOADING
+   ========================================================= */
+
+.button-loading {
+               display: none;
+
+               align-items: center;
+
+               gap: 8px;
+}
+
+.delete-btn-danger.is-loading .button-normal {
+               display: none;
+}
+
+.delete-btn-danger.is-loading .button-loading {
+               display: inline-flex;
+}
+
+
+/* =========================================================
+   SPINNER
+   ========================================================= */
+
+.spinner {
+               width: 15px;
+               height: 15px;
+
+               border: 2px solid rgba(255, 255, 255, 0.35);
+
+               border-top-color: #ffffff;
+
+               border-radius: 50%;
+
+               animation: deleteSpinner 0.7s linear infinite;
+}
+
+@keyframes deleteSpinner {
+
+               to {
+                              transform: rotate(360deg);
+               }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+               .category-delete-page {
+                              padding: 20px 15px 40px;
+               }
+
+               .delete-page-header {
+                              align-items: flex-start;
+
+                              flex-direction: column;
+               }
+
+               .delete-page-header-content {
+                              align-items: flex-start;
+               }
+
+               .delete-page-header h1 {
+                              font-size: 23px;
+               }
+
+               .delete-page-header .delete-btn {
+                              width: 100%;
+               }
+
+               .delete-details {
+                              grid-template-columns: 1fr;
+
+                              padding: 20px;
+               }
+
+               .delete-card-top {
+                              padding: 24px 20px;
+               }
+
+               .delete-status {
+                              margin-left: 20px;
+                              margin-right: 20px;
+               }
+
+               .delete-card-footer {
+                              padding: 18px 20px;
+
+                              flex-direction: column-reverse;
+
+                              align-items: stretch;
+               }
+
+               .delete-card-footer .delete-btn {
+                              width: 100%;
+               }
+
+}
+
+
+@media (max-width: 480px) {
+
+               .delete-page-header-content {
+                              gap: 12px;
+               }
+
+               .delete-page-icon {
+                              width: 48px;
+                              height: 48px;
+
+                              border-radius: 13px;
+               }
+
+               .delete-card-top {
+                              align-items: flex-start;
+               }
+
+               .delete-danger-icon {
+                              width: 46px;
+                              height: 46px;
+               }
+
+               .delete-card-top h2 {
+                              font-size: 18px;
+               }
+
+               .delete-detail {
+                              padding: 15px;
+               }
+
+}

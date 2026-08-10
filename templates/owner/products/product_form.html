@@ -1,158 +1,127 @@
-{% extends "owner/base_owner.html" %} {% load static %} {% block title %} {% if
-form.instance.pk %} Edit Product {% else %} Add Product {% endif %} {% endblock
-%} {% block page_title %} {% if form.instance.pk %} Edit Product {% else %} Add
-Product {% endif %} {% endblock %} {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/owner/products.css' %}" />
-{% endblock %} {% block content %}
+{% extends "owner/base_owner.html" %}
+{% load static %}
 
+{% block title %}
+  {% if form.instance.pk %}Edit Product{% else %}Add Product{% endif %}
+{% endblock %}
+
+{% block page_title %}
+  {% if form.instance.pk %}Edit Product{% else %}Add New Product{% endif %}
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/owner/products.css' %}" />
+{% endblock %}
+
+{% block content %}
 <div class="product-form-page">
   <div class="form-header">
     <div>
       <h2>
-        {% if form.instance.pk %} Edit Product {% else %} Add New Product {%
-        endif %}
+        {% if form.instance.pk %}Edit Product{% else %}Add New Product{% endif %}
       </h2>
-
       <p>Fill in the product information below.</p>
     </div>
-
     <a href="{% url 'owner:products' %}" class="btn-owner-outline">
       <i class="bi bi-arrow-left"></i>
-
       Back
     </a>
   </div>
 
-  <form method="POST" enctype="multipart/form-data" class="owner-form">
+  <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
 
     <div class="form-grid">
-      <!-- LEFT -->
-
       <div class="form-card">
         <h3>Product Information</h3>
 
         <div class="form-group">
-          <label>Category</label>
-
+          <label for="{{ form.category.id_for_label }}">Category</label>
           {{ form.category }} {{ form.category.errors }}
         </div>
 
         <div class="form-group">
-          <label>Product Name</label>
-
+          <label for="{{ form.name.id_for_label }}">Product Name</label>
           {{ form.name }} {{ form.name.errors }}
         </div>
 
         <div class="form-group">
-          <label>Slug</label>
-
+          <label for="{{ form.slug.id_for_label }}">Slug</label>
           {{ form.slug }} {{ form.slug.errors }}
         </div>
 
         <div class="form-group">
-          <label>Description</label>
-
+          <label for="{{ form.description.id_for_label }}">Description</label>
           {{ form.description }} {{ form.description.errors }}
         </div>
       </div>
-
-      <!-- RIGHT -->
 
       <div class="form-card">
         <h3>Pricing & Stock</h3>
 
         <div class="form-group">
-          <label>Price (KSh)</label>
-
+          <label for="{{ form.price.id_for_label }}">Price (KSh)</label>
           {{ form.price }} {{ form.price.errors }}
         </div>
 
         <div class="form-group">
-          <label>Stock</label>
-
+          <label for="{{ form.stock.id_for_label }}">Stock</label>
           {{ form.stock }} {{ form.stock.errors }}
         </div>
 
         <div class="form-group">
-          <label>Product Image</label>
-
+          <label for="{{ form.image.id_for_label }}">Product Image</label>
           {{ form.image }} {{ form.image.errors }}
         </div>
 
         <div class="image-preview">
           {% if form.instance.image %}
-
-          <img
-            id="preview-image"
-            src="{{ form.instance.image.url }}"
-            alt="Preview"
-          />
-
+            <img id="preview-image" src="{{ form.instance.image.url }}" alt="{{ form.instance.name }}" />
           {% else %}
-
-          <img id="preview-image" style="display: none" />
-
+            <img id="preview-image" src="" alt="Image preview" style="display: none" />
           {% endif %}
         </div>
 
         <div class="checkbox-group">
-          <label> {{ form.is_available }} Available </label>
+          <label>{{ form.is_available }} Available</label>
         </div>
 
         <div class="checkbox-group">
-          <label> {{ form.is_featured }} Featured Product </label>
+          <label>{{ form.is_featured }} Featured Product</label>
         </div>
       </div>
     </div>
 
     <div class="form-actions">
-      <a href="{% url 'owner:products' %}" class="btn-owner-outline">
-        Cancel
-      </a>
-
+      <a href="{% url 'owner:products' %}" class="btn-owner-outline">Cancel</a>
       <button type="submit" class="btn-owner">
         <i class="bi bi-check-circle"></i>
-
-        Save Product
+        {% if form.instance.pk %}Update Product{% else %}Save Product{% endif %}
       </button>
     </div>
   </form>
 </div>
+{% endblock %}
 
-{% endblock %} {% block extra_js %}
-
+{% block extra_js %}
 <script>
-  const nameInput = document.getElementById("id_name");
+  document.addEventListener("DOMContentLoaded", function () {
+    const imageInput = document.getElementById("id_image");
+    const previewImage = document.getElementById("preview-image");
 
-  const slugInput = document.getElementById("id_slug");
-
-  if (nameInput && slugInput) {
-    nameInput.addEventListener("keyup", () => {
-      slugInput.value = nameInput.value
-        .toLowerCase()
-        .trim()
-        .replace(/[^\w\s-]/g, "")
-        .replace(/\s+/g, "-")
-        .replace(/--+/g, "-");
-    });
-  }
-
-  const imageInput = document.getElementById("id_image");
-
-  const preview = document.getElementById("preview-image");
-
-  if (imageInput) {
-    imageInput.addEventListener("change", function () {
-      const file = this.files[0];
-
-      if (file) {
-        preview.src = URL.createObjectURL(file);
-
-        preview.style.display = "block";
-      }
-    });
-  }
+    if (imageInput && previewImage) {
+      imageInput.addEventListener("change", function () {
+        const file = this.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (event) {
+            previewImage.src = event.target.result;
+            previewImage.style.display = "block";
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+  });
 </script>
-
 {% endblock %}

@@ -1,0 +1,215 @@
+{% extends "owner/base_owner.html" %} {% load static %} 
+{% block title %}Settings{% endblock %} {% block page_title %}Settings{% endblock %} 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/owner/settings.css' %}" />
+{% endblock %} {% block content %}
+
+<div class="settings-page">
+  <!-- HEADER -->
+  <div class="settings-header">
+    <div>
+      <span class="settings-eyebrow"> OWNER CONTROL </span>
+
+      <h1>Settings</h1>
+
+      <p>Manage your account preferences and owner portal settings.</p>
+    </div>
+  </div>
+
+  <!-- SETTINGS GRID -->
+  <div class="settings-grid">
+    <!-- ACCOUNT -->
+    <section class="settings-card">
+      <div class="settings-card-header">
+        <div class="settings-card-icon">
+          <i class="bi bi-person-circle"></i>
+        </div>
+
+        <div>
+          <h2>Account</h2>
+
+          <p>Manage your owner account.</p>
+        </div>
+      </div>
+
+      <div class="settings-list">
+        <a href="{% url 'owner:profile' %}" class="settings-item">
+          <div class="settings-item-icon">
+            <i class="bi bi-person"></i>
+          </div>
+
+          <div class="settings-item-content">
+            <strong>Profile</strong>
+
+            <span> View your personal information </span>
+          </div>
+
+          <i class="bi bi-chevron-right settings-arrow"></i>
+        </a>
+
+        <a href="{% url 'owner:profile_edit' %}" class="settings-item">
+          <div class="settings-item-icon">
+            <i class="bi bi-person-gear"></i>
+          </div>
+
+          <div class="settings-item-content">
+            <strong>Edit Profile</strong>
+
+            <span> Update your name, username and email </span>
+          </div>
+
+          <i class="bi bi-chevron-right settings-arrow"></i>
+        </a>
+
+        <a href="{% url 'password_change' %}" class="settings-item">
+          <div class="settings-item-icon">
+            <i class="bi bi-shield-lock"></i>
+          </div>
+
+          <div class="settings-item-content">
+            <strong>Password & Security</strong>
+
+            <span> Change your account password </span>
+          </div>
+
+          <i class="bi bi-chevron-right settings-arrow"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- STORE -->
+    <section class="settings-card">
+      <div class="settings-card-header">
+        <div class="settings-card-icon store">
+          <i class="bi bi-shop"></i>
+        </div>
+
+        <div>
+          <h2>Store</h2>
+
+          <p>Manage your farm store.</p>
+        </div>
+      </div>
+
+      <div class="settings-list">
+        <a href="{% url 'owner:products' %}" class="settings-item">
+          <div class="settings-item-icon">
+            <i class="bi bi-box-seam"></i>
+          </div>
+
+          <div class="settings-item-content">
+            <strong>Products</strong>
+
+            <span> Manage products and inventory </span>
+          </div>
+
+          <i class="bi bi-chevron-right settings-arrow"></i>
+        </a>
+
+        <a href="{% url 'owner:categories' %}" class="settings-item">
+          <div class="settings-item-icon">
+            <i class="bi bi-grid"></i>
+          </div>
+
+          <div class="settings-item-content">
+            <strong>Categories</strong>
+
+            <span> Organize your product categories </span>
+          </div>
+
+          <i class="bi bi-chevron-right settings-arrow"></i>
+        </a>
+
+        <a href="{% url 'owner:orders' %}" class="settings-item">
+          <div class="settings-item-icon">
+            <i class="bi bi-bag-check"></i>
+          </div>
+
+          <div class="settings-item-content">
+            <strong>Orders</strong>
+
+            <span> View and manage customer orders </span>
+          </div>
+
+          <i class="bi bi-chevron-right settings-arrow"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- SYSTEM -->
+    <section class="settings-card">
+      <div class="settings-card-header">
+        <div class="settings-card-icon system">
+          <i class="bi bi-sliders"></i>
+        </div>
+
+        <div>
+          <h2>System</h2>
+
+          <p>General owner portal information.</p>
+        </div>
+      </div>
+
+      <div class="settings-info">
+        <div class="settings-info-row">
+          <span>Portal</span>
+          <strong>Owner Dashboard</strong>
+        </div>
+
+        <div class="settings-info-row">
+          <span>Account</span>
+          <strong>{{ request.user.username }}</strong>
+        </div>
+
+        <div class="settings-info-row">
+          <span>Status</span>
+
+          <span class="settings-status">
+            <i class="bi bi-circle-fill"></i>
+            Active
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECURITY -->
+    <section class="settings-card security-card">
+      <div class="settings-card-header">
+        <div class="settings-card-icon security">
+          <i class="bi bi-shield-check"></i>
+        </div>
+
+        <div>
+          <h2>Security</h2>
+
+          <p>Keep your account protected.</p>
+        </div>
+      </div>
+
+      <div class="security-message">
+        <div class="security-check">
+          <i class="bi bi-check-lg"></i>
+        </div>
+
+        <div>
+          <strong>Your account is active</strong>
+
+          <p>Make sure your password remains private and up to date.</p>
+        </div>
+      </div>
+
+      <div class="security-action">
+        <a href="{% url 'password_change' %}" class="security-btn">
+          <i class="bi bi-key"></i>
+          Change Password
+        </a>
+      </div>
+    </section>
+  </div>
+</div>
+
+{% endblock %} {% block extra_js %}
+
+<script src="{% static 'js/settings.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,429 @@
+{% extends "owner/base_owner.html" %}
+{% load static %}
+
+{% block title %}Categories{% endblock %}
+
+{% block page_title %}
+    Categories
+{% endblock %}
+
+{% block extra_css %}
+<link
+    rel="stylesheet"
+    href="{% static 'css/owner/categories.css' %}"
+>
+{% endblock %}
+
+{% block content %}
+
+<div class="categories-page">
+
+    <!-- =====================================================
+         PAGE HEADER
+         ===================================================== -->
+
+    <div class="page-header">
+
+        <div class="page-header-content">
+
+            <div class="page-icon">
+                <i class="bi bi-tags"></i>
+            </div>
+
+            <div>
+
+                <span class="page-eyebrow">
+                    PRODUCT MANAGEMENT
+                </span>
+
+                <h2>
+                    Categories
+                </h2>
+
+                <p>
+                    Organize your farm products into clear and
+                    easy-to-manage categories.
+                </p>
+
+            </div>
+
+        </div>
+
+        <a
+            href="{% url 'owner:category_add' %}"
+            class="btn-owner primary"
+        >
+            <i class="bi bi-plus-lg"></i>
+            Add Category
+        </a>
+
+    </div>
+
+
+    <!-- =====================================================
+         SEARCH & FILTER TOOLBAR
+         Same approach as Products
+         ===================================================== -->
+
+    <div class="categories-toolbar">
+
+        <!-- SEARCH -->
+
+        <div class="category-search">
+
+            <i class="bi bi-search"></i>
+
+            <input
+                type="search"
+                id="categorySearch"
+                placeholder="Search categories..."
+                autocomplete="off"
+            >
+
+            <button
+                type="button"
+                id="clearCategorySearch"
+                class="clear-search"
+                aria-label="Clear search"
+                title="Clear search"
+            >
+                <i class="bi bi-x"></i>
+            </button>
+
+        </div>
+
+
+        <!-- STATUS FILTER -->
+
+        <select
+            id="categoryStatusFilter"
+            class="category-filter"
+        >
+
+            <option value="all">
+                All Status
+            </option>
+
+            <option value="with-products">
+                With Products
+            </option>
+
+            <option value="empty">
+                Empty
+            </option>
+
+        </select>
+
+
+        <!-- SORT -->
+
+        <select
+            id="categorySort"
+            class="category-filter"
+        >
+
+            <option value="name-asc">
+                Name: A–Z
+            </option>
+
+            <option value="name-desc">
+                Name: Z–A
+            </option>
+
+            <option value="products-desc">
+                Most Products
+            </option>
+
+            <option value="products-asc">
+                Fewest Products
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- =====================================================
+         CATEGORY RESULTS
+         ===================================================== -->
+
+    {% if categories %}
+
+    <div
+        class="categories-grid"
+        id="categoriesGrid"
+    >
+
+        {% for category in categories %}
+
+        <article
+            class="category-card"
+            data-name="{{ category.name|lower }}"
+            data-product-count="{{ category.products.count }}"
+            data-status="{% if category.products.exists %}with-products{% else %}empty{% endif %}"
+        >
+
+            <!-- =================================================
+                 CATEGORY IMAGE
+                 ================================================= -->
+
+            <div class="category-image">
+
+                {% if category.image %}
+
+                    <img
+                        src="{{ category.image.url }}"
+                        alt="{{ category.name }}"
+                        loading="lazy"
+                    >
+
+                {% else %}
+
+                    <div class="category-image-placeholder">
+
+                        <i class="bi bi-tag"></i>
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- PRODUCT COUNT -->
+
+                <span class="category-count">
+
+                    <i class="bi bi-box-seam"></i>
+
+                    {{ category.products.count }}
+
+                    {% if category.products.count == 1 %}
+                        product
+                    {% else %}
+                        products
+                    {% endif %}
+
+                </span>
+
+            </div>
+
+
+            <!-- =================================================
+                 CATEGORY CONTENT
+                 ================================================= -->
+
+            <div class="category-card-content">
+
+                <div class="category-card-heading">
+
+                    <h3>
+                        {{ category.name }}
+                    </h3>
+
+                    {% if category.products.exists %}
+
+                        <span class="category-status active">
+                            Active
+                        </span>
+
+                    {% else %}
+
+                        <span class="category-status empty">
+                            Empty
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                {% if category.description %}
+
+                    <p class="category-description">
+                        {{ category.description|truncatechars:120 }}
+                    </p>
+
+                {% else %}
+
+                    <p class="category-description muted">
+                        No description added for this category.
+                    </p>
+
+                {% endif %}
+
+
+                <!-- =================================================
+                     CATEGORY FOOTER
+                     ================================================= -->
+
+                <div class="category-card-footer">
+
+                    <a
+                        href="{% url 'owner:category_edit' category.pk %}"
+                        class="category-action edit"
+                        title="Edit category"
+                    >
+                        <i class="bi bi-pencil"></i>
+                        Edit
+                    </a>
+
+                    <a
+                        href="{% url 'owner:category_delete' category.pk %}"
+                        class="category-action delete"
+                        title="Delete category"
+                    >
+                        <i class="bi bi-trash3"></i>
+                        Delete
+                    </a>
+
+                </div>
+
+            </div>
+
+        </article>
+
+        {% endfor %}
+
+    </div>
+
+
+    <!-- =====================================================
+         NO SEARCH RESULTS
+         ===================================================== -->
+
+    <div
+        class="categories-no-results"
+        id="categoriesNoResults"
+        hidden
+    >
+
+        <div class="no-results-icon">
+            <i class="bi bi-search"></i>
+        </div>
+
+        <h3>
+            No Categories Found
+        </h3>
+
+        <p>
+            No categories match your current search or filter.
+        </p>
+
+        <button
+            type="button"
+            class="btn-owner secondary"
+            id="resetCategoryFilters"
+        >
+            <i class="bi bi-arrow-counterclockwise"></i>
+            Reset Filters
+        </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         PAGINATION
+         ===================================================== -->
+
+    {% if is_paginated %}
+
+    <div class="categories-pagination">
+
+        {% if page_obj.has_previous %}
+
+            <a
+                href="?page={{ page_obj.previous_page_number }}"
+                class="pagination-btn"
+            >
+                <i class="bi bi-chevron-left"></i>
+                Previous
+            </a>
+
+        {% else %}
+
+            <span class="pagination-btn disabled">
+                <i class="bi bi-chevron-left"></i>
+                Previous
+            </span>
+
+        {% endif %}
+
+
+        <span class="pagination-info">
+
+            Page
+            <strong>{{ page_obj.number }}</strong>
+            of
+            <strong>{{ page_obj.paginator.num_pages }}</strong>
+
+        </span>
+
+
+        {% if page_obj.has_next %}
+
+            <a
+                href="?page={{ page_obj.next_page_number }}"
+                class="pagination-btn"
+            >
+                Next
+                <i class="bi bi-chevron-right"></i>
+            </a>
+
+        {% else %}
+
+            <span class="pagination-btn disabled">
+                Next
+                <i class="bi bi-chevron-right"></i>
+            </span>
+
+        {% endif %}
+
+    </div>
+
+    {% endif %}
+
+
+    {% else %}
+
+    <!-- =====================================================
+         EMPTY CATEGORY STATE
+         ===================================================== -->
+
+    <div class="categories-empty">
+
+        <div class="empty-icon">
+            <i class="bi bi-tags"></i>
+        </div>
+
+        <h3>
+            No Categories Yet
+        </h3>
+
+        <p>
+            Create your first category to start organizing
+            your farm products.
+        </p>
+
+        <a
+            href="{% url 'owner:category_add' %}"
+            class="btn-owner primary"
+        >
+            <i class="bi bi-plus-lg"></i>
+            Add Category
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script src="{% static 'js/categories.js' %}"></script>
+
+{% endblock %}

@@ -44,25 +44,25 @@
         </div>
 
         <nav class="sidebar-menu">
-          <a href="{% url 'dashboard' %}" class="active">
+          <a href="{% url 'owner:dashboard' %}" class="active">
             <i class="bi bi-grid"></i>
 
             Dashboard
           </a>
 
-          <a href="#">
+          <a href="{% url 'owner:products' %}">
             <i class="bi bi-box-seam"></i>
 
             Products
           </a>
 
-          <a href="#">
+          <a href="{% url 'owner:categories' %}">
             <i class="bi bi-folder"></i>
 
             Categories
           </a>
 
-          <a href="#">
+          <a href="{% url 'owner:orders' %}">
             <i class="bi bi-bag-check"></i>
 
             Orders
@@ -74,7 +74,7 @@
             Payments
           </a>
 
-          <a href="#">
+          <a href="{% url 'owner:analytics' %}">
             <i class="bi bi-bar-chart"></i>
 
             Analytics
@@ -86,7 +86,7 @@
             Reports
           </a>
 
-          <a href="#">
+          <a href="{% url 'owner:settings' %}">
             <i class="bi bi-gear"></i>
 
             Settings

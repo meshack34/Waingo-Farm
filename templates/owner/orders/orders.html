@@ -1,195 +1,435 @@
-{% extends "owner/base_owner.html" %} {% load static %} {% block title
-%}Orders{% endblock %} {% block page_title %} Orders {% endblock %} {% block
-extra_css %}
-<link rel="stylesheet" href="{% static 'css/owner/orders.css' %}" />
-{% endblock %} {% block content %}
+{% extends "owner/base_owner.html" %}
+{% load static %}
 
-<div class="orders-page">
-  <!-- ================= HEADER ================= -->
+{% block title %}
+Orders
+{% endblock %}
 
-  <div class="orders-header">
+{% block page_title %}
+Orders
+{% endblock %}
+
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/owner/orders.css' %}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<!-- =========================================================
+     HEADER
+     ========================================================= -->
+
+<div class="orders-header">
+
     <div>
-      <h2>Customer Orders</h2>
+        <h2>Customer Orders</h2>
 
-      <p>Manage customer purchases and M-Pesa payments.</p>
-    </div>
-  </div>
-
-  <!-- ================= SUMMARY ================= -->
-
-  <div class="orders-summary">
-    <div class="summary-card pending">
-      <i class="bi bi-clock-history"></i>
-
-      <div>
-        <small>Pending</small>
-
-        <h3>{{ pending_orders }}</h3>
-      </div>
+        <p>
+            Manage customer purchases and M-Pesa payments.
+        </p>
     </div>
 
-    <div class="summary-card paid">
-      <i class="bi bi-credit-card"></i>
-
-      <div>
-        <small>Paid</small>
-
-        <h3>{{ paid_orders }}</h3>
-      </div>
-    </div>
-
-    <div class="summary-card delivered">
-      <i class="bi bi-truck"></i>
-
-      <div>
-        <small>Delivered</small>
-
-        <h3>{{ delivered_orders }}</h3>
-      </div>
-    </div>
-
-    <div class="summary-card cancelled">
-      <i class="bi bi-x-circle"></i>
-
-      <div>
-        <small>Cancelled</small>
-
-        <h3>{{ cancelled_orders }}</h3>
-      </div>
-    </div>
-  </div>
-
-  <!-- ================= FILTERS ================= -->
-
-  <div class="orders-toolbar">
-    <div class="toolbar-search">
-      <i class="bi bi-search"></i>
-
-      <input type="text" placeholder="Search customer, phone or receipt..." />
-    </div>
-
-    <select>
-      <option>All Status</option>
-
-      <option>Pending</option>
-
-      <option>Paid</option>
-
-      <option>Delivered</option>
-
-      <option>Cancelled</option>
-    </select>
-
-    <select>
-      <option>All Counties</option>
-
-      {% for county in counties %}
-
-      <option>{{ county }}</option>
-
-      {% endfor %}
-    </select>
-  </div>
-
-  <!-- ================= ORDERS ================= -->
-
-  {% if orders %}
-
-  <div class="orders-grid">
-    {% for order in orders %}
-
-    <div class="order-card">
-      <div class="order-top">
-        <div>
-          <h4>#{{ order.id }}</h4>
-
-          <small> {{ order.created_at|date:"d M Y" }} </small>
-        </div>
-
-        <span class="status {{ order.status }}">
-          {{ order.get_status_display }}
-        </span>
-      </div>
-
-      <div class="customer-info">
-        <div class="avatar">{{ order.full_name|first|upper }}</div>
-
-        <div>
-          <strong> {{ order.full_name }} </strong>
-
-          <small> {{ order.phone }} </small>
-        </div>
-      </div>
-
-      <div class="order-details">
-        <div>
-          <span>County</span>
-
-          <strong>{{ order.county }}</strong>
-        </div>
-
-        <div>
-          <span>Total</span>
-
-          <strong>KSh {{ order.total_amount }}</strong>
-        </div>
-      </div>
-
-      {% if order.mpesa_receipt_number %}
-
-      <div class="receipt-box">
-        <small>M-Pesa Receipt</small>
-
-        <strong> {{ order.mpesa_receipt_number }} </strong>
-      </div>
-
-      {% endif %}
-
-      <div class="order-actions">
-        <a href="{% url 'owner:order_detail' order.pk %}" class="btn-owner">
-          <i class="bi bi-eye"></i>
-
-          View
-        </a>
-      </div>
-    </div>
-
-    {% endfor %}
-  </div>
-
-  {% else %}
-
-  <div class="empty-products">
-    <i class="bi bi-bag-x"></i>
-
-    <h3>No Orders Found</h3>
-
-    <p>Customer orders will appear here once purchases are made.</p>
-  </div>
-
-  {% endif %} {% if is_paginated %}
-
-  <div class="pagination-area">
-    {% if page_obj.has_previous %}
-
-    <a href="?page={{ page_obj.previous_page_number }}"> Previous </a>
-
-    {% endif %}
-
-    <span>
-      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-    </span>
-
-    {% if page_obj.has_next %}
-
-    <a href="?page={{ page_obj.next_page_number }}"> Next </a>
-
-    {% endif %}
-  </div>
-
-  {% endif %}
 </div>
 
-{% endblock %} {% block extra_js %}
+
+<!-- =========================================================
+     SUMMARY CARDS
+     ========================================================= -->
+
+<div class="orders-summary">
+
+    <!-- Pending -->
+
+    <div class="summary-card pending">
+
+        <i class="bi bi-clock"></i>
+
+        <div>
+
+            <small>
+                Pending
+            </small>
+
+            <h3>
+                {{ pending_orders }}
+            </h3>
+
+        </div>
+
+    </div>
+
+
+    <!-- Paid -->
+
+    <div class="summary-card paid">
+
+        <i class="bi bi-credit-card"></i>
+
+        <div>
+
+            <small>
+                Paid
+            </small>
+
+            <h3>
+                {{ paid_orders }}
+            </h3>
+
+        </div>
+
+    </div>
+
+
+    <!-- Completed -->
+
+    <div class="summary-card completed">
+
+        <i class="bi bi-truck"></i>
+
+        <div>
+
+            <small>
+                Completed
+            </small>
+
+            <h3>
+                {{ delivered_orders }}
+            </h3>
+
+        </div>
+
+    </div>
+
+
+    <!-- Cancelled -->
+
+    <div class="summary-card cancelled">
+
+        <i class="bi bi-x-circle"></i>
+
+        <div>
+
+            <small>
+                Cancelled
+            </small>
+
+            <h3>
+                {{ cancelled_orders }}
+            </h3>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     FILTERS
+     ========================================================= -->
+
+<div class="orders-filters">
+
+    <!-- Search -->
+
+    <div class="toolbar-search">
+
+        <input
+            type="text"
+            id="orderSearch"
+            placeholder="Search customer, phone or receipt..."
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <!-- Status -->
+
+    <select id="statusFilter">
+
+        <option value="all">
+            All Status
+        </option>
+
+        <option value="pending">
+            Pending
+        </option>
+
+        <option value="paid">
+            Paid
+        </option>
+
+        <option value="processing">
+            Processing
+        </option>
+
+        <option value="shipped">
+            Shipped
+        </option>
+
+        <option value="completed">
+            Completed
+        </option>
+
+        <option value="cancelled">
+            Cancelled
+        </option>
+
+    </select>
+
+
+    <!-- County -->
+
+    <select id="countyFilter">
+
+        <option value="all">
+            All Counties
+        </option>
+
+        {% for county in counties %}
+
+            <option value="{{ county|lower }}">
+                {{ county }}
+            </option>
+
+        {% endfor %}
+
+    </select>
+
+</div>
+
+
+<!-- =========================================================
+     ORDERS
+     ========================================================= -->
+
+{% if orders %}
+
+    <div class="orders-list">
+
+        {% for order in orders %}
+
+            <div
+                class="order-card"
+                data-status="{{ order.status }}"
+                data-county="{{ order.county|lower }}"
+            >
+
+                <!-- =================================================
+                     ORDER TOP
+                     ================================================= -->
+
+                <div class="order-top">
+
+                    <div>
+
+                        <h4>
+                            #{{ order.id }}
+                        </h4>
+
+                        <small>
+                            {{ order.created_at|date:"d M Y" }}
+                        </small>
+
+                    </div>
+
+
+                    <span class="status {{ order.status }}">
+
+                        {{ order.get_status_display }}
+
+                    </span>
+
+                </div>
+
+
+                <!-- =================================================
+                     CUSTOMER
+                     ================================================= -->
+
+                <div class="customer-info">
+
+                    <div class="avatar">
+
+                        {{ order.full_name|first|upper }}
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            {{ order.full_name }}
+                        </strong>
+
+                        <small>
+                            {{ order.phone }}
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     ORDER DETAILS
+                     ================================================= -->
+
+                <div class="order-details">
+
+                    <div>
+
+                        <span>
+                            County
+                        </span>
+
+                        <strong>
+                            {{ order.county }}
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Total
+                        </span>
+
+                        <strong>
+                            KSh {{ order.total_amount }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     MPESA RECEIPT
+                     ================================================= -->
+
+                {% if order.mpesa_receipt_number %}
+
+                    <div class="receipt-box">
+
+                        <small>
+                            M-Pesa Receipt
+                        </small>
+
+                        <strong>
+                            {{ order.mpesa_receipt_number }}
+                        </strong>
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- =================================================
+                     ACTIONS
+                     ================================================= -->
+
+                <div class="order-actions">
+
+                    <a
+                        href="{% url 'owner:order_detail' order.pk %}"
+                        class="btn-owner"
+                    >
+
+                        <i class="bi bi-eye"></i>
+
+                        View
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+
+{% else %}
+
+    <!-- =========================================================
+         NO ORDERS
+         ========================================================= -->
+
+    <div class="empty-state">
+
+        <h3>
+            No Orders Found
+        </h3>
+
+        <p>
+            Customer orders will appear here once purchases are made.
+        </p>
+
+    </div>
+
+{% endif %}
+
+
+<!-- =========================================================
+     PAGINATION
+     ========================================================= -->
+
+{% if is_paginated %}
+
+    <div class="pagination">
+
+        {% if page_obj.has_previous %}
+
+            <a
+                href="?page={{ page_obj.previous_page_number }}"
+            >
+                Previous
+            </a>
+
+        {% endif %}
+
+
+        <span>
+
+            Page {{ page_obj.number }}
+            of
+            {{ page_obj.paginator.num_pages }}
+
+        </span>
+
+
+        {% if page_obj.has_next %}
+
+            <a
+                href="?page={{ page_obj.next_page_number }}"
+            >
+                Next
+            </a>
+
+        {% endif %}
+
+    </div>
+
+{% endif %}
+
+
+{% endblock %}
+
+
+{% block extra_js %}
+
 <script src="{% static 'js/orders.js' %}"></script>
+
 {% endblock %}

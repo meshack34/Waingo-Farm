@@ -1,0 +1,363 @@
+{% extends "owner/base_owner.html" %}
+{% load static %}
+
+{% block title %}
+Profile
+{% endblock %}
+
+{% block page_title %}
+Profile
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/owner/profile.css' %}" />
+{% endblock %}
+
+{% block content %}
+
+<div class="profile-page">
+
+  <!-- =================================================
+       PROFILE HERO
+  ================================================== -->
+
+  <div class="profile-hero">
+
+    <div class="profile-hero-info">
+
+      <span class="profile-eyebrow">
+        OWNER ACCOUNT
+      </span>
+
+      <h1>
+        {% if request.user.get_full_name %}
+          {{ request.user.get_full_name }}
+        {% else %}
+          {{ request.user.username }}
+        {% endif %}
+      </h1>
+
+      <p>
+        Manage your account information and security.
+      </p>
+
+    </div>
+
+    <div class="profile-status">
+      <span class="status-dot"></span>
+      <span>Account Active</span>
+    </div>
+
+  </div>
+
+
+  <!-- =================================================
+       PERSONAL INFORMATION
+  ================================================== -->
+
+  <section class="profile-card profile-main-card">
+
+    <div class="profile-card-header">
+
+      <div class="profile-card-icon">
+        <i class="bi bi-person"></i>
+      </div>
+
+      <div>
+        <h2>Personal Information</h2>
+        <p>Your basic account information.</p>
+      </div>
+
+    </div>
+
+
+    <div class="profile-information">
+
+      <div class="profile-field">
+        <span class="field-label">Username</span>
+
+        <strong>
+          {{ request.user.username }}
+        </strong>
+      </div>
+
+
+      <div class="profile-field">
+        <span class="field-label">First Name</span>
+
+        <strong>
+          {{ request.user.first_name|default:"Not provided" }}
+        </strong>
+      </div>
+
+
+      <div class="profile-field">
+        <span class="field-label">Last Name</span>
+
+        <strong>
+          {{ request.user.last_name|default:"Not provided" }}
+        </strong>
+      </div>
+
+
+      <div class="profile-field">
+        <span class="field-label">Email Address</span>
+
+        <strong>
+          {{ request.user.email|default:"Not provided" }}
+        </strong>
+      </div>
+
+    </div>
+
+
+    <div class="profile-card-footer">
+
+      <a
+        href="{% url 'owner:profile_edit' %}"
+        class="btn-owner"
+      >
+        <i class="bi bi-pencil-square"></i>
+        Edit Profile
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- =================================================
+       ACCOUNT OVERVIEW
+  ================================================== -->
+
+  <section class="profile-card account-card">
+
+    <div class="profile-card-header">
+
+      <div class="profile-card-icon">
+        <i class="bi bi-person-badge"></i>
+      </div>
+
+      <div>
+        <h2>Account</h2>
+        <p>Account overview.</p>
+      </div>
+
+    </div>
+
+
+    <div class="account-details">
+
+      <div class="account-detail">
+
+        <div class="account-detail-icon">
+          <i class="bi bi-shield-check"></i>
+        </div>
+
+        <div>
+          <span>Account Status</span>
+
+          <strong class="active-text">
+            Active
+          </strong>
+        </div>
+
+      </div>
+
+
+      <div class="account-detail">
+
+        <div class="account-detail-icon">
+          <i class="bi bi-calendar-check"></i>
+        </div>
+
+        <div>
+          <span>Member Since</span>
+
+          <strong>
+            {{ request.user.date_joined|date:"d M Y" }}
+          </strong>
+        </div>
+
+      </div>
+
+
+      <div class="account-detail">
+
+        <div class="account-detail-icon">
+          <i class="bi bi-clock-history"></i>
+        </div>
+
+        <div>
+          <span>Last Login</span>
+
+          <strong>
+
+            {% if request.user.last_login %}
+              {{ request.user.last_login|date:"d M Y, H:i" }}
+            {% else %}
+              Not available
+            {% endif %}
+
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =================================================
+       SECURITY
+  ================================================== -->
+
+  <section class="profile-card security-card">
+
+    <div class="profile-card-header">
+
+      <div class="profile-card-icon">
+        <i class="bi bi-shield-lock"></i>
+      </div>
+
+      <div>
+        <h2>Security</h2>
+        <p>Keep your owner account secure.</p>
+      </div>
+
+    </div>
+
+
+    <div class="security-content">
+
+      <!-- PASSWORD -->
+
+      <div class="security-row">
+
+        <div class="security-row-icon">
+          <i class="bi bi-key"></i>
+        </div>
+
+        <div class="security-row-info">
+
+          <strong>
+            Password
+          </strong>
+
+          <span>
+            Change your account password regularly.
+          </span>
+
+        </div>
+
+
+        <a
+          href="{% url 'password_change' %}"
+          class="security-action"
+        >
+          Change
+          <i class="bi bi-arrow-right"></i>
+        </a>
+
+      </div>
+
+
+      <!-- EMAIL -->
+
+      <div class="security-row">
+
+        <div class="security-row-icon">
+          <i class="bi bi-envelope-check"></i>
+        </div>
+
+
+        <div class="security-row-info">
+
+          <strong>
+            Email
+          </strong>
+
+          <span>
+
+            {% if request.user.email %}
+              Your email is connected to this account.
+            {% else %}
+              Add an email address to your account.
+            {% endif %}
+
+          </span>
+
+        </div>
+
+
+        <span class="security-badge">
+
+          {% if request.user.email %}
+            Added
+          {% else %}
+            Missing
+          {% endif %}
+
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =================================================
+       OWNER ROLE
+  ================================================== -->
+
+  <section class="profile-card role-card">
+
+    <div class="profile-card-header">
+
+      <div class="profile-card-icon">
+        <i class="bi bi-award"></i>
+      </div>
+
+      <div>
+        <h2>Owner Access</h2>
+        <p>Your permissions within Waingo Farm.</p>
+      </div>
+
+    </div>
+
+
+    <div class="role-content">
+
+      <div class="role-badge">
+
+        <i class="bi bi-person-workspace"></i>
+
+        <span>
+          Farm Owner
+        </span>
+
+      </div>
+
+
+      <p>
+        You have access to manage products, orders, categories,
+        analytics and your farm settings.
+      </p>
+
+    </div>
+
+  </section>
+
+</div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script src="{% static 'js/profile.js' %}"></script>
+
+{% endblock %}

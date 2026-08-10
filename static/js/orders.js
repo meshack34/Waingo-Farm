@@ -1,44 +1,152 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    const searchInput = document.querySelector(".toolbar-search input");
+    /* =========================================================
+       ELEMENTS
+       ========================================================= */
 
-    const statusFilter = document.querySelectorAll(".orders-toolbar select")[0];
+    const searchInput =
+        document.getElementById("orderSearch");
 
-    const countyFilter = document.querySelectorAll(".orders-toolbar select")[1];
+    const statusFilter =
+        document.getElementById("statusFilter");
 
-    const cards = document.querySelectorAll(".order-card");
+    const countyFilter =
+        document.getElementById("countyFilter");
+
+    const cards =
+        document.querySelectorAll(".order-card");
 
 
+    /* =========================================================
+       FILTER ORDERS
+       ========================================================= */
 
     function filterOrders() {
 
-        const search = searchInput.value.toLowerCase().trim();
-
-        const status = statusFilter.value.toLowerCase();
-
-        const county = countyFilter.value.toLowerCase();
-
-
-
-        cards.forEach(card => {
-
-            const customer = card.querySelector(".customer-info strong").textContent.toLowerCase();
-
-            const phone = card.querySelector(".customer-info small").textContent.toLowerCase();
-
-            const orderId = card.querySelector(".order-top h4").textContent.toLowerCase();
-
-            const receiptBox = card.querySelector(".receipt-box strong");
-
-            const receipt = receiptBox ? receiptBox.textContent.toLowerCase() : "";
-
-            const cardStatus = card.querySelector(".status").textContent.toLowerCase();
-
-            const cardCounty = card.querySelector(".order-details div strong").textContent.toLowerCase();
+        const search =
+            searchInput
+                ? searchInput.value
+                    .toLowerCase()
+                    .trim()
+                : "";
 
 
+        const selectedStatus =
+            statusFilter
+                ? statusFilter.value
+                    .toLowerCase()
+                    .trim()
+                : "all";
 
-            const matchSearch =
+
+        const selectedCounty =
+            countyFilter
+                ? countyFilter.value
+                    .toLowerCase()
+                    .trim()
+                : "all";
+
+
+        /* =====================================================
+           LOOP THROUGH ORDER CARDS
+           ===================================================== */
+
+        cards.forEach(function (card) {
+
+            /* -------------------------------------------------
+               DATA FROM CARD
+               ------------------------------------------------- */
+
+            const cardStatus =
+                (card.dataset.status || "")
+                    .toLowerCase()
+                    .trim();
+
+
+            const cardCounty =
+                (card.dataset.county || "")
+                    .toLowerCase()
+                    .trim();
+
+
+            /* -------------------------------------------------
+               CUSTOMER
+               ------------------------------------------------- */
+
+            const customerElement =
+                card.querySelector(
+                    ".customer-info strong"
+                );
+
+
+            const customer =
+                customerElement
+                    ? customerElement.textContent
+                        .toLowerCase()
+                        .trim()
+                    : "";
+
+
+            /* -------------------------------------------------
+               PHONE
+               ------------------------------------------------- */
+
+            const phoneElement =
+                card.querySelector(
+                    ".customer-info small"
+                );
+
+
+            const phone =
+                phoneElement
+                    ? phoneElement.textContent
+                        .toLowerCase()
+                        .trim()
+                    : "";
+
+
+            /* -------------------------------------------------
+               ORDER ID
+               ------------------------------------------------- */
+
+            const orderIdElement =
+                card.querySelector(
+                    ".order-top h4"
+                );
+
+
+            const orderId =
+                orderIdElement
+                    ? orderIdElement.textContent
+                        .toLowerCase()
+                        .trim()
+                    : "";
+
+
+            /* -------------------------------------------------
+               MPESA RECEIPT
+               ------------------------------------------------- */
+
+            const receiptElement =
+                card.querySelector(
+                    ".receipt-box strong"
+                );
+
+
+            const receipt =
+                receiptElement
+                    ? receiptElement.textContent
+                        .toLowerCase()
+                        .trim()
+                    : "";
+
+
+            /* =================================================
+               SEARCH MATCH
+               ================================================= */
+
+            const matchesSearch =
+                search === "" ||
 
                 customer.includes(search) ||
 
@@ -49,24 +157,41 @@ document.addEventListener("DOMContentLoaded", function () {
                 receipt.includes(search);
 
 
+            /* =================================================
+               STATUS MATCH
+               ================================================= */
 
-            const matchStatus =
+            const matchesStatus =
+                selectedStatus === "all" ||
 
-                status === "all status" ||
-
-                status === cardStatus;
-
-
-
-            const matchCounty =
-
-                county === "all counties" ||
-
-                county === cardCounty;
+                selectedStatus === cardStatus;
 
 
+            /* =================================================
+               COUNTY MATCH
+               ================================================= */
 
-            if (matchSearch && matchStatus && matchCounty) {
+            const matchesCounty =
+                selectedCounty === "all" ||
+
+                selectedCounty === cardCounty;
+
+
+            /* =================================================
+               FINAL MATCH
+               ================================================= */
+
+            const shouldShow =
+                matchesSearch &&
+                matchesStatus &&
+                matchesCounty;
+
+
+            /* =================================================
+               SHOW / HIDE
+               ================================================= */
+
+            if (shouldShow) {
 
                 card.style.display = "";
 
@@ -81,27 +206,52 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    /* =========================================================
+       SEARCH
+       ========================================================= */
 
     if (searchInput) {
 
-        searchInput.addEventListener("keyup", filterOrders);
+        searchInput.addEventListener(
+            "input",
+            filterOrders
+        );
 
     }
 
 
+    /* =========================================================
+       STATUS FILTER
+       ========================================================= */
 
     if (statusFilter) {
 
-        statusFilter.addEventListener("change", filterOrders);
+        statusFilter.addEventListener(
+            "change",
+            filterOrders
+        );
 
     }
 
 
+    /* =========================================================
+       COUNTY FILTER
+       ========================================================= */
 
     if (countyFilter) {
 
-        countyFilter.addEventListener("change", filterOrders);
+        countyFilter.addEventListener(
+            "change",
+            filterOrders
+        );
 
     }
+
+
+    /* =========================================================
+       INITIAL FILTER
+       ========================================================= */
+
+    filterOrders();
 
 });

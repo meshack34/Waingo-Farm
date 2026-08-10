@@ -1,0 +1,164 @@
+{% extends "owner/base_owner.html" %} {% load static %} {% block title %}Edit
+Profile{% endblock %} {% block page_title %}Edit Profile{% endblock %} 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/owner/profile_edit.css' %}" />
+{% endblock %} {% block content %}
+
+<div class="profile-edit-page">
+  <!-- HEADER -->
+  <div class="profile-edit-header">
+    <div>
+      <span class="profile-edit-eyebrow"> ACCOUNT SETTINGS </span>
+
+      <h1>Edit Profile</h1>
+
+      <p>Update your personal information used on your owner account.</p>
+    </div>
+
+    <a href="{% url 'owner:profile' %}" class="profile-back-btn">
+      <i class="bi bi-arrow-left"></i>
+      Back to Profile
+    </a>
+  </div>
+
+  <!-- FORM CARD -->
+  <section class="profile-edit-card">
+    <div class="profile-edit-card-header">
+      <div class="profile-edit-icon">
+        <i class="bi bi-person-gear"></i>
+      </div>
+
+      <div>
+        <h2>Personal Information</h2>
+
+        <p>Keep your account details up to date.</p>
+      </div>
+    </div>
+
+    <form method="post" class="profile-edit-form" novalidate>
+      {% csrf_token %} {% if form.non_field_errors %}
+      <div class="form-alert">
+        <i class="bi bi-exclamation-circle"></i>
+
+        <div>
+          {% for error in form.non_field_errors %}
+          <p>{{ error }}</p>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- USERNAME -->
+      <div class="form-group">
+        <label for="{{ form.username.id_for_label }}"> Username </label>
+
+        <div class="input-wrapper">
+          <i class="bi bi-at"></i>
+
+          {{ form.username }}
+        </div>
+
+        {% if form.username.errors %}
+        <div class="field-error">
+          {% for error in form.username.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- FIRST NAME -->
+      <div class="form-group">
+        <label for="{{ form.first_name.id_for_label }}"> First Name </label>
+
+        <div class="input-wrapper">
+          <i class="bi bi-person"></i>
+
+          {{ form.first_name }}
+        </div>
+
+        {% if form.first_name.errors %}
+        <div class="field-error">
+          {% for error in form.first_name.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- LAST NAME -->
+      <div class="form-group">
+        <label for="{{ form.last_name.id_for_label }}"> Last Name </label>
+
+        <div class="input-wrapper">
+          <i class="bi bi-person"></i>
+
+          {{ form.last_name }}
+        </div>
+
+        {% if form.last_name.errors %}
+        <div class="field-error">
+          {% for error in form.last_name.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- EMAIL -->
+      <div class="form-group">
+        <label for="{{ form.email.id_for_label }}"> Email Address </label>
+
+        <div class="input-wrapper">
+          <i class="bi bi-envelope"></i>
+
+          {{ form.email }}
+        </div>
+
+        {% if form.email.errors %}
+        <div class="field-error">
+          {% for error in form.email.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- FORM ACTIONS -->
+      <div class="profile-form-actions">
+        <a href="{% url 'owner:profile' %}" class="cancel-btn"> Cancel </a>
+
+        <button type="submit" class="save-profile-btn">
+          <i class="bi bi-check2-circle"></i>
+          Save Changes
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <!-- SECURITY NOTICE -->
+  <section class="profile-security-notice">
+    <div class="notice-icon">
+      <i class="bi bi-shield-check"></i>
+    </div>
+
+    <div>
+      <strong>Need to change your password?</strong>
+
+      <p>
+        Password changes are handled separately to keep your account secure.
+      </p>
+    </div>
+
+    <a href="{% url 'password_change' %}">
+      Change Password
+      <i class="bi bi-arrow-right"></i>
+    </a>
+  </section>
+</div>
+
+{% endblock %} {% block extra_js %}
+
+<script src="{% static 'js/profile.js' %}"></script>
+
+{% endblock %}

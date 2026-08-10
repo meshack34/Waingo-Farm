@@ -1,0 +1,354 @@
+{% extends "owner/base_owner.html" %}
+{% load static %}
+
+{% block title %}
+    {% if object %}
+        Edit Category
+    {% else %}
+        Add Category
+    {% endif %}
+{% endblock %}
+
+{% block page_title %}
+    {% if object %}
+        Edit Category
+    {% else %}
+        Add Category
+    {% endif %}
+{% endblock %}
+
+{% block extra_css %}
+<link
+    rel="stylesheet"
+    href="{% static 'css/owner/categories.css' %}"
+>
+{% endblock %}
+
+{% block content %}
+
+<div class="categories-page">
+
+    <!-- =====================================================
+         PAGE HEADER
+         ===================================================== -->
+
+    <div class="page-header">
+
+        <div class="page-header-content">
+
+            <div class="page-icon">
+                <i class="bi bi-folder-plus"></i>
+            </div>
+
+            <div>
+                <span class="page-eyebrow">
+                    PRODUCT CATEGORIES
+                </span>
+
+                <h2>
+                    {% if object %}
+                        Edit Category
+                    {% else %}
+                        Add Category
+                    {% endif %}
+                </h2>
+
+                <p>
+                    {% if object %}
+                        Update the details of this product category.
+                    {% else %}
+                        Create a category to organize your farm products.
+                    {% endif %}
+                </p>
+            </div>
+
+        </div>
+
+        <a
+            href="{% url 'owner:categories' %}"
+            class="btn-owner secondary"
+        >
+            <i class="bi bi-arrow-left"></i>
+            Back to Categories
+        </a>
+
+    </div>
+
+
+    <!-- =====================================================
+         FORM CARD
+         ===================================================== -->
+
+    <div class="category-form-card">
+
+        <div class="form-card-header">
+
+            <div>
+                <h3>
+                    Category Information
+                </h3>
+
+                <p>
+                    Enter the basic information for this category.
+                </p>
+            </div>
+
+            <div class="form-card-icon">
+                <i class="bi bi-tags"></i>
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             FORM
+             ================================================= -->
+
+        <form
+            method="post"
+            class="category-form"
+            id="categoryForm"
+        >
+
+            {% csrf_token %}
+
+
+            <!-- FORM NON FIELD ERRORS -->
+
+            {% if form.non_field_errors %}
+
+                <div class="form-alert error">
+
+                    <i class="bi bi-exclamation-circle"></i>
+
+                    <div>
+
+                        {% for error in form.non_field_errors %}
+
+                            <span>
+                                {{ error }}
+                            </span>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- =================================================
+                 CATEGORY NAME
+                 ================================================= -->
+
+            {% if form.name %}
+
+                <div class="form-group">
+
+                    <label for="{{ form.name.id_for_label }}">
+                        Category Name
+                        <span>*</span>
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="bi bi-tag"></i>
+
+                        {{ form.name }}
+
+                    </div>
+
+                    {% if form.name.help_text %}
+
+                        <small class="field-help">
+                            {{ form.name.help_text }}
+                        </small>
+
+                    {% endif %}
+
+                    {% for error in form.name.errors %}
+
+                        <div class="field-error">
+                            <i class="bi bi-exclamation-circle"></i>
+                            {{ error }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- =================================================
+                 CATEGORY DESCRIPTION
+                 ================================================= -->
+
+            {% if form.description %}
+
+                <div class="form-group">
+
+                    <label for="{{ form.description.id_for_label }}">
+                        Description
+                    </label>
+
+                    <div class="textarea-wrapper">
+
+                        <i class="bi bi-card-text"></i>
+
+                        {{ form.description }}
+
+                    </div>
+
+                    {% if form.description.help_text %}
+
+                        <small class="field-help">
+                            {{ form.description.help_text }}
+                        </small>
+
+                    {% endif %}
+
+                    {% for error in form.description.errors %}
+
+                        <div class="field-error">
+                            <i class="bi bi-exclamation-circle"></i>
+                            {{ error }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- =================================================
+                 OTHER FORM FIELDS
+                 ================================================= -->
+
+            {% for field in form %}
+
+                {% if field.name != "name" and field.name != "description" %}
+
+                    <div class="form-group">
+
+                        {{ field.label_tag }}
+
+                        <div class="input-wrapper">
+
+                            {{ field }}
+
+                        </div>
+
+                        {% if field.help_text %}
+
+                            <small class="field-help">
+                                {{ field.help_text }}
+                            </small>
+
+                        {% endif %}
+
+                        {% for error in field.errors %}
+
+                            <div class="field-error">
+
+                                <i class="bi bi-exclamation-circle"></i>
+
+                                {{ error }}
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
+            {% endfor %}
+
+
+            <!-- =================================================
+                 FORM ACTIONS
+                 ================================================= -->
+
+            <div class="form-actions">
+
+                <a
+                    href="{% url 'owner:categories' %}"
+                    class="btn-owner secondary"
+                >
+                    <i class="bi bi-x-lg"></i>
+                    Cancel
+                </a>
+
+                <button
+                    type="submit"
+                    class="btn-owner primary"
+                    id="saveCategoryButton"
+                >
+
+                    <span class="button-normal">
+
+                        <i class="bi bi-check-lg"></i>
+
+                        {% if object %}
+                            Save Changes
+                        {% else %}
+                            Create Category
+                        {% endif %}
+
+                    </span>
+
+                    <span class="button-loading">
+
+                        <span class="spinner"></span>
+
+                        Saving...
+
+                    </span>
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- =====================================================
+         INFORMATION CARD
+         ===================================================== -->
+
+    <div class="category-form-note">
+
+        <div class="note-icon">
+            <i class="bi bi-lightbulb"></i>
+        </div>
+
+        <div>
+
+            <strong>
+                Keep categories simple
+            </strong>
+
+            <p>
+                Use clear category names so customers can easily
+                find the products they are looking for.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script src="{% static 'js/categories.js' %}"></script>
+
+{% endblock %}

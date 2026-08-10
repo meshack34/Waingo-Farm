@@ -1,0 +1,987 @@
+/* =========================================================
+   WAINGO FARM — OWNER PROFILE
+   ========================================================= */
+
+.profile-page {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+}
+
+
+/* =========================================================
+   PROFILE HERO
+   ========================================================= */
+
+.profile-hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+
+    padding: 32px;
+
+    margin-bottom: 24px;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(25, 135, 84, 0.12),
+            rgba(13, 110, 253, 0.06)
+        );
+
+    border: 1px solid rgba(25, 135, 84, 0.12);
+
+    overflow: hidden;
+}
+
+
+/* Decorative background */
+
+.profile-hero::before {
+    content: "";
+    position: absolute;
+
+    width: 260px;
+    height: 260px;
+
+    right: -100px;
+    top: -120px;
+
+    border-radius: 50%;
+
+    background: rgba(25, 135, 84, 0.08);
+
+    pointer-events: none;
+}
+
+
+.profile-hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 150px;
+    height: 150px;
+
+    right: 180px;
+    bottom: -110px;
+
+    border-radius: 50%;
+
+    background: rgba(13, 110, 253, 0.05);
+
+    pointer-events: none;
+}
+
+
+.profile-hero-content {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+
+/* =========================================================
+   AVATAR
+   ========================================================= */
+
+.profile-avatar-large {
+    width: 86px;
+    height: 86px;
+
+    flex: 0 0 86px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 24px;
+
+    background: linear-gradient(
+        135deg,
+        #198754,
+        #146c43
+    );
+
+    color: #fff;
+
+    font-size: 34px;
+    font-weight: 800;
+
+    box-shadow:
+        0 12px 28px rgba(25, 135, 84, 0.22);
+}
+
+
+.profile-hero-info {
+    min-width: 0;
+}
+
+
+.profile-eyebrow {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1.8px;
+
+    color: #198754;
+}
+
+
+.profile-hero-info h1 {
+    margin: 0;
+
+    font-size: clamp(25px, 3vw, 34px);
+
+    line-height: 1.15;
+
+    font-weight: 800;
+
+    color: #182230;
+}
+
+
+.profile-hero-info p {
+    margin: 8px 0 0;
+
+    color: #687385;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   ACCOUNT STATUS
+   ========================================================= */
+
+.profile-status {
+    position: relative;
+    z-index: 1;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    padding: 10px 15px;
+
+    border-radius: 999px;
+
+    background: rgba(255, 255, 255, 0.85);
+
+    border: 1px solid rgba(25, 135, 84, 0.14);
+
+    color: #198754;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #198754;
+
+    box-shadow: 0 0 0 4px rgba(25, 135, 84, 0.10);
+}
+
+
+/* =========================================================
+   MAIN GRID
+   ========================================================= */
+
+.profile-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.35fr)
+        minmax(300px, 0.65fr);
+
+    gap: 22px;
+}
+
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.profile-card {
+    min-width: 0;
+
+    background: #fff;
+
+    border: 1px solid #e8ecf1;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 8px 25px rgba(24, 34, 48, 0.045);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.profile-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #dfe6ed;
+
+    box-shadow:
+        0 14px 32px rgba(24, 34, 48, 0.07);
+}
+
+
+.profile-card-header {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 22px 24px;
+
+    border-bottom: 1px solid #eef1f4;
+}
+
+
+.profile-card-icon {
+    width: 44px;
+    height: 44px;
+
+    flex: 0 0 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: rgba(25, 135, 84, 0.10);
+
+    color: #198754;
+
+    font-size: 19px;
+}
+
+
+.profile-card-header h2 {
+    margin: 0;
+
+    font-size: 17px;
+    font-weight: 750;
+
+    color: #202936;
+}
+
+
+.profile-card-header p {
+    margin: 4px 0 0;
+
+    color: #7a8492;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   PERSONAL INFORMATION
+   ========================================================= */
+
+.profile-information {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 0;
+
+    padding: 4px 24px;
+}
+
+
+.profile-field {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+
+    padding: 19px 0;
+
+    min-width: 0;
+}
+
+
+.profile-field:nth-child(odd) {
+    padding-right: 22px;
+}
+
+
+.profile-field:nth-child(even) {
+    padding-left: 22px;
+
+    border-left: 1px solid #eef1f4;
+}
+
+
+.profile-field:nth-child(n + 3) {
+    border-top: 1px solid #eef1f4;
+}
+
+
+.field-label {
+    font-size: 11px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.65px;
+
+    color: #8a94a3;
+}
+
+
+.profile-field strong {
+    display: block;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    font-size: 14px;
+
+    font-weight: 650;
+
+    color: #293241;
+}
+
+
+.profile-card-footer {
+    display: flex;
+
+    justify-content: flex-end;
+
+    padding: 18px 24px;
+
+    border-top: 1px solid #eef1f4;
+
+    background: #fafbfc;
+}
+
+
+/* =========================================================
+   OWNER BUTTON
+   ========================================================= */
+
+.profile-page .btn-owner {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    min-height: 42px;
+
+    padding: 10px 17px;
+
+    border-radius: 11px;
+
+    background: #198754;
+
+    color: #fff;
+
+    text-decoration: none;
+
+    border: 1px solid #198754;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.profile-page .btn-owner:hover {
+    background: #157347;
+
+    color: #fff;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 7px 18px rgba(25, 135, 84, 0.20);
+}
+
+
+/* =========================================================
+   ACCOUNT CARD
+   ========================================================= */
+
+.account-details {
+    padding: 8px 24px 18px;
+}
+
+
+.account-detail {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 16px 0;
+
+    border-bottom: 1px solid #eef1f4;
+}
+
+
+.account-detail:last-child {
+    border-bottom: 0;
+}
+
+
+.account-detail-icon {
+    width: 38px;
+    height: 38px;
+
+    flex: 0 0 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background: #f5f7f9;
+
+    color: #687385;
+
+    font-size: 16px;
+}
+
+
+.account-detail div:last-child {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.account-detail span {
+    color: #8a94a3;
+
+    font-size: 11px;
+
+    font-weight: 650;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+}
+
+
+.account-detail strong {
+    color: #293241;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+.account-detail strong.active-text {
+    color: #198754;
+}
+
+
+/* =========================================================
+   SECURITY CARD
+   ========================================================= */
+
+.security-content {
+    padding: 4px 24px 18px;
+}
+
+
+.security-row {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 18px 0;
+
+    border-bottom: 1px solid #eef1f4;
+}
+
+
+.security-row:last-child {
+    border-bottom: 0;
+}
+
+
+.security-row-icon {
+    width: 42px;
+    height: 42px;
+
+    flex: 0 0 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: rgba(13, 110, 253, 0.08);
+
+    color: #0d6efd;
+
+    font-size: 17px;
+}
+
+
+.security-row-info {
+    min-width: 0;
+
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.security-row-info strong {
+    color: #293241;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+.security-row-info span {
+    color: #7c8795;
+
+    font-size: 12px;
+
+    line-height: 1.45;
+}
+
+
+.security-action {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 8px 11px;
+
+    border-radius: 9px;
+
+    color: #0d6efd;
+
+    background: rgba(13, 110, 253, 0.07);
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.security-action:hover {
+    background: #0d6efd;
+
+    color: #fff;
+}
+
+
+.security-badge {
+    padding: 6px 10px;
+
+    border-radius: 999px;
+
+    background: rgba(25, 135, 84, 0.09);
+
+    color: #198754;
+
+    font-size: 11px;
+
+    font-weight: 750;
+
+    white-space: nowrap;
+}
+
+
+.security-badge:has(+ *) {
+    /* harmless compatibility anchor */
+}
+
+
+/* =========================================================
+   ROLE CARD
+   ========================================================= */
+
+.role-content {
+    padding: 22px 24px 26px;
+}
+
+
+.role-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 10px 14px;
+
+    margin-bottom: 16px;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(25, 135, 84, 0.10),
+            rgba(25, 135, 84, 0.05)
+        );
+
+    color: #198754;
+
+    font-size: 13px;
+
+    font-weight: 750;
+}
+
+
+.role-badge i {
+    font-size: 16px;
+}
+
+
+.role-content p {
+    margin: 0;
+
+    color: #707b89;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .account-card,
+    .role-card {
+        min-height: auto;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .profile-page {
+        padding-bottom: 25px;
+    }
+
+
+    .profile-hero {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        padding: 24px;
+
+        border-radius: 19px;
+    }
+
+
+    .profile-hero-content {
+        width: 100%;
+
+        gap: 16px;
+    }
+
+
+    .profile-avatar-large {
+        width: 68px;
+        height: 68px;
+
+        flex-basis: 68px;
+
+        border-radius: 19px;
+
+        font-size: 27px;
+    }
+
+
+    .profile-hero-info h1 {
+        font-size: 25px;
+    }
+
+
+    .profile-hero-info p {
+        font-size: 13px;
+
+        line-height: 1.5;
+    }
+
+
+    .profile-status {
+        align-self: flex-start;
+    }
+
+
+    .profile-card {
+        border-radius: 17px;
+    }
+
+
+    .profile-card-header {
+        padding: 18px;
+    }
+
+
+    .profile-information {
+        grid-template-columns: 1fr;
+
+        padding: 3px 18px;
+    }
+
+
+    .profile-field:nth-child(odd),
+    .profile-field:nth-child(even) {
+        padding: 15px 0;
+
+        border-left: 0;
+    }
+
+
+    .profile-field:nth-child(n + 2) {
+        border-top: 1px solid #eef1f4;
+    }
+
+
+    .profile-card-footer {
+        padding: 16px 18px;
+
+        justify-content: stretch;
+    }
+
+
+    .profile-card-footer .btn-owner {
+        width: 100%;
+    }
+
+
+    .account-details,
+    .security-content {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+
+    .role-content {
+        padding: 19px 18px 22px;
+    }
+
+
+    .security-row {
+        align-items: flex-start;
+
+        flex-wrap: wrap;
+    }
+
+
+    .security-row-info {
+        flex: 1 1 calc(100% - 60px);
+    }
+
+
+    .security-action,
+    .security-badge {
+        margin-left: 56px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 430px) {
+
+    .profile-hero {
+        padding: 20px;
+    }
+
+
+    .profile-hero-content {
+        align-items: flex-start;
+    }
+
+
+    .profile-avatar-large {
+        width: 58px;
+        height: 58px;
+
+        flex-basis: 58px;
+
+        border-radius: 16px;
+
+        font-size: 23px;
+    }
+
+
+    .profile-eyebrow {
+        font-size: 9px;
+
+        letter-spacing: 1.4px;
+    }
+
+
+    .profile-hero-info h1 {
+        font-size: 21px;
+    }
+
+
+    .profile-hero-info p {
+        font-size: 12px;
+    }
+
+
+    .profile-card-header {
+        gap: 11px;
+    }
+
+
+    .profile-card-icon {
+        width: 39px;
+        height: 39px;
+
+        flex-basis: 39px;
+
+        border-radius: 11px;
+
+        font-size: 16px;
+    }
+
+
+    .profile-card-header h2 {
+        font-size: 15px;
+    }
+
+
+    .profile-card-header p {
+        font-size: 11px;
+    }
+
+
+    .security-row-icon {
+        width: 38px;
+        height: 38px;
+
+        flex-basis: 38px;
+    }
+
+
+    .security-row-info {
+        flex-basis: calc(100% - 53px);
+    }
+
+
+    .security-action,
+    .security-badge {
+        margin-left: 52px;
+    }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+.profile-page a:focus-visible,
+.profile-page button:focus-visible,
+.profile-page input:focus-visible {
+    outline: 3px solid rgba(13, 110, 253, 0.22);
+
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .profile-card,
+    .profile-page .btn-owner,
+    .security-action {
+        transition: none;
+    }
+
+}

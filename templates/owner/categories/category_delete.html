@@ -1,0 +1,317 @@
+{% extends "owner/base_owner.html" %}
+{% load static %}
+
+{% block title %}Delete Category{% endblock %}
+
+{% block page_title %}Delete Category{% endblock %}
+
+{% block extra_css %}
+<link
+    rel="stylesheet"
+    href="{% static 'css/owner/category_delete.css' %}"
+>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="category-delete-page">
+
+    <!-- =====================================================
+         PAGE HEADER
+         ===================================================== -->
+
+    <div class="delete-page-header">
+
+        <div class="delete-page-header-content">
+
+            <div class="delete-page-icon">
+                <i class="bi bi-trash3"></i>
+            </div>
+
+            <div>
+
+                <span class="delete-page-eyebrow">
+                    PRODUCT CATEGORIES
+                </span>
+
+                <h1>
+                    Delete Category
+                </h1>
+
+                <p>
+                    Review the category details before continuing.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <a
+            href="{% url 'owner:categories' %}"
+            class="delete-btn delete-btn-secondary"
+        >
+            <i class="bi bi-arrow-left"></i>
+            <span>Back to Categories</span>
+        </a>
+
+    </div>
+
+
+    <!-- =====================================================
+         MAIN DELETE CARD
+         ===================================================== -->
+
+    <div class="category-delete-card">
+
+
+        <!-- =================================================
+             CARD TOP
+             ================================================= -->
+
+        <div class="delete-card-top">
+
+            <div class="delete-danger-icon">
+                <i class="bi bi-trash3-fill"></i>
+            </div>
+
+            <div>
+
+                <span class="delete-card-eyebrow">
+                    CONFIRM DELETION
+                </span>
+
+                <h2>
+                    Delete "{{ object.name }}"?
+                </h2>
+
+                <p>
+                    You are about to permanently delete this
+                    category.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             CATEGORY DETAILS
+             ================================================= -->
+
+        <div class="delete-details">
+
+
+            <!-- CATEGORY -->
+
+            <div class="delete-detail">
+
+                <div class="delete-detail-icon">
+                    <i class="bi bi-tag-fill"></i>
+                </div>
+
+                <div class="delete-detail-content">
+
+                    <span>
+                        Category
+                    </span>
+
+                    <strong>
+                        {{ object.name }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT COUNT -->
+
+            <div class="delete-detail">
+
+                <div class="delete-detail-icon product-icon">
+                    <i class="bi bi-box-seam-fill"></i>
+                </div>
+
+                <div class="delete-detail-content">
+
+                    <span>
+                        Products in Category
+                    </span>
+
+                    <strong>
+                        {{ product_count }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             STATUS
+             ================================================= -->
+
+        {% if product_count == 0 %}
+
+            <!-- SAFE TO DELETE -->
+
+            <div class="delete-status delete-status-success">
+
+                <div class="delete-status-icon">
+                    <i class="bi bi-check-circle-fill"></i>
+                </div>
+
+                <div class="delete-status-content">
+
+                    <strong>
+                        Category is ready for deletion
+                    </strong>
+
+                    <p>
+                        This category does not contain any
+                        products, so it can be safely deleted.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        {% else %}
+
+            <!-- CANNOT DELETE -->
+
+            <div class="delete-status delete-status-danger">
+
+                <div class="delete-status-icon">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                </div>
+
+                <div class="delete-status-content">
+
+                    <strong>
+                        Cannot Delete Category
+                    </strong>
+
+                    <p>
+
+                        This category contains
+                        <strong>
+                            {{ product_count }}
+                            product{{ product_count|pluralize }}
+                        </strong>.
+
+                        You must remove or move
+                        the product{{ product_count|pluralize }}
+                        before deleting this category.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        {% endif %}
+
+
+        <!-- =================================================
+             ACTIONS
+             ================================================= -->
+
+        <div class="delete-card-footer">
+
+            <a
+                href="{% url 'owner:categories' %}"
+                class="delete-btn delete-btn-secondary"
+            >
+
+                <i class="bi bi-x-lg"></i>
+
+                Cancel
+
+            </a>
+
+
+            {% if product_count == 0 %}
+
+                <!-- =========================================
+                     DELETE ENABLED
+                     ========================================= -->
+
+                <form
+                    method="post"
+                    id="deleteCategoryForm"
+                    class="delete-form"
+                >
+
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        class="delete-btn delete-btn-danger"
+                        id="deleteCategoryButton"
+                    >
+
+                        <span class="button-normal">
+
+                            <i class="bi bi-trash3-fill"></i>
+
+                            Delete Category
+
+                        </span>
+
+
+                        <span class="button-loading">
+
+                            <span class="spinner"></span>
+
+                            Deleting...
+
+                        </span>
+
+                    </button>
+
+                </form>
+
+
+            {% else %}
+
+                <!-- =========================================
+                     DELETE DISABLED
+                     ========================================= -->
+
+                <button
+                    type="button"
+                    class="delete-btn delete-btn-disabled"
+                    disabled
+                    title="Remove or move all products from this category first"
+                >
+
+                    <i class="bi bi-lock-fill"></i>
+
+                    Delete Category
+
+                </button>
+
+            {% endif %}
+
+        </div>
+
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script src="{% static 'js/categories.js' %}"></script>
+
+{% endblock %}

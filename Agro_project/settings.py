@@ -126,8 +126,17 @@ STATICFILES_DIRS = [
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
-LOGIN_REDIRECT_URL = 'dashboard'
-LOGOUT_REDIRECT_URL = 'login'
+
+# =========================================================
+# AUTHENTICATION
+# =========================================================
+
+LOGIN_URL = "/login/"
+
+LOGIN_REDIRECT_URL = "/owner/"
+
+LOGOUT_REDIRECT_URL = "/login/"
+
 
 PAYPAL_CLIENT_ID = "AQRk_BNJ53jb5kdVbkLQBrjFLBCPfzGszSEeME7-9Zpv0EQjvMeuhjs9p25G7-du1XYzrBkaO7wfe5c3"
 PAYPAL_CLIENT_SECRET = "EKOf5W7Uli_WV5LHkbn6jNMEwIvqVFvv8cvNnlp4wBGNaaAyFBjAFmrNOdD2u72AsFbd3UqlEi6RYRkB"
