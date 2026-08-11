@@ -11,73 +11,73 @@
 
 :root {
 
-    /* =========================
+   /* =========================
        BRAND GREEN
     ========================= */
 
-    --primary-green: #65a936;
-    --dark-green: #3f7627;
-    --light-green: #8bc45a;
-    --lighter-green: #eaf4e3;
+   --primary-green: #65a936;
+   --dark-green: #3f7627;
+   --light-green: #8bc45a;
+   --lighter-green: #eaf4e3;
 
 
-    /* =========================
+   /* =========================
        BRAND BROWN
        Farm / Earth / Logo
     ========================= */
 
-    --primary-brown: #5a3030;
-    --light-brown: #8a5650;
-    --lighter-brown: #f5eeee;
+   --primary-brown: #5a3030;
+   --light-brown: #8a5650;
+   --lighter-brown: #f5eeee;
 
 
-    /* =========================
+   /* =========================
        TEXT
     ========================= */
 
-    --dark: #172019;
-    --text: #4a554c;
-    --muted: #7b857c;
+   --dark: #172019;
+   --text: #4a554c;
+   --muted: #7b857c;
 
 
-    /* =========================
+   /* =========================
        BASIC COLORS
     ========================= */
 
-    --white: #ffffff;
-    --black: #000000;
+   --white: #ffffff;
+   --black: #000000;
 
 
-    /* =========================
+   /* =========================
        BORDERS
     ========================= */
 
-    --border: #e3e8e1;
-    --light-border: #eef2ec;
+   --border: #e3e8e1;
+   --light-border: #eef2ec;
 
 
-    /* =========================
+   /* =========================
        BACKGROUNDS
     ========================= */
 
-    --background: #ffffff;
-    --light-background: #f7faf4;
-    --green-background: #f3f8ee;
+   --background: #ffffff;
+   --light-background: #f7faf4;
+   --green-background: #f3f8ee;
 
 
-    /* =========================
+   /* =========================
        EFFECTS
     ========================= */
 
-    --green-shadow: rgba(101, 169, 54, 0.18);
-    --dark-shadow: rgba(23, 32, 25, 0.10);
+   --green-shadow: rgba(101, 169, 54, 0.18);
+   --dark-shadow: rgba(23, 32, 25, 0.10);
 
 
-    /* =========================
+   /* =========================
        TRANSITION
     ========================= */
 
-    --transition: all 0.3s ease;
+   --transition: all 0.3s ease;
 
 }
 
@@ -87,9 +87,9 @@
 ========================================================= */
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
 }
 
 
@@ -98,7 +98,7 @@
 ========================================================= */
 
 html {
-    scroll-behavior: smooth;
+   scroll-behavior: smooth;
 }
 
 
@@ -108,15 +108,15 @@ html {
 
 body {
 
-    font-family: "Poppins", sans-serif;
+   font-family: "Poppins", sans-serif;
 
-    background: var(--background);
+   background: var(--background);
 
-    color: var(--text);
+   color: var(--text);
 
-    line-height: 1.6;
+   line-height: 1.6;
 
-    overflow-x: hidden;
+   overflow-x: hidden;
 
 }
 
@@ -127,9 +127,9 @@ body {
 
 a {
 
-    text-decoration: none;
+   text-decoration: none;
 
-    color: inherit;
+   color: inherit;
 
 }
 
@@ -143,7 +143,7 @@ input,
 select,
 textarea {
 
-    font-family: inherit;
+   font-family: inherit;
 
 }
 
@@ -154,9 +154,9 @@ textarea {
 
 img {
 
-    max-width: 100%;
+   max-width: 100%;
 
-    display: block;
+   display: block;
 
 }
 
@@ -167,6 +167,125 @@ img {
 
 .website-content {
 
-    min-height: 500px;
+   min-height: 500px;
 
+}
+
+/* =========================================================
+   WHATSAPP FLOATING BUTTON
+   ========================================================= */
+
+.whatsapp-float {
+   position: fixed;
+
+   right: 24px;
+   bottom: 24px;
+
+   width: 58px;
+   height: 58px;
+
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   background: #25d366;
+   color: #ffffff;
+
+   border-radius: 50%;
+
+   text-decoration: none;
+
+   font-size: 30px;
+
+   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+
+   z-index: 9999;
+
+   transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+}
+
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+.whatsapp-float:hover {
+   color: #ffffff;
+
+   transform: translateY(-4px) scale(1.05);
+
+   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.24);
+}
+
+
+/* =========================================================
+   TOOLTIP
+   ========================================================= */
+
+.whatsapp-tooltip {
+   position: absolute;
+
+   right: 70px;
+   top: 50%;
+
+   transform:
+      translateY(-50%) translateX(8px);
+
+   background: #1f2937;
+   color: #ffffff;
+
+   padding: 9px 14px;
+
+   border-radius: 8px;
+
+   font-size: 13px;
+   font-weight: 600;
+
+   white-space: nowrap;
+
+   opacity: 0;
+   visibility: hidden;
+
+   pointer-events: none;
+
+   transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
+}
+
+
+/* =========================================================
+   SHOW TOOLTIP
+   ========================================================= */
+
+.whatsapp-float:hover .whatsapp-tooltip {
+   opacity: 1;
+   visibility: visible;
+
+   transform:
+      translateY(-50%) translateX(0);
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+   .whatsapp-float {
+      width: 52px;
+      height: 52px;
+
+      right: 18px;
+      bottom: 18px;
+
+      font-size: 27px;
+   }
+
+   .whatsapp-tooltip {
+      display: none;
+   }
 }
