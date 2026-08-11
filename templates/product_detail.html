@@ -1,214 +1,607 @@
-{% extends "base.html" %} {% load static %} {% block title %} {{ product.name }}
-| Waingo Farm {% endblock %} {% block extra_css %}
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+{{ product.name }} | Waingo Farm
+{% endblock %}
+
+{% block extra_css %}
+
 <link rel="stylesheet" href="{% static 'css/shop.css' %}" />
 <link rel="stylesheet" href="{% static 'css/cart.css' %}" />
 <link rel="stylesheet" href="{% static 'css/payment.css' %}" />
 <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-{% endblock %} {% block content %}
+
+{% endblock %}
+
+
+{% block content %}
 
 <section class="product-detail-section">
+
   <div class="container">
-    <!-- Breadcrumb -->
+
+    <!-- =====================================================
+         BREADCRUMB
+         ===================================================== -->
 
     <div class="product-breadcrumb">
-      <a href="{% url 'home' %}"> Home </a>
+
+      <a href="{% url 'home' %}">
+        Home
+      </a>
 
       <i class="bi bi-chevron-right"></i>
 
-      <a href="{% url 'shop' %}"> Shop </a>
+      <a href="{% url 'shop' %}">
+        Shop
+      </a>
 
       <i class="bi bi-chevron-right"></i>
 
-      <span> {{ product.name }} </span>
+      <span>
+        {{ product.name }}
+      </span>
+
     </div>
 
+
+    <!-- =====================================================
+         PRODUCT
+         ===================================================== -->
+
     <div class="row g-5 align-items-start">
-      <!-- PRODUCT IMAGE -->
+
+
+      <!-- =================================================
+           PRODUCT IMAGE
+           ================================================= -->
 
       <div class="col-lg-6">
+
         <div class="product-detail-image">
+
           {% if product.image %}
 
-          <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+            <img
+              src="{{ product.image.url }}"
+              alt="{{ product.name }}"
+            />
 
           {% else %}
 
-          <div class="product-detail-placeholder">
-            <i class="bi bi-image"></i>
+            <div class="product-detail-placeholder">
 
-            <span> No image available </span>
-          </div>
+              <i class="bi bi-image"></i>
+
+              <span>
+                No image available
+              </span>
+
+            </div>
 
           {% endif %}
+
         </div>
+
       </div>
 
-      <!-- PRODUCT INFORMATION -->
+
+      <!-- =================================================
+           PRODUCT INFORMATION
+           ================================================= -->
 
       <div class="col-lg-6">
+
         <div class="product-detail-info">
+
+
+          <!-- CATEGORY -->
+
           <span class="product-detail-category">
             {{ product.category.name }}
           </span>
 
-          <h1>{{ product.name }}</h1>
+
+          <!-- PRODUCT NAME -->
+
+          <h1>
+            {{ product.name }}
+          </h1>
+
+
+          <!-- RATING -->
 
           <div class="product-rating">
+
             <span>
+
               <i class="bi bi-star-fill"></i>
               <i class="bi bi-star-fill"></i>
               <i class="bi bi-star-fill"></i>
               <i class="bi bi-star-fill"></i>
               <i class="bi bi-star"></i>
+
             </span>
 
-            <small> Product Rating </small>
+            <small>
+              Product Rating
+            </small>
+
           </div>
+
+
+          <!-- PRICE -->
 
           <div class="product-detail-price">
+
             KSH {{ product.price|floatformat:2 }}
+
           </div>
+
+
+          <!-- STOCK -->
 
           <div class="product-detail-stock">
+
             {% if product.stock > 0 %}
 
-            <i class="bi bi-check-circle-fill"></i>
+              <i class="bi bi-check-circle-fill"></i>
 
-            In Stock ({{ product.stock }} available) {% else %}
-
-            <i class="bi bi-x-circle-fill"></i>
-
-            Out of Stock {% endif %}
-          </div>
-
-          <div class="product-detail-description">
-            <h3>Product Description</h3>
-
-            {% if product.description %}
-
-            <p>{{ product.description }}</p>
+              In Stock
+              ({{ product.stock }} available)
 
             {% else %}
 
-            <p>Quality agricultural product from Waingo Farm.</p>
+              <i class="bi bi-x-circle-fill"></i>
+
+              Out of Stock
 
             {% endif %}
+
           </div>
+
+
+          <!-- DESCRIPTION -->
+
+          <div class="product-detail-description">
+
+            <h3>
+              Product Description
+            </h3>
+
+            {% if product.description %}
+
+              <p>
+                {{ product.description }}
+              </p>
+
+            {% else %}
+
+              <p>
+                Quality agricultural product from Waingo Farm.
+              </p>
+
+            {% endif %}
+
+          </div>
+
+
+          <!-- =================================================
+               PURCHASE AREA
+               ================================================= -->
 
           {% if product.stock > 0 %}
 
-          <form
-            action="{% url 'add_to_cart' product.id %}"
-            method="POST"
-            class="purchase-area"
-          >
-            {% csrf_token %}
+            <form
+              action="{% url 'add_to_cart' product.id %}"
+              method="POST"
+              class="purchase-area"
+            >
 
-            <div class="quantity-box">
-              <button type="button" id="quantity-minus">
-                <i class="bi bi-dash"></i>
+              {% csrf_token %}
+
+
+              <!-- QUANTITY -->
+
+              <div class="quantity-box">
+
+                <button
+                  type="button"
+                  id="quantity-minus"
+                  aria-label="Decrease quantity"
+                >
+
+                  <i class="bi bi-dash"></i>
+
+                </button>
+
+
+                <input
+                  type="number"
+                  id="quantity"
+                  name="quantity"
+                  value="1"
+                  min="1"
+                  max="{{ product.stock }}"
+                />
+
+
+                <button
+                  type="button"
+                  id="quantity-plus"
+                  aria-label="Increase quantity"
+                >
+
+                  <i class="bi bi-plus"></i>
+
+                </button>
+
+              </div>
+
+
+              <!-- ADD TO CART -->
+
+              <button
+                type="submit"
+                class="add-cart-btn"
+              >
+
+                <i class="bi bi-cart-plus"></i>
+
+                ADD TO CART
+
               </button>
 
-              <input
-                type="number"
-                id="quantity"
-                name="quantity"
-                value="1"
-                min="1"
-                max="{{ product.stock }}"
-              />
+            </form>
 
-              <button type="button" id="quantity-plus">
-                <i class="bi bi-plus"></i>
-              </button>
-            </div>
 
-            <button type="submit" class="add-cart-btn">
-              <i class="bi bi-cart-plus"></i>
+            <!-- =================================================
+                 WHATSAPP PRODUCT ENQUIRY
+                 ================================================= -->
 
-              ADD TO CART
-            </button>
-          </form>
+            <a
+              href="#"
+              id="product-whatsapp"
+              class="product-whatsapp-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Ask about this product on WhatsApp"
+            >
+
+              <i class="bi bi-whatsapp"></i>
+
+              <span>
+                Ask about this product
+              </span>
+
+            </a>
+
 
           {% else %}
 
-          <button type="button" class="add-cart-btn disabled" disabled>
-            OUT OF STOCK
-          </button>
+
+            <!-- OUT OF STOCK -->
+
+            <button
+              type="button"
+              class="add-cart-btn disabled"
+              disabled
+            >
+
+              OUT OF STOCK
+
+            </button>
+
 
           {% endif %}
 
-          <!-- PRODUCT FEATURES -->
+
+          <!-- =================================================
+               PRODUCT FEATURES
+               ================================================= -->
 
           <div class="product-features">
+
+
+            <!-- DELIVERY -->
+
             <div class="product-feature">
+
               <i class="bi bi-truck"></i>
 
               <div>
-                <strong> Reliable Delivery </strong>
 
-                <span> Delivery available for your order. </span>
+                <strong>
+                  Reliable Delivery
+                </strong>
+
+                <span>
+                  Delivery available for your order.
+                </span>
+
               </div>
+
             </div>
 
+
+            <!-- QUALITY -->
+
             <div class="product-feature">
+
               <i class="bi bi-shield-check"></i>
 
               <div>
-                <strong> Quality Products </strong>
 
-                <span> Quality agricultural products. </span>
+                <strong>
+                  Quality Products
+                </strong>
+
+                <span>
+                  Quality agricultural products.
+                </span>
+
               </div>
+
             </div>
 
+
+            <!-- SUPPORT -->
+
             <div class="product-feature">
+
               <i class="bi bi-headset"></i>
 
               <div>
-                <strong> Customer Support </strong>
 
-                <span> We're here to help. </span>
+                <strong>
+                  Customer Support
+                </strong>
+
+                <span>
+                  We're here to help.
+                </span>
+
               </div>
+
             </div>
+
+
           </div>
+
         </div>
+
       </div>
+
     </div>
+
   </div>
+
 </section>
 
-{% endblock %} {% block extra_js %}
+{% endblock %}
+
+
+{% block extra_js %}
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const quantityInput = document.getElementById("quantity");
 
-    const minusButton = document.getElementById("quantity-minus");
+document.addEventListener("DOMContentLoaded", function () {
 
-    const plusButton = document.getElementById("quantity-plus");
 
-    if (!quantityInput) {
-      return;
-    }
+  /* =====================================================
+     QUANTITY ELEMENTS
+     ===================================================== */
+
+  const quantityInput =
+    document.getElementById("quantity");
+
+  const minusButton =
+    document.getElementById("quantity-minus");
+
+  const plusButton =
+    document.getElementById("quantity-plus");
+
+
+  /* =====================================================
+     WHATSAPP BUTTON
+     ===================================================== */
+
+  const whatsappButton =
+    document.getElementById("product-whatsapp");
+
+
+  /* =====================================================
+     STOP IF QUANTITY DOES NOT EXIST
+     ===================================================== */
+
+  if (!quantityInput) {
+    return;
+  }
+
+
+  /* =====================================================
+     DECREASE QUANTITY
+     ===================================================== */
+
+  if (minusButton) {
 
     minusButton.addEventListener("click", function () {
-      let quantity = parseInt(quantityInput.value);
+
+      let quantity =
+        parseInt(quantityInput.value) || 1;
+
 
       if (quantity > 1) {
-        quantityInput.value = quantity - 1;
+
+        quantityInput.value =
+          quantity - 1;
+
       }
+
     });
+
+  }
+
+
+  /* =====================================================
+     INCREASE QUANTITY
+     ===================================================== */
+
+  if (plusButton) {
 
     plusButton.addEventListener("click", function () {
-      let quantity = parseInt(quantityInput.value);
 
-      let maximum = parseInt(quantityInput.max);
+      let quantity =
+        parseInt(quantityInput.value) || 1;
+
+      let maximum =
+        parseInt(quantityInput.max);
+
 
       if (quantity < maximum) {
-        quantityInput.value = quantity + 1;
+
+        quantityInput.value =
+          quantity + 1;
+
       }
+
     });
+
+  }
+
+
+  /* =====================================================
+     VALIDATE MANUAL QUANTITY INPUT
+     ===================================================== */
+
+  quantityInput.addEventListener("change", function () {
+
+    let quantity =
+      parseInt(quantityInput.value) || 1;
+
+    let minimum =
+      parseInt(quantityInput.min) || 1;
+
+    let maximum =
+      parseInt(quantityInput.max);
+
+
+    if (quantity < minimum) {
+
+      quantityInput.value =
+        minimum;
+
+    }
+
+
+    if (quantity > maximum) {
+
+      quantityInput.value =
+        maximum;
+
+    }
+
   });
+
+
+  /* =====================================================
+     WHATSAPP PRODUCT MESSAGE
+     ===================================================== */
+
+  if (whatsappButton) {
+
+    whatsappButton.addEventListener(
+      "click",
+      function (event) {
+
+        event.preventDefault();
+
+
+        /* -----------------------------------------------
+           PRODUCT INFORMATION
+           ----------------------------------------------- */
+
+        const productName =
+          "{{ product.name|escapejs }}";
+
+
+        const productPrice =
+          "{{ product.price|floatformat:2|escapejs }}";
+
+
+        /* -----------------------------------------------
+           SELECTED QUANTITY
+           ----------------------------------------------- */
+
+        const quantity =
+          parseInt(quantityInput.value) || 1;
+
+
+        /* -----------------------------------------------
+           PRODUCT PAGE URL
+           ----------------------------------------------- */
+
+        const productUrl =
+          window.location.href;
+
+
+        /* -----------------------------------------------
+           CALCULATE ESTIMATED TOTAL
+           ----------------------------------------------- */
+
+        const total =
+          (
+            parseFloat(productPrice) *
+            quantity
+          ).toFixed(2);
+
+
+        /* -----------------------------------------------
+           WHATSAPP MESSAGE
+           ----------------------------------------------- */
+
+        const message =
+`Hello Waingo Farm,
+
+I am interested in this product:
+
+Product: ${productName}
+Price: KSh ${productPrice}
+Quantity: ${quantity}
+Estimated Total: KSh ${total}
+
+Product link:
+${productUrl}
+
+I would like to know more about this product. Thank you.`;
+
+
+        /* -----------------------------------------------
+           WHATSAPP URL
+           ----------------------------------------------- */
+
+        const whatsappUrl =
+          "https://wa.me/254704659267?text=" +
+          encodeURIComponent(message);
+
+
+        /* -----------------------------------------------
+           OPEN WHATSAPP
+           ----------------------------------------------- */
+
+        window.open(
+          whatsappUrl,
+          "_blank"
+        );
+
+      }
+    );
+
+  }
+
+});
+
 </script>
 
 {% endblock %}

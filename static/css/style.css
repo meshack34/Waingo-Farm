@@ -289,3 +289,63 @@ img {
       display: none;
    }
 }
+
+
+/* =========================================================
+   PRODUCT WHATSAPP BUTTON
+   ========================================================= */
+
+.product-whatsapp-btn {
+   min-height: 52px;
+   width: 100%;
+   margin-top: 12px;
+   padding: 0 25px;
+
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   gap: 10px;
+
+   border: 1px solid #25d366;
+   background: #ffffff;
+   color: #25d366;
+
+   text-decoration: none;
+
+   font-size: 13px;
+   font-weight: 600;
+
+   transition: var(--transition);
+}
+
+
+/* HOVER */
+
+.product-whatsapp-btn:hover {
+   background: #25d366;
+   color: #ffffff;
+   border-color: #25d366;
+
+   transform: translateY(-2px);
+
+   box-shadow:
+      0 8px 20px rgba(37, 211, 102, 0.18);
+}
+
+
+/* ICON */
+
+.product-whatsapp-btn i {
+   font-size: 20px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 576px) {
+
+   .product-whatsapp-btn {
+      width: 100%;
+   }
+
+}
