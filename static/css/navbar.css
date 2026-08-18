@@ -57,7 +57,7 @@
 
     font-size: 16px;
 
-    border-right: 1px solid rgba(255,255,255,0.15);
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
 
     transition: var(--transition);
 
@@ -66,14 +66,14 @@
 
 .top-contact a:first-child {
 
-    border-left: 1px solid rgba(255,255,255,0.15);
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
 
 }
 
 
 .top-contact a:hover {
 
-    background: rgba(0,0,0,0.08);
+    background: rgba(0, 0, 0, 0.08);
 
 }
 
@@ -111,7 +111,7 @@
 
     color: var(--white);
 
-    border-left: 1px solid rgba(255,255,255,0.15);
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
 
     transition: var(--transition);
 
@@ -139,7 +139,7 @@
 .social-link:hover,
 .top-link:hover {
 
-    background: rgba(0,0,0,0.08);
+    background: rgba(0, 0, 0, 0.08);
 
 }
 
@@ -737,7 +737,7 @@
 
     border-bottom: 1px solid var(--border);
 
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 
 }
 
