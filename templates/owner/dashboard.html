@@ -174,12 +174,10 @@ Dashboard {% endblock %} {% block extra_css %}
 
       <div class="quick-grid">
        
-
-        <a href="{% url 'owner:product_add' %}" class="btn-owner">
-      <i class="bi bi-folder-circle"></i>
-
-      Add Product
-    </a>
+<a href="{% url 'owner:product_add' %}" class="btn-owner">
+    <i class="bi bi-plus-lg"></i>
+    <span>Add Product</span>
+</a>
 
         <a href="{% url 'owner:category_add' %}">
           <i class="bi bi-folder-plus"></i>
