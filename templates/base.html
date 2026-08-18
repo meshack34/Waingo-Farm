@@ -1,17 +1,17 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-<head>
 
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8">
 
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
-    />
+    >
 
     <title>
-        {% block title %}waingo farm{% endblock %}
+        {% block title %}Waingo Farm{% endblock %}
     </title>
 
 
@@ -22,7 +22,7 @@
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
         rel="stylesheet"
-    />
+    >
 
 
     <!-- =========================================================
@@ -32,38 +32,42 @@
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
         rel="stylesheet"
-    />
+    >
 
 
     <!-- =========================================================
-         GOOGLE FONTS
+         GOOGLE FONT
     ========================================================== -->
 
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet"
-    />
+    >
 
 
     <!-- =========================================================
-         MAIN CSS
+         GLOBAL CSS
     ========================================================== -->
 
     <link
         rel="stylesheet"
-        href="{% static 'css/style.css' %}"
-    />
+        href="{% static 'css/style.css' %}?v=20260818"
+    >
 
     <link
         rel="stylesheet"
-        href="{% static 'css/navbar.css' %}"
-    />
+        href="{% static 'css/navbar.css' %}?v=20260818"
+    >
 
     <link
         rel="stylesheet"
-        href="{% static 'css/footer.css' %}"
-    />
+        href="{% static 'css/footer.css' %}?v=20260818"
+    >
 
+
+    <!-- =========================================================
+         PAGE-SPECIFIC CSS
+    ========================================================== -->
 
     {% block extra_css %}{% endblock %}
 
@@ -79,7 +83,7 @@
 
     <header>
 
-        {% include 'partials/navbar.html' %}
+        {% include "partials/navbar.html" %}
 
 
         <!-- =====================================================
@@ -117,18 +121,15 @@
     </header>
 
 
-
     <!-- =========================================================
-         PAGE CONTENT
+         MAIN WEBSITE CONTENT
     ========================================================== -->
 
     <main class="website-content">
 
-        {% block content %}
-        {% endblock %}
+        {% block content %}{% endblock %}
 
     </main>
-
 
 
     <!-- =========================================================
@@ -136,15 +137,6 @@
     ========================================================== -->
 
     {% include "partials/footer.html" %}
-
-
-
-    <!-- =========================================================
-         BOOTSTRAP JS
-    ========================================================== -->
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
 
 
     <!-- =========================================================
@@ -168,9 +160,20 @@
     </a>
 
 
+    <!-- =========================================================
+         BOOTSTRAP JAVASCRIPT
+    ========================================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    ></script>
+
 
     <!-- =========================================================
          MOBILE NAVIGATION
+         
+         IMPORTANT:
+         Only ONE mobile navigation script.
     ========================================================== -->
 
     <script>
@@ -184,44 +187,26 @@
                 document.getElementById("navMenu");
 
 
-            /* -----------------------------------------------------
-               Make sure both elements exist
-            ----------------------------------------------------- */
-
             if (!menuButton || !navMenu) {
                 return;
             }
 
 
-            /* -----------------------------------------------------
-               OPEN / CLOSE MOBILE MENU
-            ----------------------------------------------------- */
+            function openMenu() {
 
-            menuButton.addEventListener("click", function () {
-
-                navMenu.classList.toggle("show");
-
-                const isOpen =
-                    navMenu.classList.contains("show");
-
-
-                /* Accessibility */
+                navMenu.classList.add("show");
+                navMenu.classList.add("active");
 
                 menuButton.setAttribute(
                     "aria-expanded",
-                    isOpen ? "true" : "false"
+                    "true"
                 );
-
 
                 menuButton.setAttribute(
                     "aria-label",
-                    isOpen
-                        ? "Close navigation"
-                        : "Open navigation"
+                    "Close navigation"
                 );
 
-
-                /* Change hamburger icon */
 
                 const icon =
                     menuButton.querySelector("i");
@@ -229,109 +214,115 @@
 
                 if (icon) {
 
-                    icon.classList.toggle(
-                        "bi-list",
-                        !isOpen
-                    );
+                    icon.classList.remove("bi-list");
 
-                    icon.classList.toggle(
-                        "bi-x-lg",
-                        isOpen
-                    );
+                    icon.classList.add("bi-x-lg");
 
                 }
 
-            });
+            }
 
 
+            function closeMenu() {
 
-            /* -----------------------------------------------------
-               CLOSE MENU AFTER CLICKING A NAVIGATION LINK
-            ----------------------------------------------------- */
+                navMenu.classList.remove("show");
+                navMenu.classList.remove("active");
+
+                menuButton.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+                menuButton.setAttribute(
+                    "aria-label",
+                    "Open navigation"
+                );
+
+
+                const icon =
+                    menuButton.querySelector("i");
+
+
+                if (icon) {
+
+                    icon.classList.remove("bi-x-lg");
+
+                    icon.classList.add("bi-list");
+
+                }
+
+            }
+
+
+            menuButton.addEventListener(
+                "click",
+                function (event) {
+
+                    event.preventDefault();
+
+                    const isOpen =
+                        navMenu.classList.contains("show");
+
+                    if (isOpen) {
+
+                        closeMenu();
+
+                    } else {
+
+                        openMenu();
+
+                    }
+
+                }
+            );
+
 
             const navLinks =
-                navMenu.querySelectorAll(".nav-link");
+                navMenu.querySelectorAll("a");
 
 
             navLinks.forEach(function (link) {
 
-                link.addEventListener("click", function () {
+                link.addEventListener(
+                    "click",
+                    function () {
 
-                    navMenu.classList.remove("show");
-
-
-                    menuButton.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
-
-
-                    menuButton.setAttribute(
-                        "aria-label",
-                        "Open navigation"
-                    );
-
-
-                    const icon =
-                        menuButton.querySelector("i");
-
-
-                    if (icon) {
-
-                        icon.classList.remove(
-                            "bi-x-lg"
-                        );
-
-                        icon.classList.add(
-                            "bi-list"
-                        );
+                        closeMenu();
 
                     }
-
-                });
+                );
 
             });
 
 
+            /* Close when clicking outside */
 
-            /* -----------------------------------------------------
-               CLOSE MENU WHEN SCREEN BECOMES DESKTOP SIZE
-            ----------------------------------------------------- */
+            document.addEventListener(
+                "click",
+                function (event) {
 
-            window.addEventListener(
-                "resize",
-                function () {
+                    if (
+                        !navMenu.contains(event.target) &&
+                        !menuButton.contains(event.target)
+                    ) {
 
-                    if (window.innerWidth > 850) {
+                        closeMenu();
 
-                        navMenu.classList.remove("show");
+                    }
 
-                        menuButton.setAttribute(
-                            "aria-expanded",
-                            "false"
-                        );
-
-                        menuButton.setAttribute(
-                            "aria-label",
-                            "Open navigation"
-                        );
+                }
+            );
 
 
-                        const icon =
-                            menuButton.querySelector("i");
+            /* Close with Escape */
 
+            document.addEventListener(
+                "keydown",
+                function (event) {
 
-                        if (icon) {
+                    if (event.key === "Escape") {
 
-                            icon.classList.remove(
-                                "bi-x-lg"
-                            );
-
-                            icon.classList.add(
-                                "bi-list"
-                            );
-
-                        }
+                        closeMenu();
 
                     }
 
@@ -343,14 +334,12 @@
     </script>
 
 
-
     <!-- =========================================================
          PAGE-SPECIFIC JAVASCRIPT
     ========================================================== -->
 
-    {% block extra_js %}
-    {% endblock %}
-
+    {% block extra_js %}{% endblock %}
 
 </body>
+
 </html>
