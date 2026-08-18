@@ -29,7 +29,6 @@ var/
 *.log
 *.pot
 *.pyc
-media/
 staticfiles/
 local_settings.py
 
