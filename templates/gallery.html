@@ -5,11 +5,14 @@
 Gallery | Waingo Farm
 {% endblock %}
 
+
 {% block extra_css %}
+
 <link
     rel="stylesheet"
     href="{% static 'css/gallery.css' %}"
 >
+
 {% endblock %}
 
 
@@ -79,7 +82,10 @@ Gallery | Waingo Farm
              FILTER BUTTONS
         ================================================== -->
 
-        <div class="gallery-filters" aria-label="Gallery filters">
+        <div
+            class="gallery-filters"
+            aria-label="Gallery filters"
+        >
 
             <button
                 type="button"
@@ -140,7 +146,7 @@ Gallery | Waingo Farm
 
 
             <!-- =================================================
-                 WAINGO FARM
+                 01 — WAINGO FARM
             ================================================== -->
 
             <div
@@ -172,7 +178,7 @@ Gallery | Waingo Farm
 
 
             <!-- =================================================
-                 FARMER
+                 02 — FARMER
             ================================================== -->
 
             <div
@@ -204,7 +210,7 @@ Gallery | Waingo Farm
 
 
             <!-- =================================================
-                 COWS
+                 03 — COWS
             ================================================== -->
 
             <div
@@ -236,7 +242,7 @@ Gallery | Waingo Farm
 
 
             <!-- =================================================
-                 COW 2
+                 04 — COW 2
             ================================================== -->
 
             <div
@@ -268,7 +274,7 @@ Gallery | Waingo Farm
 
 
             <!-- =================================================
-                 COW 3
+                 05 — COW 3
             ================================================== -->
 
             <div
@@ -300,7 +306,7 @@ Gallery | Waingo Farm
 
 
             <!-- =================================================
-                 CABBAGE
+                 06 — CABBAGE
             ================================================== -->
 
             <div
@@ -332,19 +338,19 @@ Gallery | Waingo Farm
 
 
             <!-- =================================================
-                 CABBAGE COPY
+                 07 — CABBAGE COPY
             ================================================== -->
 
             <div
                 class="gallery-item visible"
                 data-category="crops"
                 data-category-label="Crops"
-                data-title="Fresh Produce"
+                data-title="Fresh Cabbage Produce"
             >
 
                 <img
                     src="{% static 'images/cabbage - Copy.jpeg' %}"
-                    alt="Cabbage farming at Waingo Farm"
+                    alt="Fresh cabbage produce at Waingo Farm"
                     loading="lazy"
                 >
 
@@ -355,7 +361,7 @@ Gallery | Waingo Farm
                     </span>
 
                     <h3>
-                        Fresh Produce
+                        Fresh Cabbage Produce
                     </h3>
 
                 </div>
@@ -364,7 +370,39 @@ Gallery | Waingo Farm
 
 
             <!-- =================================================
-                 SUKUMA WIKI
+                 08 — SPINACH
+            ================================================== -->
+
+            <div
+                class="gallery-item visible"
+                data-category="crops"
+                data-category-label="Crops"
+                data-title="Fresh Spinach"
+            >
+
+                <img
+                    src="{% static 'images/spinach.jpeg' %}"
+                    alt="Fresh spinach at Waingo Farm"
+                    loading="lazy"
+                >
+
+                <div class="gallery-overlay">
+
+                    <span>
+                        CROPS
+                    </span>
+
+                    <h3>
+                        Fresh Spinach
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 09 — SUKUMA
             ================================================== -->
 
             <div
@@ -375,7 +413,7 @@ Gallery | Waingo Farm
             >
 
                 <img
-                    src="{% static 'images/sukumaa.jpg' %}"
+                    src="{% static 'images/sukuma.jpeg' %}"
                     alt="Sukuma wiki at Waingo Farm"
                     loading="lazy"
                 >
@@ -396,7 +434,40 @@ Gallery | Waingo Farm
 
 
             <!-- =================================================
-                 MAIZE
+                 10 — OLD SUKUMAA IMAGE
+                 Keep this if you still have the old image.
+            ================================================== -->
+
+            <div
+                class="gallery-item visible"
+                data-category="crops"
+                data-category-label="Crops"
+                data-title="Sukuma Wiki"
+            >
+
+                <img
+                    src="{% static 'images/sukumaa.jpg' %}"
+                    alt="Sukuma wiki crop at Waingo Farm"
+                    loading="lazy"
+                >
+
+                <div class="gallery-overlay">
+
+                    <span>
+                        CROPS
+                    </span>
+
+                    <h3>
+                        Sukuma Wiki
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 11 — MAIZE
             ================================================== -->
 
             <div
@@ -428,7 +499,7 @@ Gallery | Waingo Farm
 
 
             <!-- =================================================
-                 RICE
+                 12 — RICE
             ================================================== -->
 
             <div
@@ -460,7 +531,7 @@ Gallery | Waingo Farm
 
 
             <!-- =================================================
-                 POND
+                 13 — POND
             ================================================== -->
 
             <div
@@ -492,14 +563,14 @@ Gallery | Waingo Farm
 
 
             <!-- =================================================
-                 TANK
+                 14 — WATER TANK
             ================================================== -->
 
             <div
                 class="gallery-item visible"
                 data-category="farm"
                 data-category-label="Farm"
-                data-title="Farm Infrastructure"
+                data-title="Farm Water Storage"
             >
 
                 <img
@@ -515,7 +586,7 @@ Gallery | Waingo Farm
                     </span>
 
                     <h3>
-                        Farm Infrastructure
+                        Farm Water Storage
                     </h3>
 
                 </div>
@@ -524,19 +595,19 @@ Gallery | Waingo Farm
 
 
             <!-- =================================================
-                 SPRING
+                 15 — SPRING
             ================================================== -->
 
             <div
                 class="gallery-item visible"
                 data-category="farm"
                 data-category-label="Farm"
-                data-title="Natural Resources"
+                data-title="Natural Water Source"
             >
 
                 <img
                     src="{% static 'images/springila.jpg' %}"
-                    alt="Water source at Waingo Farm"
+                    alt="Natural water source at Waingo Farm"
                     loading="lazy"
                 >
 
@@ -547,7 +618,7 @@ Gallery | Waingo Farm
                     </span>
 
                     <h3>
-                        Natural Resources
+                        Natural Water Source
                     </h3>
 
                 </div>
@@ -556,7 +627,7 @@ Gallery | Waingo Farm
 
 
             <!-- =================================================
-                 BATA
+                 16 — BATA
             ================================================== -->
 
             <div
@@ -568,7 +639,7 @@ Gallery | Waingo Farm
 
                 <img
                     src="{% static 'images/bata.jpeg' %}"
-                    alt="Farm activity at Waingo Farm"
+                    alt="Farm activities at Waingo Farm"
                     loading="lazy"
                 >
 
@@ -588,14 +659,14 @@ Gallery | Waingo Farm
 
 
             <!-- =================================================
-                 BATA HOME
+                 17 — BATA HOME
             ================================================== -->
 
             <div
                 class="gallery-item visible"
                 data-category="farm-life"
                 data-category-label="Farm Life"
-                data-title="Our Surroundings"
+                data-title="Farm Surroundings"
             >
 
                 <img
@@ -611,7 +682,7 @@ Gallery | Waingo Farm
                     </span>
 
                     <h3>
-                        Our Surroundings
+                        Farm Surroundings
                     </h3>
 
                 </div>
@@ -620,7 +691,7 @@ Gallery | Waingo Farm
 
 
             <!-- =================================================
-                 FARM OPERATIONS
+                 18 — FARM OPERATIONS
             ================================================== -->
 
             <div
@@ -652,7 +723,7 @@ Gallery | Waingo Farm
 
 
             <!-- =================================================
-                 FARM PRODUCE
+                 19 — FARM PRODUCE
             ================================================== -->
 
             <div
@@ -664,7 +735,7 @@ Gallery | Waingo Farm
 
                 <img
                     src="{% static 'images/boostani.jpg' %}"
-                    alt="Farm produce at Waingo Farm"
+                    alt="Fresh farm produce at Waingo Farm"
                     loading="lazy"
                 >
 
@@ -684,7 +755,7 @@ Gallery | Waingo Farm
 
 
             <!-- =================================================
-                 DOGS
+                 20 — DOGS
             ================================================== -->
 
             <div
@@ -716,11 +787,11 @@ Gallery | Waingo Farm
 
 
             <!-- =================================================
-                 DOGS 2
+                 21 — DOGS 2
             ================================================== -->
 
             <div
-                class="gallery-item"
+                class="gallery-item visible"
                 data-category="farm-life"
                 data-category-label="Farm Life"
                 data-title="Life Around the Farm"
@@ -728,7 +799,7 @@ Gallery | Waingo Farm
 
                 <img
                     src="{% static 'images/dogs2.jpg' %}"
-                    alt="Farm dogs"
+                    alt="Farm dogs at Waingo Farm"
                     loading="lazy"
                 >
 
@@ -753,7 +824,7 @@ Gallery | Waingo Farm
 
 
     <!-- =====================================================
-         IMAGE LIGHTBOX
+         LIGHTBOX
     ====================================================== -->
 
     <div
@@ -767,6 +838,9 @@ Gallery | Waingo Farm
 
         <div class="lightbox-content">
 
+
+            <!-- CLOSE -->
+
             <button
                 type="button"
                 class="lightbox-close"
@@ -777,6 +851,8 @@ Gallery | Waingo Farm
             </button>
 
 
+            <!-- PREVIOUS -->
+
             <button
                 type="button"
                 class="lightbox-navigation lightbox-previous"
@@ -786,6 +862,8 @@ Gallery | Waingo Farm
                 <i class="bi bi-chevron-left"></i>
             </button>
 
+
+            <!-- IMAGE -->
 
             <div class="lightbox-image-wrapper">
 
@@ -806,6 +884,8 @@ Gallery | Waingo Farm
             </div>
 
 
+            <!-- NEXT -->
+
             <button
                 type="button"
                 class="lightbox-navigation lightbox-next"
@@ -815,13 +895,14 @@ Gallery | Waingo Farm
                 <i class="bi bi-chevron-right"></i>
             </button>
 
+
         </div>
 
     </div>
 
 
     <!-- =====================================================
-         BOTTOM CTA
+         GALLERY CTA
     ====================================================== -->
 
     <section class="gallery-cta">
@@ -852,7 +933,9 @@ Gallery | Waingo Farm
                     class="gallery-cta-button"
                 >
                     CONTACT US
+
                     <i class="bi bi-arrow-right"></i>
+
                 </a>
 
             </div>
@@ -868,5 +951,7 @@ Gallery | Waingo Farm
 
 
 {% block extra_js %}
+
 <script src="{% static 'js/gallery.js' %}"></script>
+
 {% endblock %}
