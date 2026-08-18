@@ -1,21 +1,764 @@
-{% extends "base.html" %} {% load static %} {% block title %} Waingo Farm | Our
-Services {% endblock %} {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/services.css' %}" />
-{% endblock %} {% block content %}
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Services | Waingo Farm
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/services.css' %}"
+>
+
+{% endblock %}
+
+
+{% block content %}
 
 <section class="services-page">
-  <div class="container">
-    <div class="services-page-heading">
-      <span>OUR SERVICES</span>
 
-      <h1>Complete Farming Solutions</h1>
+    <!-- =====================================================
+         SERVICES HERO
+    ====================================================== -->
 
-      <p>
-        Quality agricultural products, livestock support and practical farming
-        solutions for farmers across Kenya.
-      </p>
-    </div>
-  </div>
+    <section class="services-hero">
+
+        <div class="services-hero-overlay"></div>
+
+        <div class="container">
+
+            <div class="services-hero-content">
+
+                <span class="services-eyebrow">
+                    WAINGO FARM
+                </span>
+
+                <h1>
+                    Our Agricultural Services
+                </h1>
+
+                <p>
+                    Practical farming solutions, quality agricultural
+                    products and reliable support to help farmers grow
+                    better and achieve more.
+                </p>
+
+                <div class="services-hero-actions">
+
+                    <a
+                        href="{% url 'shop' %}"
+                        class="services-btn services-btn-primary"
+                    >
+                        SHOP PRODUCTS
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+
+                    <a
+                        href="{% url 'contact' %}"
+                        class="services-btn services-btn-outline"
+                    >
+                        CONTACT US
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         INTRODUCTION
+    ====================================================== -->
+
+    <section class="services-intro">
+
+        <div class="container">
+
+            <div class="services-intro-grid">
+
+                <div class="services-intro-content">
+
+                    <span class="section-eyebrow">
+                        FARMING SUPPORT
+                    </span>
+
+                    <h2>
+                        Helping You Farm With Confidence
+                    </h2>
+
+                    <p>
+                        At Waingo Farm, we understand that successful
+                        farming requires more than simply buying
+                        agricultural products.
+                    </p>
+
+                    <p>
+                        That is why we bring together quality farm
+                        supplies, practical solutions and farmer-focused
+                        support to help you make better decisions
+                        throughout the farming cycle.
+                    </p>
+
+                    <a
+                        href="{% url 'contact' %}"
+                        class="text-link"
+                    >
+                        Talk to Our Team
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+
+                </div>
+
+
+                <div class="services-intro-visual">
+
+                    <div class="intro-image-card">
+
+                        <img
+                            src="{% static 'images/waingo.jpeg' %}"
+                            alt="Waingo Farm"
+                            loading="lazy"
+                        >
+
+                        <div class="intro-image-badge">
+
+                            <i class="bi bi-check-circle-fill"></i>
+
+                            <div>
+                                <strong>
+                                    Quality Farming
+                                </strong>
+
+                                <span>
+                                    Better solutions for better farms
+                                </span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SERVICES SECTION
+    ====================================================== -->
+
+    <section class="services-list-section">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <span class="section-eyebrow">
+                    WHAT WE OFFER
+                </span>
+
+                <h2>
+                    Our Farming Solutions
+                </h2>
+
+                <p>
+                    Explore the agricultural products and support
+                    services available through Waingo Farm.
+                </p>
+
+            </div>
+
+
+            <div class="services-grid">
+
+
+                <!-- 01 -->
+
+                <article class="service-card">
+
+                    <div class="service-card-number">
+                        01
+                    </div>
+
+                    <div class="service-icon">
+                        <i class="bi bi-flower1"></i>
+                    </div>
+
+                    <h3>
+                        Crop Production Support
+                    </h3>
+
+                    <p>
+                        Practical solutions and quality farm inputs
+                        to support healthy crops from planting through
+                        harvest.
+                    </p>
+
+                    <a
+                        href="{% url 'shop' %}"
+                        class="service-link"
+                    >
+                        Explore Products
+                        <i class="bi bi-arrow-up-right"></i>
+                    </a>
+
+                </article>
+
+
+                <!-- 02 -->
+
+                <article class="service-card">
+
+                    <div class="service-card-number">
+                        02
+                    </div>
+
+                    <div class="service-icon">
+                        <i class="bi bi-seedling"></i>
+                    </div>
+
+                    <h3>
+                        Seeds & Planting Solutions
+                    </h3>
+
+                    <p>
+                        Access quality seeds and planting solutions
+                        selected to help farmers establish strong and
+                        productive crops.
+                    </p>
+
+                    <a
+                        href="{% url 'shop' %}?category=seeds"
+                        class="service-link"
+                    >
+                        View Seeds
+                        <i class="bi bi-arrow-up-right"></i>
+                    </a>
+
+                </article>
+
+
+                <!-- 03 -->
+
+                <article class="service-card">
+
+                    <div class="service-card-number">
+                        03
+                    </div>
+
+                    <div class="service-icon">
+                        <i class="bi bi-droplet"></i>
+                    </div>
+
+                    <h3>
+                        Fertilizer & Soil Management
+                    </h3>
+
+                    <p>
+                        Farming inputs designed to support soil
+                        fertility, plant nutrition and productive
+                        crop growth.
+                    </p>
+
+                    <a
+                        href="{% url 'shop' %}?category=fertilizers"
+                        class="service-link"
+                    >
+                        View Fertilizers
+                        <i class="bi bi-arrow-up-right"></i>
+                    </a>
+
+                </article>
+
+
+                <!-- 04 -->
+
+                <article class="service-card">
+
+                    <div class="service-card-number">
+                        04
+                    </div>
+
+                    <div class="service-icon">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+
+                    <h3>
+                        Crop Protection
+                    </h3>
+
+                    <p>
+                        Solutions that help farmers protect crops and
+                        maintain healthier fields throughout the growing
+                        season.
+                    </p>
+
+                    <a
+                        href="{% url 'shop' %}?category=crop-protection"
+                        class="service-link"
+                    >
+                        Explore Protection
+                        <i class="bi bi-arrow-up-right"></i>
+                    </a>
+
+                </article>
+
+
+                <!-- 05 -->
+
+                <article class="service-card">
+
+                    <div class="service-card-number">
+                        05
+                    </div>
+
+                    <div class="service-icon">
+                        <i class="bi bi-heart-pulse"></i>
+                    </div>
+
+                    <h3>
+                        Animal Health
+                    </h3>
+
+                    <p>
+                        Agricultural supplies supporting responsible
+                        livestock health and day-to-day animal care.
+                    </p>
+
+                    <a
+                        href="{% url 'shop' %}?category=animal-health"
+                        class="service-link"
+                    >
+                        View Animal Health
+                        <i class="bi bi-arrow-up-right"></i>
+                    </a>
+
+                </article>
+
+
+                <!-- 06 -->
+
+                <article class="service-card">
+
+                    <div class="service-card-number">
+                        06
+                    </div>
+
+                    <div class="service-icon">
+                        <i class="bi bi-basket"></i>
+                    </div>
+
+                    <h3>
+                        Animal Feeds & Nutrition
+                    </h3>
+
+                    <p>
+                        Feed solutions to support livestock nutrition,
+                        growth and productive farm operations.
+                    </p>
+
+                    <a
+                        href="{% url 'shop' %}?category=animal-feeds"
+                        class="service-link"
+                    >
+                        View Animal Feeds
+                        <i class="bi bi-arrow-up-right"></i>
+                    </a>
+
+                </article>
+
+
+                <!-- 07 -->
+
+                <article class="service-card">
+
+                    <div class="service-card-number">
+                        07
+                    </div>
+
+                    <div class="service-icon">
+                        <i class="bi bi-tools"></i>
+                    </div>
+
+                    <h3>
+                        Farm Tools & Equipment
+                    </h3>
+
+                    <p>
+                        Useful farm tools and equipment to make routine
+                        agricultural work easier and more efficient.
+                    </p>
+
+                    <a
+                        href="{% url 'shop' %}?category=farm-tools"
+                        class="service-link"
+                    >
+                        View Farm Tools
+                        <i class="bi bi-arrow-up-right"></i>
+                    </a>
+
+                </article>
+
+
+                <!-- 08 -->
+
+                <article class="service-card service-card-featured">
+
+                    <div class="service-card-number">
+                        08
+                    </div>
+
+                    <div class="service-icon">
+                        <i class="bi bi-person-check"></i>
+                    </div>
+
+                    <h3>
+                        Farmer Support
+                    </h3>
+
+                    <p>
+                        We aim to make agricultural shopping easier by
+                        helping farmers find suitable products and
+                        practical solutions for their needs.
+                    </p>
+
+                    <a
+                        href="{% url 'contact' %}"
+                        class="service-link"
+                    >
+                        Speak With Us
+                        <i class="bi bi-arrow-up-right"></i>
+                    </a>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         WHY WAINGO
+    ====================================================== -->
+
+    <section class="why-waingo">
+
+        <div class="container">
+
+            <div class="why-waingo-grid">
+
+
+                <div class="why-waingo-image">
+
+                    <img
+                        src="{% static 'images/waingo.jpeg' %}"
+                        alt="Farming at Waingo Farm"
+                        loading="lazy"
+                    >
+
+                    <div class="why-image-overlay">
+
+                        <span>
+                            WAINGO FARM
+                        </span>
+
+                        <strong>
+                            Growing Better Farms.
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="why-waingo-content">
+
+                    <span class="section-eyebrow">
+                        WHY CHOOSE US
+                    </span>
+
+                    <h2>
+                        More Than Products.
+                        <span>Practical Farming Support.</span>
+                    </h2>
+
+                    <p>
+                        Our goal is to make it easier for farmers to
+                        access dependable agricultural products while
+                        receiving a service experience built around
+                        their farming needs.
+                    </p>
+
+
+                    <div class="benefits-list">
+
+
+                        <div class="benefit-item">
+
+                            <div class="benefit-icon">
+                                <i class="bi bi-patch-check"></i>
+                            </div>
+
+                            <div>
+                                <h4>
+                                    Quality Focus
+                                </h4>
+
+                                <p>
+                                    We focus on providing dependable
+                                    agricultural products.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="benefit-item">
+
+                            <div class="benefit-icon">
+                                <i class="bi bi-people"></i>
+                            </div>
+
+                            <div>
+                                <h4>
+                                    Farmer Focused
+                                </h4>
+
+                                <p>
+                                    Our approach is centered around
+                                    practical farming needs.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="benefit-item">
+
+                            <div class="benefit-icon">
+                                <i class="bi bi-headset"></i>
+                            </div>
+
+                            <div>
+                                <h4>
+                                    Reliable Support
+                                </h4>
+
+                                <p>
+                                    We are available to help you find
+                                    suitable farming solutions.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="benefit-item">
+
+                            <div class="benefit-icon">
+                                <i class="bi bi-arrow-repeat"></i>
+                            </div>
+
+                            <div>
+                                <h4>
+                                    Farm-Cycle Thinking
+                                </h4>
+
+                                <p>
+                                    We consider the different stages
+                                    involved in successful farming.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         HOW WE WORK
+    ====================================================== -->
+
+    <section class="how-we-work">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <span class="section-eyebrow">
+                    OUR APPROACH
+                </span>
+
+                <h2>
+                    Simple. Practical. Farmer-Focused.
+                </h2>
+
+                <p>
+                    Getting the right farming solution should be
+                    straightforward.
+                </p>
+
+            </div>
+
+
+            <div class="process-grid">
+
+
+                <div class="process-item">
+
+                    <div class="process-number">
+                        01
+                    </div>
+
+                    <div class="process-icon">
+                        <i class="bi bi-chat-dots"></i>
+                    </div>
+
+                    <h3>
+                        Tell Us What You Need
+                    </h3>
+
+                    <p>
+                        Share what you are looking for or the farming
+                        challenge you are trying to solve.
+                    </p>
+
+                </div>
+
+
+                <div class="process-line"></div>
+
+
+                <div class="process-item">
+
+                    <div class="process-number">
+                        02
+                    </div>
+
+                    <div class="process-icon">
+                        <i class="bi bi-search"></i>
+                    </div>
+
+                    <h3>
+                        Find the Right Solution
+                    </h3>
+
+                    <p>
+                        Explore products and solutions that match your
+                        farming requirements.
+                    </p>
+
+                </div>
+
+
+                <div class="process-line"></div>
+
+
+                <div class="process-item">
+
+                    <div class="process-number">
+                        03
+                    </div>
+
+                    <div class="process-icon">
+                        <i class="bi bi-bag-check"></i>
+                    </div>
+
+                    <h3>
+                        Get What You Need
+                    </h3>
+
+                    <p>
+                        Purchase the products you need and continue
+                        with your farming journey.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CTA
+    ====================================================== -->
+
+    <section class="services-cta">
+
+        <div class="services-cta-overlay"></div>
+
+        <div class="container">
+
+            <div class="services-cta-content">
+
+                <span>
+                    READY TO GROW BETTER?
+                </span>
+
+                <h2>
+                    Let's Grow Better Farms Together.
+                </h2>
+
+                <p>
+                    Explore our agricultural products or get in touch
+                    with Waingo Farm for more information.
+                </p>
+
+                <div class="services-cta-actions">
+
+                    <a
+                        href="{% url 'shop' %}"
+                        class="services-btn services-btn-primary"
+                    >
+                        SHOP PRODUCTS
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+
+                    <a
+                        href="{% url 'contact' %}"
+                        class="services-btn services-btn-outline"
+                    >
+                        CONTACT US
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
 </section>
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script src="{% static 'js/services.js' %}"></script>
 
 {% endblock %}
