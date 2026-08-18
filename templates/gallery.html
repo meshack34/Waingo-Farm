@@ -1,0 +1,872 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Gallery | Waingo Farm
+{% endblock %}
+
+{% block extra_css %}
+<link
+    rel="stylesheet"
+    href="{% static 'css/gallery.css' %}"
+>
+{% endblock %}
+
+
+{% block content %}
+
+<section class="gallery-page">
+
+    <!-- =====================================================
+         GALLERY HERO
+    ====================================================== -->
+
+    <div class="gallery-hero">
+
+        <div class="gallery-hero-overlay"></div>
+
+        <div class="container">
+
+            <div class="gallery-hero-content">
+
+                <span class="gallery-eyebrow">
+                    WAINGO FARM
+                </span>
+
+                <h1>
+                    Our Farm Gallery
+                </h1>
+
+                <p>
+                    Take a look at our farm, animals, crops,
+                    landscapes and the work that happens at
+                    Waingo Farm.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         GALLERY INTRO
+    ====================================================== -->
+
+    <div class="container">
+
+        <div class="gallery-intro">
+
+            <span>
+                LIFE AT WAINGO FARM
+            </span>
+
+            <h2>
+                From Our Farm to You
+            </h2>
+
+            <p>
+                Explore moments from Waingo Farm and see the
+                people, animals, crops and surroundings that
+                make our farm special.
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             FILTER BUTTONS
+        ================================================== -->
+
+        <div class="gallery-filters" aria-label="Gallery filters">
+
+            <button
+                type="button"
+                class="gallery-filter-btn active"
+                data-filter="all"
+            >
+                All
+            </button>
+
+            <button
+                type="button"
+                class="gallery-filter-btn"
+                data-filter="farm"
+            >
+                Farm
+            </button>
+
+            <button
+                type="button"
+                class="gallery-filter-btn"
+                data-filter="livestock"
+            >
+                Livestock
+            </button>
+
+            <button
+                type="button"
+                class="gallery-filter-btn"
+                data-filter="crops"
+            >
+                Crops
+            </button>
+
+            <button
+                type="button"
+                class="gallery-filter-btn"
+                data-filter="farm-life"
+            >
+                Farm Life
+            </button>
+
+            <button
+                type="button"
+                class="gallery-filter-btn"
+                data-filter="operations"
+            >
+                Operations
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             GALLERY GRID
+        ================================================== -->
+
+        <div class="gallery-grid">
+
+
+            <!-- =================================================
+                 WAINGO FARM
+            ================================================== -->
+
+            <div
+                class="gallery-item gallery-large visible"
+                data-category="farm"
+                data-category-label="Waingo Farm"
+                data-title="Our Farm"
+            >
+
+                <img
+                    src="{% static 'images/waingo.jpeg' %}"
+                    alt="Waingo Farm"
+                    loading="lazy"
+                >
+
+                <div class="gallery-overlay">
+
+                    <span>
+                        WAINGO FARM
+                    </span>
+
+                    <h3>
+                        Our Farm
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 FARMER
+            ================================================== -->
+
+            <div
+                class="gallery-item visible"
+                data-category="farm-life"
+                data-category-label="Farm Life"
+                data-title="Our Farmers"
+            >
+
+                <img
+                    src="{% static 'images/farmer.jpg' %}"
+                    alt="Farmer at Waingo Farm"
+                    loading="lazy"
+                >
+
+                <div class="gallery-overlay">
+
+                    <span>
+                        FARM LIFE
+                    </span>
+
+                    <h3>
+                        Our Farmers
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 COWS
+            ================================================== -->
+
+            <div
+                class="gallery-item visible"
+                data-category="livestock"
+                data-category-label="Livestock"
+                data-title="Our Cattle"
+            >
+
+                <img
+                    src="{% static 'images/cows.jpeg' %}"
+                    alt="Cows at Waingo Farm"
+                    loading="lazy"
+                >
+
+                <div class="gallery-overlay">
+
+                    <span>
+                        LIVESTOCK
+                    </span>
+
+                    <h3>
+                        Our Cattle
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 COW 2
+            ================================================== -->
+
+            <div
+                class="gallery-item visible"
+                data-category="livestock"
+                data-category-label="Livestock"
+                data-title="Farm Cattle"
+            >
+
+                <img
+                    src="{% static 'images/cow2.jpg' %}"
+                    alt="Cattle at Waingo Farm"
+                    loading="lazy"
+                >
+
+                <div class="gallery-overlay">
+
+                    <span>
+                        LIVESTOCK
+                    </span>
+
+                    <h3>
+                        Farm Cattle
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 COW 3
+            ================================================== -->
+
+            <div
+                class="gallery-item gallery-tall visible"
+                data-category="livestock"
+                data-category-label="Livestock"
+                data-title="Farm Life"
+            >
+
+                <img
+                    src="{% static 'images/cow3.jpg' %}"
+                    alt="Cow at Waingo Farm"
+                    loading="lazy"
+                >
+
+                <div class="gallery-overlay">
+
+                    <span>
+                        LIVESTOCK
+                    </span>
+
+                    <h3>
+                        Farm Life
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 CABBAGE
+            ================================================== -->
+
+            <div
+                class="gallery-item visible"
+                data-category="crops"
+                data-category-label="Crops"
+                data-title="Cabbage"
+            >
+
+                <img
+                    src="{% static 'images/cabbagi.jpg' %}"
+                    alt="Cabbage crop at Waingo Farm"
+                    loading="lazy"
+                >
+
+                <div class="gallery-overlay">
+
+                    <span>
+                        CROPS
+                    </span>
+
+                    <h3>
+                        Cabbage
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 CABBAGE COPY
+            ================================================== -->
+
+            <div
+                class="gallery-item visible"
+                data-category="crops"
+                data-category-label="Crops"
+                data-title="Fresh Produce"
+            >
+
+                <img
+                    src="{% static 'images/cabbage - Copy.jpeg' %}"
+                    alt="Cabbage farming at Waingo Farm"
+                    loading="lazy"
+                >
+
+                <div class="gallery-overlay">
+
+                    <span>
+                        CROPS
+                    </span>
+
+                    <h3>
+                        Fresh Produce
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 SUKUMA WIKI
+            ================================================== -->
+
+            <div
+                class="gallery-item visible"
+                data-category="crops"
+                data-category-label="Crops"
+                data-title="Sukuma Wiki"
+            >
+
+                <img
+                    src="{% static 'images/sukumaa.jpg' %}"
+                    alt="Sukuma wiki at Waingo Farm"
+                    loading="lazy"
+                >
+
+                <div class="gallery-overlay">
+
+                    <span>
+                        CROPS
+                    </span>
+
+                    <h3>
+                        Sukuma Wiki
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 MAIZE
+            ================================================== -->
+
+            <div
+                class="gallery-item gallery-large visible"
+                data-category="crops"
+                data-category-label="Crops"
+                data-title="Maize Farming"
+            >
+
+                <img
+                    src="{% static 'images/maizef.jpg' %}"
+                    alt="Maize farming at Waingo Farm"
+                    loading="lazy"
+                >
+
+                <div class="gallery-overlay">
+
+                    <span>
+                        CROPS
+                    </span>
+
+                    <h3>
+                        Maize Farming
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 RICE
+            ================================================== -->
+
+            <div
+                class="gallery-item visible"
+                data-category="crops"
+                data-category-label="Crops"
+                data-title="Rice Farming"
+            >
+
+                <img
+                    src="{% static 'images/rice.jpg' %}"
+                    alt="Rice farming at Waingo Farm"
+                    loading="lazy"
+                >
+
+                <div class="gallery-overlay">
+
+                    <span>
+                        CROPS
+                    </span>
+
+                    <h3>
+                        Rice Farming
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 POND
+            ================================================== -->
+
+            <div
+                class="gallery-item visible"
+                data-category="farm"
+                data-category-label="Farm"
+                data-title="Farm Water"
+            >
+
+                <img
+                    src="{% static 'images/pond.jpg' %}"
+                    alt="Farm pond at Waingo Farm"
+                    loading="lazy"
+                >
+
+                <div class="gallery-overlay">
+
+                    <span>
+                        FARM
+                    </span>
+
+                    <h3>
+                        Farm Water
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 TANK
+            ================================================== -->
+
+            <div
+                class="gallery-item visible"
+                data-category="farm"
+                data-category-label="Farm"
+                data-title="Farm Infrastructure"
+            >
+
+                <img
+                    src="{% static 'images/tanki.jpg' %}"
+                    alt="Water tank at Waingo Farm"
+                    loading="lazy"
+                >
+
+                <div class="gallery-overlay">
+
+                    <span>
+                        FARM
+                    </span>
+
+                    <h3>
+                        Farm Infrastructure
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 SPRING
+            ================================================== -->
+
+            <div
+                class="gallery-item visible"
+                data-category="farm"
+                data-category-label="Farm"
+                data-title="Natural Resources"
+            >
+
+                <img
+                    src="{% static 'images/springila.jpg' %}"
+                    alt="Water source at Waingo Farm"
+                    loading="lazy"
+                >
+
+                <div class="gallery-overlay">
+
+                    <span>
+                        FARM
+                    </span>
+
+                    <h3>
+                        Natural Resources
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 BATA
+            ================================================== -->
+
+            <div
+                class="gallery-item visible"
+                data-category="farm-life"
+                data-category-label="Farm Life"
+                data-title="Farm Activities"
+            >
+
+                <img
+                    src="{% static 'images/bata.jpeg' %}"
+                    alt="Farm activity at Waingo Farm"
+                    loading="lazy"
+                >
+
+                <div class="gallery-overlay">
+
+                    <span>
+                        FARM LIFE
+                    </span>
+
+                    <h3>
+                        Farm Activities
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 BATA HOME
+            ================================================== -->
+
+            <div
+                class="gallery-item visible"
+                data-category="farm-life"
+                data-category-label="Farm Life"
+                data-title="Our Surroundings"
+            >
+
+                <img
+                    src="{% static 'images/batahome.jpg' %}"
+                    alt="Waingo Farm surroundings"
+                    loading="lazy"
+                >
+
+                <div class="gallery-overlay">
+
+                    <span>
+                        FARM LIFE
+                    </span>
+
+                    <h3>
+                        Our Surroundings
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 FARM OPERATIONS
+            ================================================== -->
+
+            <div
+                class="gallery-item gallery-large visible"
+                data-category="operations"
+                data-category-label="Farm Operations"
+                data-title="Working at the Farm"
+            >
+
+                <img
+                    src="{% static 'images/lading.jpeg' %}"
+                    alt="Farm operations at Waingo Farm"
+                    loading="lazy"
+                >
+
+                <div class="gallery-overlay">
+
+                    <span>
+                        FARM OPERATIONS
+                    </span>
+
+                    <h3>
+                        Working at the Farm
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 FARM PRODUCE
+            ================================================== -->
+
+            <div
+                class="gallery-item visible"
+                data-category="farm"
+                data-category-label="Farm Produce"
+                data-title="Fresh From the Farm"
+            >
+
+                <img
+                    src="{% static 'images/boostani.jpg' %}"
+                    alt="Farm produce at Waingo Farm"
+                    loading="lazy"
+                >
+
+                <div class="gallery-overlay">
+
+                    <span>
+                        FARM PRODUCE
+                    </span>
+
+                    <h3>
+                        Fresh From the Farm
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 DOGS
+            ================================================== -->
+
+            <div
+                class="gallery-item visible"
+                data-category="farm-life"
+                data-category-label="Farm Life"
+                data-title="Farm Companions"
+            >
+
+                <img
+                    src="{% static 'images/dogs.jpg' %}"
+                    alt="Farm dogs at Waingo Farm"
+                    loading="lazy"
+                >
+
+                <div class="gallery-overlay">
+
+                    <span>
+                        FARM LIFE
+                    </span>
+
+                    <h3>
+                        Farm Companions
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 DOGS 2
+            ================================================== -->
+
+            <div
+                class="gallery-item"
+                data-category="farm-life"
+                data-category-label="Farm Life"
+                data-title="Life Around the Farm"
+            >
+
+                <img
+                    src="{% static 'images/dogs2.jpg' %}"
+                    alt="Farm dogs"
+                    loading="lazy"
+                >
+
+                <div class="gallery-overlay">
+
+                    <span>
+                        FARM LIFE
+                    </span>
+
+                    <h3>
+                        Life Around the Farm
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         IMAGE LIGHTBOX
+    ====================================================== -->
+
+    <div
+        class="gallery-lightbox"
+        id="galleryLightbox"
+        aria-hidden="true"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Gallery image viewer"
+    >
+
+        <div class="lightbox-content">
+
+            <button
+                type="button"
+                class="lightbox-close"
+                id="lightboxClose"
+                aria-label="Close image viewer"
+            >
+                <i class="bi bi-x-lg"></i>
+            </button>
+
+
+            <button
+                type="button"
+                class="lightbox-navigation lightbox-previous"
+                id="lightboxPrevious"
+                aria-label="Previous image"
+            >
+                <i class="bi bi-chevron-left"></i>
+            </button>
+
+
+            <div class="lightbox-image-wrapper">
+
+                <img
+                    id="lightboxImage"
+                    src=""
+                    alt=""
+                >
+
+                <div class="lightbox-caption">
+
+                    <span id="lightboxCategory"></span>
+
+                    <h3 id="lightboxTitle"></h3>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="lightbox-navigation lightbox-next"
+                id="lightboxNext"
+                aria-label="Next image"
+            >
+                <i class="bi bi-chevron-right"></i>
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         BOTTOM CTA
+    ====================================================== -->
+
+    <section class="gallery-cta">
+
+        <div class="container">
+
+            <div class="gallery-cta-inner">
+
+                <div>
+
+                    <span>
+                        HAVE A QUESTION?
+                    </span>
+
+                    <h2>
+                        Want to know more about Waingo Farm?
+                    </h2>
+
+                    <p>
+                        Get in touch with our team for more
+                        information about our farm and products.
+                    </p>
+
+                </div>
+
+                <a
+                    href="{% url 'contact' %}"
+                    class="gallery-cta-button"
+                >
+                    CONTACT US
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</section>
+
+{% endblock %}
+
+
+{% block extra_js %}
+<script src="{% static 'js/gallery.js' %}"></script>
+{% endblock %}

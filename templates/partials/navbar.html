@@ -7,9 +7,10 @@
 <div class="top-bar">
   <div class="container-fluid px-lg-4">
     <div class="top-bar-inner">
-      <!-- Contact information -->
+
       <div class="top-contact">
-        <a href="tel:+254712001141">
+
+        <a href="tel:+254704659267">
           <i class="bi bi-telephone-fill"></i>
           <span>+254 704659267</span>
         </a>
@@ -18,10 +19,12 @@
           <i class="bi bi-envelope-fill"></i>
           <span>info@waingofarm.co.ke</span>
         </a>
+
       </div>
 
-      <!-- Social / quick links -->
+
       <div class="top-right">
+
         <a href="#" class="social-link" aria-label="Facebook">
           <i class="bi bi-facebook"></i>
         </a>
@@ -30,21 +33,35 @@
           <i class="bi bi-instagram"></i>
         </a>
 
-        <a href="#" class="top-link"> CONTACT US </a>
+                    <a
+                href="{% url 'contact' %}"
+                class="top-link"
+            >
+                CONTACT US
+            </a>
 
-        <a href="#" class="top-link"> FAQS </a>
+        <a href="#" class="top-link">
+          FAQS
+        </a>
+
       </div>
+
     </div>
   </div>
 </div>
+
 
 <!-- =========================================================
      MAIN HEADER
 ========================================================= -->
 
 <header class="main-header">
+
   <div class="container-fluid px-lg-4">
+
     <div class="main-header-inner">
+
+
       <!-- MOBILE MENU BUTTON -->
 
       <button
@@ -57,61 +74,96 @@
         <i class="bi bi-list"></i>
       </button>
 
+
       <!-- =================================================
-                 LOGO
-            ================================================== -->
+           LOGO
+      ================================================== -->
 
       <div class="site-logo">
+
         <a href="{% url 'home' %}">
-          <img src="{% static 'images/logo.jpg' %}" alt="Waingo Farm Logo" />
+          <img
+            src="{% static 'images/logo.jpg' %}"
+            alt="Waingo Farm Logo"
+          />
         </a>
+
       </div>
 
+
       <!-- =================================================
-                 SEARCH BAR
-            ================================================== -->
+           SEARCH BAR
+      ================================================== -->
 
       <div class="search-container">
-        <form action="#" method="GET" class="product-search">
+
+        <form
+          action="{% url 'shop' %}"
+          method="GET"
+          class="product-search"
+        >
+
           <div class="search-input">
+
             <input
               type="search"
               name="q"
+              value="{{ search_query|default:'' }}"
               placeholder="Search for products"
               aria-label="Search for products"
             />
+
           </div>
+
 
           <div class="category-select">
-            <select name="category" aria-label="Select category">
-              <option value="">SELECT CATEGORY</option>
 
-              <option value="animal-health">Animal Health</option>
+            <select
+              name="category"
+              aria-label="Select category"
+            >
 
-              <option value="animal-feeds">Animal Feeds</option>
+              <option value="">
+                SELECT CATEGORY
+              </option>
 
-              <option value="seeds">Seeds</option>
+              {% for category in categories %}
 
-              <option value="fertilizers">Fertilizers</option>
+                <option
+                  value="{{ category.slug }}"
+                  {% if selected_category == category.slug %}selected{% endif %}
+                >
+                  {{ category.name }}
+                </option>
 
-              <option value="farm-tools">Farm Tools</option>
+              {% endfor %}
 
-              <option value="crop-protection">Crop Protection</option>
             </select>
+
           </div>
 
-          <button type="submit" class="search-button" aria-label="Search">
+
+          <button
+            type="submit"
+            class="search-button"
+            aria-label="Search"
+          >
             <i class="bi bi-search"></i>
           </button>
+
         </form>
+
       </div>
 
+
       <!-- =================================================
-                 HEADER ACTIONS
-            ================================================== -->
+           HEADER ACTIONS
+      ================================================== -->
 
       <div class="header-actions">
-        <!-- Account -->
+
+
+        <!-- ACCOUNT -->
 
         <a
           href="#"
@@ -121,7 +173,8 @@
           <i class="bi bi-person"></i>
         </a>
 
-        <!-- Wishlist -->
+
+        <!-- WISHLIST -->
 
         <a
           href="#"
@@ -130,10 +183,14 @@
         >
           <i class="bi bi-heart"></i>
 
-          <span class="action-counter"> 0 </span>
+          <span class="action-counter">
+            0
+          </span>
+
         </a>
 
-        <!-- Compare -->
+
+        <!-- COMPARE -->
 
         <a
           href="#"
@@ -142,118 +199,223 @@
         >
           <i class="bi bi-arrow-left-right"></i>
 
-          <span class="action-counter"> 0 </span>
+          <span class="action-counter">
+            0
+          </span>
+
         </a>
 
-        <!-- Cart -->
+
+        <!-- CART -->
 
         <a
           href="{% url 'cart' %}"
           class="cart-button"
           aria-label="Shopping cart"
         >
+
           <span class="cart-icon">
             <i class="bi bi-bag"></i>
           </span>
 
-          <span class="cart-total"> KSH {{ cart_total|floatformat:0 }} </span>
+          <span class="cart-total">
+            KSH {{ cart_total|floatformat:0 }}
+          </span>
 
-          <span class="cart-counter"> {{ cart_count }} </span>
+          <span class="cart-counter">
+            {{ cart_count }}
+          </span>
+
         </a>
+
       </div>
+
     </div>
+
   </div>
+
 </header>
+
 
 <!-- =========================================================
      NAVIGATION
 ========================================================= -->
 
 <nav class="main-navigation">
+
   <div class="container-fluid px-lg-4">
+
     <div class="navigation-inner">
+
+
       <!-- PRODUCT CATEGORIES -->
 
-      <button class="categories-button" type="button" id="categoriesButton">
+      <button
+        class="categories-button"
+        type="button"
+        id="categoriesButton"
+      >
+
         <span class="categories-left">
+
           <i class="bi bi-list"></i>
 
-          <span> PRODUCT CATEGORIES </span>
+          <span>
+            PRODUCT CATEGORIES
+          </span>
+
         </span>
 
         <i class="bi bi-chevron-down categories-arrow"></i>
+
       </button>
+
 
       <!-- NAVIGATION MENU -->
 
-      <div class="nav-menu" id="navMenu">
+      <div
+        class="nav-menu"
+        id="navMenu"
+      >
+
+
+        <!-- HOME -->
+
         <a
           href="{% url 'home' %}"
-          class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}"
+          class="nav-link{% if request.resolver_match.url_name == 'home' %} active{% endif %}"
         >
           HOME
         </a>
 
+
+        <!-- SHOP -->
+
         <a
           href="{% url 'shop' %}"
-          class="nav-link {% if request.resolver_match.url_name == 'shop' or request.resolver_match.url_name == 'product_detail' %}active{% endif %}"
+          class="nav-link{% if request.resolver_match.url_name == 'shop' or request.resolver_match.url_name == 'product_detail' %} active{% endif %}"
         >
           SHOP
         </a>
 
+
+        <!-- OUR SERVICES -->
+
         <a
           href="{% url 'services' %}"
-          class="nav-link {% if request.resolver_match.url_name == 'services' %}active{% endif %}"
+          class="nav-link{% if request.resolver_match.url_name == 'services' %} active{% endif %}"
         >
           OUR SERVICES
         </a>
 
-        <a href="#" class="nav-link"> ABOUT US </a>
 
-        <a href="#" class="nav-link"> GALLERY </a>
+        <!-- ABOUT US -->
 
-        <a href="#" class="nav-link"> CONTACT US </a>
+                <a
+            href="{% url 'about' %}"
+            class="nav-link{% if request.resolver_match.url_name == 'about' %} active{% endif %}"
+          >
+            ABOUT US
+          </a>
+
+
+        <!-- GALLERY -->
+
+        <a
+          href="{% url 'gallery' %}"
+          class="nav-link{% if request.resolver_match.url_name == 'gallery' %} active{% endif %}"
+        >
+          GALLERY
+        </a>
+
+
+        <!-- CONTACT US -->
+
+            <a
+          href="{% url 'contact' %}"
+          class="nav-link{% if request.resolver_match.url_name == 'contact' %} active{% endif %}"
+      >
+          CONTACT US
+      </a>
+
       </div>
+
     </div>
+
   </div>
+
 </nav>
+
 
 <!-- =========================================================
      CATEGORY MOBILE DROPDOWN
 ========================================================= -->
 
-<div class="category-dropdown" id="categoryDropdown">
+<div
+  class="category-dropdown"
+  id="categoryDropdown"
+>
+
   <div class="container">
+
     <div class="category-grid">
-      <a href="#">
-        <i class="bi bi-heart-pulse"></i>
-        Animal Health
-      </a>
 
-      <a href="#">
-        <i class="bi bi-basket"></i>
-        Animal Feeds
-      </a>
 
-      <a href="#">
-        <i class="bi bi-flower1"></i>
-        Seeds
-      </a>
+      {% for category in categories %}
 
-      <a href="#">
-        <i class="bi bi-droplet"></i>
-        Fertilizers
-      </a>
+        <a
+          href="{% url 'shop' %}?category={{ category.slug }}"
+        >
 
-      <a href="#">
-        <i class="bi bi-shield-check"></i>
-        Crop Protection
-      </a>
+          {% if category.name|lower == "animal health" %}
 
-      <a href="#">
-        <i class="bi bi-tools"></i>
-        Farm Tools
-      </a>
+            <i class="bi bi-heart-pulse"></i>
+
+          {% elif category.name|lower == "animal feeds" %}
+
+            <i class="bi bi-basket"></i>
+
+          {% elif category.name|lower == "seeds" %}
+
+            <i class="bi bi-flower1"></i>
+
+          {% elif category.name|lower == "fertilizers" %}
+
+            <i class="bi bi-droplet"></i>
+
+          {% elif category.name|lower == "crop protection" %}
+
+            <i class="bi bi-shield-check"></i>
+
+          {% elif category.name|lower == "farm tools" %}
+
+            <i class="bi bi-tools"></i>
+
+          {% else %}
+
+            <i class="bi bi-grid"></i>
+
+          {% endif %}
+
+          {{ category.name }}
+
+        </a>
+
+      {% empty %}
+
+        <a href="{% url 'shop' %}">
+
+          <i class="bi bi-grid"></i>
+
+          View Products
+
+        </a>
+
+      {% endfor %}
+
+
     </div>
+
   </div>
+
 </div>

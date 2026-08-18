@@ -9,16 +9,7 @@ import json
 from django.http import JsonResponse
 from django.utils import timezone
 from django.db.models import Sum, Count
-
-
-
-from .models import (
-    Category,
-    Product,
-    Order,
-    OrderItem,
-)
-
+from django.db.models import ( Sum, F, Q,)
 from .forms import CheckoutForm
 
 
@@ -29,18 +20,73 @@ def home(request):
         "home.html"
     )
 
+def contact(request):
+    return render(
+        request,
+        "contact.html"
+    )
+def about(request):
+    return render(
+        request,
+        "about.html"
+    )
+def gallery(request):
+    return render(
+        request,
+        "gallery.html"
+    )
 
 def shop(request):
 
-    products = Product.objects.filter(
-        is_available=True
-    ).select_related("category")
+    # ============================================================
+    # ALL AVAILABLE PRODUCTS
+    # ============================================================
 
-    categories = Category.objects.all()
+    products = (
+        Product.objects
+        .filter(is_available=True)
+        .select_related("category")
+    )
+
+    # ============================================================
+    # SEARCH
+    # ============================================================
+
+    search_query = request.GET.get(
+        "q",
+        ""
+    ).strip()
+
+    if search_query:
+
+        products = products.filter(
+            Q(name__icontains=search_query)
+            | Q(description__icontains=search_query)
+        )
+
+    # ============================================================
+    # CATEGORY FILTER
+    # ============================================================
+
+    category_slug = request.GET.get(
+        "category",
+        ""
+    ).strip()
+
+    if category_slug:
+
+        products = products.filter(
+            category__slug=category_slug
+        )
+
+    # ============================================================
+    # CONTEXT
+    # ============================================================
 
     context = {
         "products": products,
-        "categories": categories,
+        "search_query": search_query,
+        "selected_category": category_slug,
     }
 
     return render(
@@ -48,7 +94,6 @@ def shop(request):
         "shop.html",
         context
     )
-
 def services(request):
 
     return render(

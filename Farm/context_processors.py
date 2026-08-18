@@ -1,7 +1,11 @@
 from decimal import Decimal
 
-from .models import Product
+from .models import Product, Category
 
+
+# ============================================================
+# CART CONTEXT
+# ============================================================
 
 def cart_context(request):
 
@@ -41,5 +45,20 @@ def cart_context(request):
         "cart_count": cart_count,
 
         "cart_total": cart_total,
+
+    }
+
+
+# ============================================================
+# CATEGORY CONTEXT
+# ============================================================
+
+def categories_processor(request):
+
+    categories = Category.objects.all()
+
+    return {
+
+        "categories": categories,
 
     }

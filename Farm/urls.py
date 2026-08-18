@@ -18,6 +18,9 @@ urlpatterns = [
         name="shop"
     ),  
     path("services/", views.services, name="services"),
+    path("contact/", views.contact, name="contact"),
+    path("about/", views.about, name="about"),
+    path("gallery/", views.gallery, name="gallery"),
 
     # Product details
     path(
