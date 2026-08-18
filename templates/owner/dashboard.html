@@ -111,7 +111,7 @@ Dashboard {% endblock %} {% block extra_css %}
       <div class="widget-header">
         <h3>Recent Orders</h3>
 
-        <a href="{% url 'admin:Farm_order_changelist' %}"> View All </a>
+        <a href="{% url 'owner:orders' %}"> View All </a>
       </div>
 
       {% if recent_orders %}
