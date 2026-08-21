@@ -1,160 +1,235 @@
-{% extends "base.html" %} {% load static %} {% block title %} Waingo Farm |
-Quality Agricultural Supplies {% endblock %} {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/home.css' %}" />
-<link rel="stylesheet" href="{% static 'css/shop.css' %}" />
-<link rel="stylesheet" href="{% static 'css/cart.css' %}" />
-<link rel="stylesheet" href="{% static 'css/payment.css' %}" />
-<link rel="stylesheet" href="{% static 'css/style.css' %}" />
-{% endblock %} {% block content %}
+```django
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Waingo Farm | Quality Agricultural Supplies
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/home.css' %}"
+>
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/shop.css' %}"
+>
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/cart.css' %}"
+>
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/payment.css' %}"
+>
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/style.css' %}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
 
 <!-- =========================================================
      HERO SECTION
 ========================================================= -->
 
 <section class="hero-section">
-  <div class="container">
-    <div class="row align-items-center min-vh-75">
-      <!-- HERO TEXT -->
 
-      <div class="col-lg-6">
-        <div class="hero-content">
-          <span class="hero-label"> WELCOME TO WAINGO FARM </span>
+    <div class="container">
 
-          <h1>
-            Growing Better
-            <span>Farms.</span>
-            <br />
-            Growing Better
-            <span>Lives.</span>
-          </h1>
+        <div class="row align-items-center min-vh-75">
 
-          <p>
-            Quality agricultural products and reliable farming solutions for
-            farmers across Kenya.
-          </p>
+            <!-- HERO TEXT -->
 
-          <div class="hero-buttons">
-            <a href="#" class="hero-btn-primary">
-              SHOP PRODUCTS
+            <div class="col-lg-6">
 
-              <i class="bi bi-arrow-right"></i>
-            </a>
-            <a href="{% url 'services' %}" class="hero-btn-secondary">
-              OUR SERVICES
-            </a>
-          </div>
+                <div class="hero-content">
+
+                    <span class="hero-label">
+                        WELCOME TO WAINGO FARM
+                    </span>
+
+
+                    <h1>
+                        Growing Better
+                        <span>Farms.</span>
+                        <br>
+                        Growing Better
+                        <span>Lives.</span>
+                    </h1>
+
+
+                    <p>
+                        Quality agricultural products and reliable farming
+                        solutions for farmers across Kenya.
+                    </p>
+
+
+                    <div class="hero-buttons">
+
+                        <a
+                            href="{% url 'shop' %}"
+                            class="hero-btn-primary"
+                        >
+                            SHOP PRODUCTS
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+
+                        <a
+                            href="{% url 'services' %}"
+                            class="hero-btn-secondary"
+                        >
+                            OUR SERVICES
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- HERO IMAGE -->
+
+            <div class="col-lg-6">
+
+                <div class="hero-image-wrapper">
+
+                    <div class="hero-circle">
+
+                        <img
+                            src="{% static 'images/lading.jpeg' %}"
+                            alt="Modern farming"
+                            class="hero-image"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
-      </div>
 
-      <!-- HERO IMAGE -->
-
-      <div class="col-lg-6">
-        <div class="hero-image-wrapper">
-          <div class="hero-circle">
-            <img
-              src="{% static 'images/lading.jpeg' %}"
-              alt="Modern farming"
-              class="hero-image"
-            />
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
+
 </section>
+
+
 
 <!-- =========================================================
      SHOP BY CATEGORY
 ========================================================= -->
-
 <section class="categories-section">
-  <div class="container">
-    <div class="section-heading text-center">
-      <span> WHAT WE OFFER </span>
 
-      <h2>Shop By Category</h2>
+    <div class="container">
 
-      <p>Everything you need to keep your farm productive and healthy.</p>
+        <div class="section-heading text-center">
+
+            <span>
+                WHAT WE OFFER
+            </span>
+
+            <h2>
+                Shop By Category
+            </h2>
+
+            <p>
+                Everything you need to keep your farm productive and healthy.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            {% for category in categories %}
+
+                <div class="col-6 col-lg-3">
+
+                    <a
+                        href="{% url 'shop' %}"
+                        class="category-card"
+                    >
+
+                        <div class="category-icon">
+
+                            {% if category.image %}
+
+                                <img
+                                    src="{{ category.image.url }}"
+                                    alt="{{ category.name }}"
+                                >
+
+                            {% else %}
+
+                                <i class="bi bi-grid"></i>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <h3>
+                            {{ category.name }}
+                        </h3>
+
+
+                        <p>
+                            {% if category.description %}
+                                {{ category.description|truncatewords:8 }}
+                            {% else %}
+                                Quality agricultural products
+                            {% endif %}
+                        </p>
+
+
+                        <span class="category-link">
+
+                            Explore
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </span>
+
+                    </a>
+
+                </div>
+
+            {% empty %}
+
+                <div class="col-12">
+
+                    <div class="text-center">
+
+                        <p>
+                            No product categories available yet.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
     </div>
 
-    <div class="row g-4">
-      <!-- CATEGORY 1 -->
-
-      <div class="col-6 col-lg-3">
-        <a href="#" class="category-card">
-          <div class="category-icon">
-            <i class="bi bi-heart-pulse"></i>
-          </div>
-
-          <h3>Animal Health</h3>
-
-          <p>Quality veterinary products</p>
-
-          <span class="category-link">
-            Explore
-            <i class="bi bi-arrow-right"></i>
-          </span>
-        </a>
-      </div>
-
-      <!-- CATEGORY 2 -->
-
-      <div class="col-6 col-lg-3">
-        <a href="#" class="category-card">
-          <div class="category-icon">
-            <i class="bi bi-basket"></i>
-          </div>
-
-          <h3>Animal Feeds</h3>
-
-          <p>Nutritious feeds for livestock</p>
-
-          <span class="category-link">
-            Explore
-            <i class="bi bi-arrow-right"></i>
-          </span>
-        </a>
-      </div>
-
-      <!-- CATEGORY 3 -->
-
-      <div class="col-6 col-lg-3">
-        <a href="#" class="category-card">
-          <div class="category-icon">
-            <i class="bi bi-flower1"></i>
-          </div>
-
-          <h3>Seeds</h3>
-
-          <p>Quality seeds for better yields</p>
-
-          <span class="category-link">
-            Explore
-            <i class="bi bi-arrow-right"></i>
-          </span>
-        </a>
-      </div>
-
-      <!-- CATEGORY 4 -->
-
-      <div class="col-6 col-lg-3">
-        <a href="#" class="category-card">
-          <div class="category-icon">
-            <i class="bi bi-tools"></i>
-          </div>
-
-          <h3>Farm Tools</h3>
-
-          <p>Tools for modern farming</p>
-
-          <span class="category-link">
-            Explore
-            <i class="bi bi-arrow-right"></i>
-          </span>
-        </a>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- =========================================================
@@ -162,228 +237,519 @@ Quality Agricultural Supplies {% endblock %} {% block extra_css %}
 ========================================================= -->
 
 <section class="why-section">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-6">
-        <div class="why-image">
-          <img
-            src="{% static 'images/waingo.jpeg' %}"
-            alt="Farmer working in a field"
-          />
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-6">
+
+                <div class="why-image">
+
+                    <img
+                        src="{% static 'images/waingo.jpeg' %}"
+                        alt="Farmer working in a field"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-6">
+
+                <div class="why-content">
+
+                    <span class="section-label">
+                        WHY CHOOSE US
+                    </span>
+
+
+                    <h2>
+                        Your Trusted Partner In Agriculture
+                    </h2>
+
+
+                    <p>
+                        At Waingo Farm, we are committed to providing farmers
+                        with quality agricultural products and practical
+                        farming solutions.
+                    </p>
+
+
+                    <div class="feature-list">
+
+
+                        <div class="feature-item">
+
+                            <div class="feature-icon">
+
+                                <i class="bi bi-check-lg"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <h4>
+                                    Quality Products
+                                </h4>
+
+                                <p>
+                                    Carefully selected products you can trust.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="feature-item">
+
+                            <div class="feature-icon">
+
+                                <i class="bi bi-headset"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <h4>
+                                    Expert Support
+                                </h4>
+
+                                <p>
+                                    Practical guidance for your farming needs.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="feature-item">
+
+                            <div class="feature-icon">
+
+                                <i class="bi bi-truck"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <h4>
+                                    Reliable Delivery
+                                </h4>
+
+                                <p>
+                                    Get your farm supplies conveniently.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
-      </div>
 
-      <div class="col-lg-6">
-        <div class="why-content">
-          <span class="section-label"> WHY CHOOSE US </span>
-
-          <h2>Your Trusted Partner In Agriculture</h2>
-
-          <p>
-            At Waingo Farm, we are committed to providing farmers with quality
-            agricultural products and practical farming solutions.
-          </p>
-
-          <div class="feature-list">
-            <div class="feature-item">
-              <div class="feature-icon">
-                <i class="bi bi-check-lg"></i>
-              </div>
-
-              <div>
-                <h4>Quality Products</h4>
-
-                <p>Carefully selected products you can trust.</p>
-              </div>
-            </div>
-
-            <div class="feature-item">
-              <div class="feature-icon">
-                <i class="bi bi-headset"></i>
-              </div>
-
-              <div>
-                <h4>Expert Support</h4>
-
-                <p>Practical guidance for your farming needs.</p>
-              </div>
-            </div>
-
-            <div class="feature-item">
-              <div class="feature-icon">
-                <i class="bi bi-truck"></i>
-              </div>
-
-              <div>
-                <h4>Reliable Delivery</h4>
-
-                <p>Get your farm supplies conveniently.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
+
 </section>
+
+
 
 <!-- =========================================================
      SERVICES
 ========================================================= -->
 
 <section class="services-section">
-  <div class="container">
-    <div class="section-heading text-center">
-      <span> OUR SERVICES </span>
 
-      <h2>Complete Farming Solutions</h2>
+    <div class="container">
+
+        <div class="section-heading text-center">
+
+            <span>
+                OUR SERVICES
+            </span>
+
+            <h2>
+                Complete Farming Solutions
+            </h2>
+
+        </div>
+
+
+        <div class="row g-4">
+
+
+            <div class="col-md-4">
+
+                <div class="service-card">
+
+                    <i class="bi bi-shop"></i>
+
+                    <h3>
+                        Agrovet Supplies
+                    </h3>
+
+                    <p>
+                        Quality agricultural inputs for farmers and
+                        agribusinesses.
+                    </p>
+
+                    <a href="{% url 'shop' %}">
+
+                        Learn More
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-md-4">
+
+                <div class="service-card">
+
+                    <i class="bi bi-heart-pulse"></i>
+
+                    <h3>
+                        Animal Health
+                    </h3>
+
+                    <p>
+                        Products and solutions to support healthy and
+                        productive livestock.
+                    </p>
+
+                    <a href="{% url 'shop' %}">
+
+                        Learn More
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-md-4">
+
+                <div class="service-card">
+
+                    <i class="bi bi-flower1"></i>
+
+                    <h3>
+                        Farm Advisory
+                    </h3>
+
+                    <p>
+                        Practical support to help farmers improve
+                        productivity.
+                    </p>
+
+                    <a href="{% url 'services' %}">
+
+                        Learn More
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
     </div>
 
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="service-card">
-          <i class="bi bi-shop"></i>
-
-          <h3>Agrovet Supplies</h3>
-
-          <p>Quality agricultural inputs for farmers and agribusinesses.</p>
-
-          <a href="#">
-            Learn More
-            <i class="bi bi-arrow-right"></i>
-          </a>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="service-card">
-          <i class="bi bi-heart-pulse"></i>
-
-          <h3>Animal Health</h3>
-
-          <p>
-            Products and solutions to support healthy and productive livestock.
-          </p>
-
-          <a href="#">
-            Learn More
-            <i class="bi bi-arrow-right"></i>
-          </a>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="service-card">
-          <i class="bi bi-flower1"></i>
-
-          <h3>Farm Advisory</h3>
-
-          <p>Practical support to help farmers improve productivity.</p>
-
-          <a href="#">
-            Learn More
-            <i class="bi bi-arrow-right"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
 </section>
+
+
 
 <!-- =========================================================
      LOCATION
 ========================================================= -->
 
 <section class="location-section">
-  <div class="container">
-    <div class="section-heading text-center">
-      <span>VISIT OUR STORE</span>
 
-      <h2>Find Waingo Agrovet</h2>
+    <div class="container">
 
-      <p>
-        Visit our agrovet for quality agricultural supplies, veterinary products
-        and expert farming advice.
-      </p>
+        <div class="section-heading text-center">
+
+            <span>
+                VISIT OUR STORE
+            </span>
+
+            <h2>
+                Find Waingo Agrovet
+            </h2>
+
+            <p>
+                Visit our agrovet for quality agricultural supplies,
+                veterinary products and expert farming advice.
+            </p>
+
+        </div>
+
     </div>
-  </div>
 
-  <div class="map-container">
-    <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6476.6333775454705!2d36.95483497948815!3d-1.4249060382614471!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f7501f54d1dfd%3A0xbf33396924a33445!2sWAINGO%20AGROVET!5e0!3m2!1sen!2ske!4v1786012798732!5m2!1sen!2ske"
-      width="600"
-      height="450"
-      style="border: 0"
-      allowfullscreen=""
-      loading="lazy"
-      referrerpolicy="strict-origin-when-cross-origin"
-    ></iframe>
-  </div>
 
-  <div class="container">
-    <div class="location-details">
-      <div class="detail">
-        <i class="bi bi-geo-alt-fill"></i>
+    <div class="map-container">
 
-        <div>
-          <h5>Location</h5>
-          <p>Sabaki, Machakos County</p>
-        </div>
-      </div>
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6476.6333775454705!2d36.95483497948815!3d-1.4249060382614471!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f7501f54d1dfd%3A0xbf33396924a33445!2sWAINGO%20AGROVET!5e0!3m2!1sen!2ske!4v1786012798732!5m2!1sen!2ske"
+            width="600"
+            height="450"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
 
-      <div class="detail">
-        <i class="bi bi-telephone-fill"></i>
-
-        <div>
-          <h5>Phone</h5>
-          <p>0704 659 267</p>
-        </div>
-      </div>
-
-      <div class="detail">
-        <i class="bi bi-clock-fill"></i>
-
-        <div>
-          <h5>Business Hours</h5>
-          <p>Mon - Sat | 8:00 AM - 6:00 PM</p>
-        </div>
-      </div>
-
-      <div class="detail">
-        <i class="bi bi-envelope-fill"></i>
-
-        <div>
-          <h5>Email</h5>
-          <p>info@waingofarm.co.ke</p>
-        </div>
-      </div>
     </div>
-  </div>
+
+
+    <div class="container">
+
+        <div class="location-details">
+
+
+            <div class="detail">
+
+                <i class="bi bi-geo-alt-fill"></i>
+
+                <div>
+
+                    <h5>
+                        Location
+                    </h5>
+
+                    <p>
+                        Sabaki, Machakos County
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="detail">
+
+                <i class="bi bi-telephone-fill"></i>
+
+                <div>
+
+                    <h5>
+                        Phone
+                    </h5>
+
+                    <p>
+                        0704 659 267
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="detail">
+
+                <i class="bi bi-clock-fill"></i>
+
+                <div>
+
+                    <h5>
+                        Business Hours
+                    </h5>
+
+                    <p>
+                        Mon - Sat | 8:00 AM - 6:00 PM
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="detail">
+
+                <i class="bi bi-envelope-fill"></i>
+
+                <div>
+
+                    <h5>
+                        Email
+                    </h5>
+
+                    <p>
+                        info@waingofarm.co.ke
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
 </section>
+
+
+
+<!-- =========================================================
+     FEATURED PRODUCTS
+========================================================= -->
+
+{% if featured_products %}
+
+<section class="categories-section">
+
+    <div class="container">
+
+        <div class="section-heading text-center">
+
+            <span>
+                FEATURED PRODUCTS
+            </span>
+
+            <h2>
+                Popular Farm Products
+            </h2>
+
+            <p>
+                Quality products selected for your farming needs.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            {% for product in featured_products %}
+
+                <div class="col-6 col-lg-3">
+
+                    <a
+                        href="{{ product.get_absolute_url }}"
+                        class="category-card"
+                    >
+
+                        <div class="category-icon">
+
+                            {% if product.image %}
+
+                                <img
+                                    src="{{ product.image.url }}"
+                                    alt="{{ product.name }}"
+                                >
+
+                            {% else %}
+
+                                <i class="bi bi-box-seam"></i>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <h3>
+                            {{ product.name }}
+                        </h3>
+
+
+                        <p>
+                            {{ product.description|truncatewords:8 }}
+                        </p>
+
+
+                        <span class="category-link">
+
+                            KSh {{ product.price }}
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </span>
+
+                    </a>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endif %}
+
+
 
 <!-- =========================================================
      CTA
 ========================================================= -->
 
 <section class="cta-section">
-  <div class="container">
-    <div class="cta-content text-center">
-      <span> NEED HELP WITH YOUR FARM? </span>
 
-      <h2>Let's Grow Together</h2>
+    <div class="container">
 
-      <p>
-        Talk to our team today and find the right products for your farming
-        needs.
-      </p>
+        <div class="cta-content text-center">
 
-      <a href="#" class="cta-button">
-        CONTACT US
+            <span>
+                NEED HELP WITH YOUR FARM?
+            </span>
 
-        <i class="bi bi-arrow-right"></i>
-      </a>
+
+            <h2>
+                Let's Grow Together
+            </h2>
+
+
+            <p>
+                Talk to our team today and find the right products for
+                your farming needs.
+            </p>
+
+
+           
+
+            <a href="{% url 'contact' %}" class="cta-button">
+               CONTACT US
+               <i class="bi bi-arrow-right"></i>
+            </a>
+
+        </div>
+
     </div>
-  </div>
+
 </section>
 
+
 {% endblock %}
+```

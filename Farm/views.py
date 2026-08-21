@@ -11,14 +11,31 @@ from django.utils import timezone
 from django.db.models import Sum, Count
 from django.db.models import ( Sum, F, Q,)
 from .forms import CheckoutForm
+from django.shortcuts import render
+from .models import Category, Product
 
 
 def home(request):
 
+    categories = Category.objects.all()
+
+    featured_products = Product.objects.filter(
+        is_available=True,
+        is_featured=True
+    ).select_related(
+        "category"
+    )[:8]
+
     return render(
         request,
-        "home.html"
+        "home.html",
+        {
+            "categories": categories,
+            "featured_products": featured_products,
+        }
     )
+
+
 
 def contact(request):
     return render(
